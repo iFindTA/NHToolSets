@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "NHToolSets"
-  s.version      = "0.1.1"
+  s.version      = "0.1.2"
   s.summary      = "NHToolSets is an Objc Wrapper Kit foriOS Developers."
   s.homepage     = "https://github.com/iFindTA"
   s.description  = "iOS Developer's Common Kit Sets, the commands between Foundation and UIKit frameworks."
@@ -9,8 +9,8 @@ Pod::Spec.new do |s|
   s.author             = { "hujiaju" => "nanhujiaju@gmail.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/iFindTA/NHToolSets.git", :tag => s.version.to_s }
-  s.source_files  = "sources/*.{h,m}"
-  s.public_header_files = "sources/*.h"
+  s.source_files  = "NHUtilSetsPro/Utils/*.{h,m}"
+  s.public_header_files = "NHUtilSetsPro/Utils/*.h"
 
   s.framework  = "UIKit","Foundation","Accelerate","QuartzCore","CoreText"
   # s.frameworks = "SomeFramework", "AnotherFramework"
