@@ -11,13 +11,12 @@
 #import <Accelerate/Accelerate.h>
 #import <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
-#import <CommonCrypto/CommonCrypto.h>
 
-#ifndef WEAKSELF
-#define WEAKSELF       __weak typeof(&*self) weakSelf = self;
+#ifndef WEAKSELFPB
+#define WEAKSELFPB       __weak typeof(&*self) weakSelfPB = self;
 #endif
 #define NHMAIN(block)  dispatch_async(dispatch_get_main_queue(),block)
-#define NHMAINDelay(block, x) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(x * NSEC_PER_SEC)), dispatch_get_main_queue(), block);
+#define NHMAINDelay(block, x) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(x * NSEC_PER_SEC)), dispatch_get_main_queue(), block)
 #define NHBACK(block)  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
 
 @interface NHUtils : NSObject
@@ -75,20 +74,6 @@
  *	@return	whether only contain number or letter
  */
 - (BOOL)isNumberOrLetter;
-
-/**
- *	@brief	Hash
- *
- *	@return	md5 hash value
- */
-- (NSString *)MD5Hash;
-
-/**
- *	@brief	Hash
- *
- *	@return	sha1 hash value
- */
-- (NSString *)SHA1Hash;
 
 /**
  *	@brief	caculate string's size

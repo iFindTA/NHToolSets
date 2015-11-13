@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
 
   s.name         = "NHToolSets"
-  s.version      = "0.1.2"
+  s.version      = "0.1.3"
   s.summary      = "NHToolSets is an Objc Wrapper Kit foriOS Developers."
   s.homepage     = "https://github.com/iFindTA"
   s.description  = "iOS Developer's Common Kit Sets, the commands between Foundation and UIKit frameworks."
-  s.license      = "MIT(LICENSE)"
+  s.license      = {:type => 'MIT', :file => 'LICENSE'}
   s.author             = { "hujiaju" => "nanhujiaju@gmail.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/iFindTA/NHToolSets.git", :tag => s.version.to_s }
@@ -14,7 +14,9 @@ Pod::Spec.new do |s|
 
   s.framework  = "UIKit","Foundation","Accelerate","QuartzCore","CoreText"
   # s.frameworks = "SomeFramework", "AnotherFramework"
+  s.prefix_header_contents = '#import <UIKit/UIKit.h>', '#import <Foundation/Foundation.h>'
 
   s.requires_arc = true
   # s.dependency "JSONKit", "~> 1.4"
+
 end
