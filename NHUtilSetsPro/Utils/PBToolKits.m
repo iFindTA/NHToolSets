@@ -390,6 +390,32 @@
     return resizedImage;
 }
 
+- (UIImage*)pb_scaleToSize:(CGSize)dstSize keepAspect:(BOOL)keep{
+    
+    /* Don't resize if we already meet the required destination size. */
+    if (CGSizeEqualToSize(self.size, dstSize)) {
+        return self;
+    }
+    
+    CGRect scaledImageRect = CGRectZero;
+    
+    CGFloat aspectWidth = dstSize.width / self.size.width;
+    CGFloat aspectHeight = dstSize.height / self.size.height;
+    CGFloat aspectRatio = keep?MIN(aspectWidth, aspectHeight):MAX(aspectWidth, aspectHeight);
+    
+    scaledImageRect.size.width = self.size.width * aspectRatio;
+    scaledImageRect.size.height = self.size.height * aspectRatio;
+    scaledImageRect.origin.x = (dstSize.width - scaledImageRect.size.width) / 2.0f;
+    scaledImageRect.origin.y = (dstSize.height - scaledImageRect.size.height) / 2.0f;
+    
+    UIGraphicsBeginImageContextWithOptions( dstSize, NO, 0 );
+    [self drawInRect:scaledImageRect];
+    UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return scaledImage;
+}
+
 - (UIImage *)pb_roundCornerWithSize:(CGSize)size withRadius:(NSInteger)radius {
     int w = size.width;
     int h = size.height;
@@ -399,28 +425,44 @@
     CGRect rect = CGRectMake(0, 0, w, h);
     
     CGContextBeginPath(contextRef);
-    /// addround rect for path
-    float fw, fh;
-    float widthOfRadius = radius; float heightOfRadius = radius;
-    CGContextSaveGState(contextRef);
-    CGContextTranslateCTM(contextRef, CGRectGetMinX(rect), CGRectGetMinY(rect));
-    CGContextScaleCTM(contextRef, widthOfRadius, heightOfRadius);
-    fw = CGRectGetWidth(rect) / widthOfRadius;
-    fh = CGRectGetHeight(rect) / heightOfRadius;
-    
-    CGContextMoveToPoint(contextRef, fw, fh/2);  // Start at lower right corner
-    CGContextAddArcToPoint(contextRef, fw, fh, fw/2, fh, 1);  // Top right corner
-    CGContextAddArcToPoint(contextRef, 0, fh, 0, fh/2, 1); // Top left corner
-    CGContextAddArcToPoint(contextRef, 0, 0, fw/2, 0, 1); // Lower left corner
-    CGContextAddArcToPoint(contextRef, fw, 0, fw, fh/2, 1); // Back to lower right
-    
-    CGContextClosePath(contextRef);
-    CGContextRestoreGState(contextRef);
-    /// round rect path end
-    
+    CGContextAddArc(contextRef, CGRectGetMidX(rect), CGRectGetMidY(rect), radius, 0, 2*M_PI, false);
     CGContextClosePath(contextRef);
     CGContextClip(contextRef);
-    CGContextDrawImage(contextRef, CGRectMake(0, 0, w, h), self.CGImage);
+    CGContextSetFillColorWithColor(contextRef, [UIColor greenColor].CGColor);
+    CGContextFillPath(contextRef);
+    CGRect infoRect = CGRectMake(0, 0, w, h);
+    infoRect = CGRectInset(infoRect, 3, 3);
+    CGContextDrawImage(contextRef, infoRect, self.CGImage);
+    CGImageRef imageMasked = CGBitmapContextCreateImage(contextRef);
+    UIImage *img = [UIImage imageWithCGImage:imageMasked];
+    
+    CGContextRelease(contextRef);
+    CGColorSpaceRelease(colorSpaceRef);
+    CGImageRelease(imageMasked);
+    return img;
+}
+
+- (UIImage *)pb_roundCornerWithSize:(CGSize)size withRadius:(NSInteger)radius withLayerColor:(UIColor *)color withLayerWidth:(int)width {
+    int w = size.width;
+    int h = size.height;
+    
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGContextRef contextRef = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
+    CGRect rect = CGRectMake(0, 0, w, h);
+    /// begin graphics
+    CGContextBeginPath(contextRef);
+    CGContextAddArc(contextRef, CGRectGetMidX(rect), CGRectGetMidY(rect), radius, 0, 2*M_PI, false);
+    CGContextClosePath(contextRef);
+    CGContextClip(contextRef);
+    /// draw layer
+    CGContextSetFillColorWithColor(contextRef, color.CGColor);
+    CGContextFillRect(contextRef, rect);
+    /// draw image
+    CGContextAddArc(contextRef, CGRectGetMidX(rect), CGRectGetMidY(rect), radius-width, 0, 2*M_PI, false);
+    CGContextClosePath(contextRef);
+    CGContextClip(contextRef);
+    CGContextDrawImage(contextRef, rect, self.CGImage);
+    /// end draw image
     CGImageRef imageMasked = CGBitmapContextCreateImage(contextRef);
     UIImage *img = [UIImage imageWithCGImage:imageMasked];
     

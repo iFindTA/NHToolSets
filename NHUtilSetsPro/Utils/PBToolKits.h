@@ -158,7 +158,17 @@ dispatch_async(dispatch_get_main_queue(),block);\
  *
  *	@return	the scaled image
  */
-- (UIImage*)pb_scaleToSize:(CGSize)dstSize;
+- (UIImage*)pb_scaleToSize:(CGSize)dstSize DEPRECATED_MSG_ATTRIBUTE("use pb_scaleToSize: keepAspect: method instead");
+
+/**
+ *	@brief	scale image
+ *
+ *	@param 	dstSize 	the destnation size
+ *	@param 	keep 	whether keep image's width/height scale info
+ *
+ *	@return	the scaled image
+ */
+- (UIImage*)pb_scaleToSize:(CGSize)dstSize keepAspect:(BOOL)keep;
 
 /**
  *	@brief	create round corner image
@@ -166,9 +176,21 @@ dispatch_async(dispatch_get_main_queue(),block);\
  *	@param 	size 	destnation size
  *	@param 	radius 	destnation radius
  *
- *	@return	the round image
+ *	@return	the round corner image
  */
 - (UIImage *)pb_roundCornerWithSize:(CGSize)size withRadius:(NSInteger)radius;
+
+/**
+ *	@brief	create round corner image with layer
+ *
+ *	@param 	size 	destnation size
+ *	@param 	radius 	destnation radius
+ *	@param 	color 	the layer's color
+ *	@param 	width 	the layer's width
+ *
+ *	@return	the round corner image
+ */
+- (UIImage *)pb_roundCornerWithSize:(CGSize)size withRadius:(NSInteger)radius withLayerColor:(UIColor *)color withLayerWidth:(int)width;
 
 /**
  *	@brief	generate dark image
