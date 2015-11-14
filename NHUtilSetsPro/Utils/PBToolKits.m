@@ -1,27 +1,17 @@
 //
-//  NHUtils.m
+//  PBToolKits.m
 //  NHUtilSetsPro
 //
-//  Created by hu jiaju on 15/11/2.
+//  Created by hu jiaju on 15/11/14.
 //  Copyright © 2015年 hu jiaju. All rights reserved.
 //
 
-#import "NHUtils.h"
+#import "PBToolKits.h"
 
-//NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
-//    NSMutableString *output = [NSMutableString string];
-//    
-//    unsigned char *input = (unsigned char *)bytes;
-//    
-//    NSUInteger i;
-//    for (i = 0; i < len; i++)
-//        [output appendFormat:@"%02x", input[i]];
-//    return output;
-//}
-
-@implementation NHUtils
+@implementation PBToolKits
 
 @end
+
 
 #pragma mark == NSArray ==
 
@@ -88,6 +78,30 @@
     return range.location == NSNotFound;
 }
 
+- (CGSize)pb_sizeThatFitsaWithFont:(UIFont *)font width:(CGFloat)width {
+    
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:self];
+    NSDictionary *attSetting = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil];
+    NSRange range = NSMakeRange(0, self.length);
+    [attString setAttributes:attSetting range:range];
+    CTFramesetterRef frameSetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attString);
+    
+    CGSize constraints = CGSizeMake(width, CGFLOAT_MAX);
+    CGSize coreTextSize = CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, CFRangeMake(0, 0), nil, constraints, nil);
+    return CGSizeMake(width, coreTextSize.height);
+}
+
+//NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
+//    NSMutableString *output = [NSMutableString string];
+//
+//    unsigned char *input = (unsigned char *)bytes;
+//
+//    NSUInteger i;
+//    for (i = 0; i < len; i++)
+//        [output appendFormat:@"%02x", input[i]];
+//    return output;
+//}
+
 //- (NSString *)MD5Hash {
 //    const char *input = [self UTF8String];
 //    unsigned char result[CC_MD5_DIGEST_LENGTH];
@@ -102,17 +116,65 @@
 //    return MPHexStringFromBytes(result, CC_SHA1_DIGEST_LENGTH);
 //}
 
-- (CGSize)pb_sizeThatFitsaWithFont:(UIFont *)font width:(CGFloat)width {
+@end
+
+#pragma mark == UIColor ==
+
+@implementation UIColor (PBHelper)
+
++ (UIColor *)pb_randomColor {
     
-    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:self];
-    NSDictionary *attSetting = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil];
-    NSRange range = NSMakeRange(0, self.length);
-    [attString setAttributes:attSetting range:range];
-    CTFramesetterRef frameSetter = CTFramesetterCreateWithAttributedString((CFAttributedStringRef)attString);
+    UIColor *color;
+    float randomRed   = (arc4random()%255)/255.0f;
+    float randomGreen = (arc4random()%255)/255.0f;
+    float randomBlue  = (arc4random()%255)/255.0f;
     
-    CGSize constraints = CGSizeMake(width, CGFLOAT_MAX);
-    CGSize coreTextSize = CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, CFRangeMake(0, 0), nil, constraints, nil);
-    return CGSizeMake(width, coreTextSize.height);
+    color= [UIColor colorWithRed:randomRed green:randomGreen blue:randomBlue alpha:1.0];
+    
+    return color;
+}
+
++ (CGFloat)colorComponentFrom: (NSString *) string start: (NSUInteger) start length: (NSUInteger) length {
+    NSString *substring = [string substringWithRange: NSMakeRange(start, length)];
+    NSString *fullHex = length == 2 ? substring : [NSString stringWithFormat: @"%@%@", substring, substring];
+    unsigned hexComponent;
+    [[NSScanner scannerWithString: fullHex] scanHexInt: &hexComponent];
+    return hexComponent / 255.0;
+}
+
++ (UIColor *)pb_colorWithHexString:(NSString *)hexString {
+    NSString *colorString = [[hexString stringByReplacingOccurrencesOfString: @"#" withString: @""] uppercaseString];
+    CGFloat alpha, red, blue, green;
+    switch ([colorString length]) {
+        case 3: // #RGB
+            alpha = 1.0f;
+            red   = [self colorComponentFrom: colorString start: 0 length: 1];
+            green = [self colorComponentFrom: colorString start: 1 length: 1];
+            blue  = [self colorComponentFrom: colorString start: 2 length: 1];
+            break;
+        case 4: // #ARGB
+            alpha = [self colorComponentFrom: colorString start: 0 length: 1];
+            red   = [self colorComponentFrom: colorString start: 1 length: 1];
+            green = [self colorComponentFrom: colorString start: 2 length: 1];
+            blue  = [self colorComponentFrom: colorString start: 3 length: 1];
+            break;
+        case 6: // #RRGGBB
+            alpha = 1.0f;
+            red   = [self colorComponentFrom: colorString start: 0 length: 2];
+            green = [self colorComponentFrom: colorString start: 2 length: 2];
+            blue  = [self colorComponentFrom: colorString start: 4 length: 2];
+            break;
+        case 8: // #AARRGGBB
+            alpha = [self colorComponentFrom: colorString start: 0 length: 2];
+            red   = [self colorComponentFrom: colorString start: 2 length: 2];
+            green = [self colorComponentFrom: colorString start: 4 length: 2];
+            blue  = [self colorComponentFrom: colorString start: 6 length: 2];
+            break;
+        default:
+            red = 0 ; green = 0 ; blue = 0; alpha = 1;
+            break;
+    }
+    return [UIColor colorWithRed: red green: green blue: blue alpha: alpha];
 }
 
 @end
@@ -190,12 +252,12 @@
     return image;
 }
 
-- (UIImage*)pb_blurredImage:(CGFloat)blurAmount {
-    if (blurAmount < 0.0 || blurAmount > 1.0) {
-        blurAmount = 0.5;
+- (UIImage *)pb_blurredImage:(CGFloat)level {
+    if (level < 0.0 || level > 1.0) {
+        level = 0.5;
     }
     
-    int boxSize = (int)(blurAmount * 40);
+    int boxSize = (int)(level * 40);
     boxSize = boxSize - (boxSize % 2) + 1;
     
     CGImageRef img = self.CGImage;
@@ -389,67 +451,6 @@
     UIGraphicsEndImageContext();
     
     return darkImage;
-}
-
-@end
-
-#pragma mark == UIColor ==
-
-@implementation UIColor (PBHelper)
-
-+ (UIColor *)pb_randomColor {
-    
-    UIColor *color;
-    float randomRed   = (arc4random()%255)/255.0f;
-    float randomGreen = (arc4random()%255)/255.0f;
-    float randomBlue  = (arc4random()%255)/255.0f;
-    
-    color= [UIColor colorWithRed:randomRed green:randomGreen blue:randomBlue alpha:1.0];
-    
-    return color;
-}
-
-+ (CGFloat)colorComponentFrom: (NSString *) string start: (NSUInteger) start length: (NSUInteger) length {
-    NSString *substring = [string substringWithRange: NSMakeRange(start, length)];
-    NSString *fullHex = length == 2 ? substring : [NSString stringWithFormat: @"%@%@", substring, substring];
-    unsigned hexComponent;
-    [[NSScanner scannerWithString: fullHex] scanHexInt: &hexComponent];
-    return hexComponent / 255.0;
-}
-
-+ (UIColor *)pb_colorWithHexString:(NSString *)hexString {
-    NSString *colorString = [[hexString stringByReplacingOccurrencesOfString: @"#" withString: @""] uppercaseString];
-    CGFloat alpha, red, blue, green;
-    switch ([colorString length]) {
-        case 3: // #RGB
-            alpha = 1.0f;
-            red   = [self colorComponentFrom: colorString start: 0 length: 1];
-            green = [self colorComponentFrom: colorString start: 1 length: 1];
-            blue  = [self colorComponentFrom: colorString start: 2 length: 1];
-            break;
-        case 4: // #ARGB
-            alpha = [self colorComponentFrom: colorString start: 0 length: 1];
-            red   = [self colorComponentFrom: colorString start: 1 length: 1];
-            green = [self colorComponentFrom: colorString start: 2 length: 1];
-            blue  = [self colorComponentFrom: colorString start: 3 length: 1];
-            break;
-        case 6: // #RRGGBB
-            alpha = 1.0f;
-            red   = [self colorComponentFrom: colorString start: 0 length: 2];
-            green = [self colorComponentFrom: colorString start: 2 length: 2];
-            blue  = [self colorComponentFrom: colorString start: 4 length: 2];
-            break;
-        case 8: // #AARRGGBB
-            alpha = [self colorComponentFrom: colorString start: 0 length: 2];
-            red   = [self colorComponentFrom: colorString start: 2 length: 2];
-            green = [self colorComponentFrom: colorString start: 4 length: 2];
-            blue  = [self colorComponentFrom: colorString start: 6 length: 2];
-            break;
-        default:
-            red = 0 ; green = 0 ; blue = 0; alpha = 1;
-            break;
-    }
-    return [UIColor colorWithRed: red green: green blue: blue alpha: alpha];
 }
 
 @end

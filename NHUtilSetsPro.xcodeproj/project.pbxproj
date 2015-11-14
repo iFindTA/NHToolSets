@@ -15,11 +15,11 @@
 		606818D81BE6F4DF00D30933 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 606818D61BE6F4DF00D30933 /* LaunchScreen.storyboard */; };
 		606818E31BE6F4DF00D30933 /* NHUtilSetsProTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 606818E21BE6F4DF00D30933 /* NHUtilSetsProTests.m */; };
 		606818EE1BE6F4DF00D30933 /* NHUtilSetsProUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 606818ED1BE6F4DF00D30933 /* NHUtilSetsProUITests.m */; };
-		606819071BE764D900D30933 /* NHUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 606819061BE764D900D30933 /* NHUtils.m */; };
 		6068190C1BE7984400D30933 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6068190B1BE7984400D30933 /* Accelerate.framework */; };
 		6068190E1BE7984800D30933 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6068190D1BE7984800D30933 /* QuartzCore.framework */; };
 		606CEF701BF32E4D00ADB22E /* sina150@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 606CEF6F1BF32E4D00ADB22E /* sina150@2x.png */; };
 		607242131BE840570055881F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607242121BE840570055881F /* Security.framework */; };
+		60D66C011BF713C60049185F /* PBToolKits.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D66C001BF713C60049185F /* PBToolKits.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,13 +56,13 @@
 		606818E91BE6F4DF00D30933 /* NHUtilSetsProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NHUtilSetsProUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		606818ED1BE6F4DF00D30933 /* NHUtilSetsProUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NHUtilSetsProUITests.m; sourceTree = "<group>"; };
 		606818EF1BE6F4DF00D30933 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		606819051BE764D900D30933 /* NHUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHUtils.h; sourceTree = "<group>"; };
-		606819061BE764D900D30933 /* NHUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NHUtils.m; sourceTree = "<group>"; };
 		606819081BE782AD00D30933 /* NHUtilSetsPro.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NHUtilSetsPro.pch; sourceTree = "<group>"; };
 		6068190B1BE7984400D30933 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		6068190D1BE7984800D30933 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		606CEF6F1BF32E4D00ADB22E /* sina150@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sina150@2x.png"; sourceTree = "<group>"; };
 		607242121BE840570055881F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		60D66BFF1BF713C60049185F /* PBToolKits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBToolKits.h; sourceTree = "<group>"; };
+		60D66C001BF713C60049185F /* PBToolKits.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PBToolKits.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,8 +164,8 @@
 		606818FB1BE6F61500D30933 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				606819051BE764D900D30933 /* NHUtils.h */,
-				606819061BE764D900D30933 /* NHUtils.m */,
+				60D66BFF1BF713C60049185F /* PBToolKits.h */,
+				60D66C001BF713C60049185F /* PBToolKits.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -304,7 +304,7 @@
 				606818D01BE6F4DF00D30933 /* ViewController.m in Sources */,
 				606818CD1BE6F4DF00D30933 /* AppDelegate.m in Sources */,
 				606818CA1BE6F4DF00D30933 /* main.m in Sources */,
-				606819071BE764D900D30933 /* NHUtils.m in Sources */,
+				60D66C011BF713C60049185F /* PBToolKits.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
