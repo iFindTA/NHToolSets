@@ -15,15 +15,20 @@
 #ifndef WEAKSELFPB
 #define WEAKSELFPB       __weak typeof(&*self) weakSelfPB = self;
 #endif
-#define NHMAIN(block)  dispatch_async(dispatch_get_main_queue(),block)
-#define NHMAINDelay(block, x) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(x * NSEC_PER_SEC)), dispatch_get_main_queue(), block)
-#define NHBACK(block)  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
+#define PBMAIN(block)  {if ([NSThread isMainThread]) {\
+    block();\
+}else{\
+    dispatch_async(dispatch_get_main_queue(),block);\
+};};
+
+#define PBMAINDelay(x, block) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(x * NSEC_PER_SEC)), dispatch_get_main_queue(), block)
+#define PBBACK(block)  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
 
 @interface NHUtils : NSObject
 
 @end
 
-@interface NSArray (Helper)
+@interface NSArray (PBHelper)
 
 /**
  *	@brief	Judging method
@@ -34,7 +39,7 @@
 
 @end
 
-@interface NSDictionary (Helper)
+@interface NSDictionary (PBHelper)
 
 /**
  *	@brief	Judging method
@@ -45,7 +50,7 @@
 
 @end
 
-@interface NSString (Helper)
+@interface NSString (PBHelper)
 
 /**
  *	@brief	Judging method
@@ -87,7 +92,7 @@
 
 @end
 
-@interface UIImage (Helper)
+@interface UIImage (PBHelper)
 
 /**
  *	@brief	Judging Method
@@ -150,7 +155,7 @@
 
 @end
 
-@interface UIColor (Helper)
+@interface UIColor (PBHelper)
 
 /**
  *	@brief	generate color
@@ -171,6 +176,6 @@
 
 @end
 
-@interface UIView (Helper)
+@interface UIView (PBHelper)
 
 @end

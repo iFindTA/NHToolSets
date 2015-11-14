@@ -25,7 +25,7 @@
 
 #pragma mark == NSArray ==
 
-@implementation NSArray (Helper)
+@implementation NSArray (PBHelper)
 
 - (BOOL)isEmpty {
     return (self == nil || self.count <= 0);
@@ -35,7 +35,7 @@
 
 #pragma mark == NSDictionary ==
 
-@implementation NSDictionary (Helper)
+@implementation NSDictionary (PBHelper)
 
 - (BOOL)isEmpty {
     return (self == nil || self.count <= 0);
@@ -45,7 +45,7 @@
 
 #pragma mark == NSString ==
 
-@implementation NSString (Helper)
+@implementation NSString (PBHelper)
 
 - (BOOL)isNull {
     
@@ -119,7 +119,7 @@
 
 #pragma mark == UIImage ==
 
-@implementation UIImage (Helper)
+@implementation UIImage (PBHelper)
 
 static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float widthOfRadius, float heightOfRadius) {
     float fw, fh;
@@ -401,7 +401,7 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
 
 #pragma mark == UIColor ==
 
-@implementation UIColor (Helper)
+@implementation UIColor (PBHelper)
 
 + (UIColor *)randomColor {
     
@@ -462,6 +462,6 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
 
 #pragma mark == UIView ==
 
-@implementation  UIView (Helper)
+@implementation  UIView (PBHelper)
 
 @end

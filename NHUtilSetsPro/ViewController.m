@@ -33,17 +33,14 @@
     imgView.image = dark;
     [self.view addSubview:imgView];
     
-    info.origin.y += 150;
-    CGRect bounds ;
-    bounds.origin = CGPointZero;
-    bounds.size = info.size;
-    UIView *view = [[UIView alloc] initWithFrame:bounds];
-    view.backgroundColor = [UIColor blackColor];
-    view.alpha = 0.5;
-    imgView = [[UIImageView alloc] initWithFrame:info];
-    imgView.image = image;
-    [imgView addSubview:view];
-    [self.view addSubview:imgView];
+    
+    PBMAIN(^{
+        NSLog(@"some thing");
+    });
+    
+    PBMAINDelay(2.5, ^{
+        NSLog(@"some thing delay");
+    });
 }
 
 - (void)didReceiveMemoryWarning {
