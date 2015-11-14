@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "NHToolSets"
-  s.version      = "0.1.3"
+  s.version      = "0.2.0"
   s.summary      = "NHToolSets is an Objc Wrapper Kit foriOS Developers."
   s.homepage     = "https://github.com/iFindTA"
   s.description  = "iOS Developer's Common Kit Sets, the commands between Foundation and UIKit frameworks."
