@@ -3,7 +3,7 @@
 #### 如果后续文件过大再考虑分文件处理
 
 ##### Usage:
-通过Pod搜索：打开终端执行$ Pod Search NHToolSets
+通过Pod搜索：打开终端执行**$ Pod Search PBToolKits**
 
 ##### Info Description:
 ```
