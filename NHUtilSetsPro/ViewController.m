@@ -23,7 +23,7 @@
     
     CGRect info = CGRectMake(100, 100, 100, 100);
     UIImage *image = [UIImage imageNamed:@"sina150"];
-    UIImage *dark = [image darkColor:[UIColor blackColor] lightLevel:0.5];
+    UIImage *dark = [image pb_darkColor:[UIColor blackColor] lightLevel:0.5];
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:info];
     imgView.image = image;
     [self.view addSubview:imgView];

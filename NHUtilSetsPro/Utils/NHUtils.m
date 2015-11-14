@@ -27,7 +27,7 @@
 
 @implementation NSArray (PBHelper)
 
-- (BOOL)isEmpty {
+- (BOOL)pb_isEmpty {
     return (self == nil || self.count <= 0);
 }
 
@@ -37,7 +37,7 @@
 
 @implementation NSDictionary (PBHelper)
 
-- (BOOL)isEmpty {
+- (BOOL)pb_isEmpty {
     return (self == nil || self.count <= 0);
 }
 
@@ -47,41 +47,41 @@
 
 @implementation NSString (PBHelper)
 
-- (BOOL)isNull {
+- (BOOL)pb_isNull {
     
-    if(self == nil || [self isKindOfClass:[NSNull class]] || [self isEmpty] || [self isEqual:[NSNull null]]) {
+    if(self == nil || [self isKindOfClass:[NSNull class]] || [self pb_isEmpty] || [self isEqual:[NSNull null]]) {
         return true;
     }
     
     return false;
 }
 
-- (BOOL)isEmpty {
-    return [self isEmptyIgnoringWhitespace:true];
+- (BOOL)pb_isEmpty {
+    return [self pb_isEmptyIgnoringWhitespace:true];
 }
-- (BOOL)isEmptyIgnoringWhitespace:(BOOL)ignoreWhitespace {
-    NSString *toCheck = (ignoreWhitespace) ? [self stringByTrimmingWhitespace] : self;
+- (BOOL)pb_isEmptyIgnoringWhitespace:(BOOL)ignoreWhitespace {
+    NSString *toCheck = (ignoreWhitespace) ? [self pb_stringByTrimmingWhitespace] : self;
     return [toCheck isEqualToString:@""];
 }
-- (NSString *)stringByTrimmingWhitespace {
+- (NSString *)pb_stringByTrimmingWhitespace {
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
-- (BOOL)isOnlyNumbers {
+- (BOOL)pb_isOnlyNumbers {
     NSCharacterSet *regular = [NSCharacterSet decimalDigitCharacterSet];
     regular = [regular invertedSet];
     NSRange range = [self rangeOfCharacterFromSet:regular];
     return range.location == NSNotFound;
 }
 
-- (BOOL)isOnlyLetters {
+- (BOOL)pb_isOnlyLetters {
     NSCharacterSet *regular = [NSCharacterSet letterCharacterSet];
     regular = [regular invertedSet];
     NSRange range = [self rangeOfCharacterFromSet:regular];
     return range.location == NSNotFound;
 }
 
-- (BOOL)isNumberOrLetter {
+- (BOOL)pb_isNumberOrLetter {
     NSCharacterSet *regular = [NSCharacterSet alphanumericCharacterSet];
     regular = [regular invertedSet];
     NSRange range = [self rangeOfCharacterFromSet:regular];
@@ -102,7 +102,7 @@
 //    return MPHexStringFromBytes(result, CC_SHA1_DIGEST_LENGTH);
 //}
 
-- (CGSize)sizeThatFitsaWithFont:(UIFont *)font width:(CGFloat)width {
+- (CGSize)pb_sizeThatFitsaWithFont:(UIFont *)font width:(CGFloat)width {
     
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:self];
     NSDictionary *attSetting = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil];
@@ -121,14 +121,18 @@
 
 @implementation UIImage (PBHelper)
 
-static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float widthOfRadius, float heightOfRadius) {
-    float fw, fh;
-    if (widthOfRadius == 0 || heightOfRadius == 0)
-    {
-        CGContextAddRect(contextRef, rect);
-        return;
-    }
+- (UIImage *)pb_createRoundedRectImage:(UIImage *)image withSize:(CGSize)size withRadius:(NSInteger)radius {
+    int w = size.width;
+    int h = size.height;
     
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGContextRef contextRef = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
+    CGRect rect = CGRectMake(0, 0, w, h);
+    
+    CGContextBeginPath(contextRef);
+    /// addround rect for path
+    float fw, fh;
+    float widthOfRadius = radius; float heightOfRadius = radius;
     CGContextSaveGState(contextRef);
     CGContextTranslateCTM(contextRef, CGRectGetMinX(rect), CGRectGetMinY(rect));
     CGContextScaleCTM(contextRef, widthOfRadius, heightOfRadius);
@@ -143,18 +147,8 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
     
     CGContextClosePath(contextRef);
     CGContextRestoreGState(contextRef);
-}
-
-- (UIImage *)createRoundedRectImage:(UIImage *)image withSize:(CGSize)size withRadius:(NSInteger)radius {
-    int w = size.width;
-    int h = size.height;
+    /// round rect path end
     
-    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-    CGContextRef contextRef = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
-    CGRect rect = CGRectMake(0, 0, w, h);
-    
-    CGContextBeginPath(contextRef);
-    addRoundedRectToPath(contextRef, rect, radius, radius);
     CGContextClosePath(contextRef);
     CGContextClip(contextRef);
     CGContextDrawImage(contextRef, CGRectMake(0, 0, w, h), image.CGImage);
@@ -167,7 +161,7 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
     return img;
 }
 
-- (BOOL)isEqualTo:(UIImage *)image {
+- (BOOL)pb_isEqualTo:(UIImage *)image {
     BOOL result = NO;
     if (image && CGSizeEqualToSize(self.size, image.size)) {
         
@@ -182,7 +176,7 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
     return result;
 }
 
-+ (UIImage *)imageWithColor:(UIColor *)color {
++ (UIImage *)pb_imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0, 0, 1, 1);
     UIGraphicsBeginImageContext(rect.size);
     CGContextRef context = UIGraphicsGetCurrentContext();
@@ -196,7 +190,7 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
     return image;
 }
 
-- (UIImage*)blurredImage:(CGFloat)blurAmount {
+- (UIImage*)pb_blurredImage:(CGFloat)blurAmount {
     if (blurAmount < 0.0 || blurAmount > 1.0) {
         blurAmount = 0.5;
     }
@@ -266,7 +260,7 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
     return returnImage;
 }
 
-- (UIImage *)croppedImage:(CGRect)bounds {
+- (UIImage *)pb_croppedImage:(CGRect)bounds {
     
     CGFloat scale = MAX(self.scale, 1.0f);
     
@@ -282,7 +276,7 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
     
 }
 
-- (UIImage*)scaleImageToSize:(CGSize)dstSize {
+- (UIImage*)pb_scaleImageToSize:(CGSize)dstSize {
     CGImageRef imgRef = self.CGImage;
     // the below values are regardless of orientation : for UIImages from Camera, width>height (landscape)
     CGSize  srcSize = CGSizeMake(CGImageGetWidth(imgRef), CGImageGetHeight(imgRef)); // not equivalent to self.size (which is dependant on the imageOrientation)!
@@ -374,7 +368,7 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
     return resizedImage;
 }
 
-- (UIImage *)darkColor:(UIColor *)color lightLevel:(CGFloat)level {
+- (UIImage *)pb_darkColor:(UIColor *)color lightLevel:(CGFloat)level {
     CGRect imageRect = CGRectMake(0.0f, 0.0f, self.size.width, self.size.height);
     
     UIGraphicsBeginImageContextWithOptions(imageRect.size, false, self.scale);
@@ -403,7 +397,7 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
 
 @implementation UIColor (PBHelper)
 
-+ (UIColor *)randomColor {
++ (UIColor *)pb_randomColor {
     
     UIColor *color;
     float randomRed   = (arc4random()%255)/255.0f;
@@ -415,7 +409,7 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
     return color;
 }
 
-+ (CGFloat) colorComponentFrom: (NSString *) string start: (NSUInteger) start length: (NSUInteger) length {
++ (CGFloat)colorComponentFrom: (NSString *) string start: (NSUInteger) start length: (NSUInteger) length {
     NSString *substring = [string substringWithRange: NSMakeRange(start, length)];
     NSString *fullHex = length == 2 ? substring : [NSString stringWithFormat: @"%@%@", substring, substring];
     unsigned hexComponent;
@@ -423,7 +417,7 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
     return hexComponent / 255.0;
 }
 
-+ (UIColor *)colorWithHexString:(NSString *)hexString {
++ (UIColor *)pb_colorWithHexString:(NSString *)hexString {
     NSString *colorString = [[hexString stringByReplacingOccurrencesOfString: @"#" withString: @""] uppercaseString];
     CGFloat alpha, red, blue, green;
     switch ([colorString length]) {
@@ -457,11 +451,5 @@ static void addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float wid
     }
     return [UIColor colorWithRed: red green: green blue: blue alpha: alpha];
 }
-
-@end
-
-#pragma mark == UIView ==
-
-@implementation  UIView (PBHelper)
 
 @end

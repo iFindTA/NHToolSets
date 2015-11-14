@@ -15,11 +15,11 @@
 #ifndef WEAKSELFPB
 #define WEAKSELFPB       __weak typeof(&*self) weakSelfPB = self;
 #endif
-#define PBMAIN(block)  {if ([NSThread isMainThread]) {\
+#define PBMAIN(block)  if ([NSThread isMainThread]) {\
     block();\
 }else{\
     dispatch_async(dispatch_get_main_queue(),block);\
-};};
+}
 
 #define PBMAINDelay(x, block) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(x * NSEC_PER_SEC)), dispatch_get_main_queue(), block)
 #define PBBACK(block)  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
@@ -35,7 +35,7 @@
  *
  *	@return	whether the array is empty
  */
-- (BOOL)isEmpty;
+- (BOOL)pb_isEmpty;
 
 @end
 
@@ -46,7 +46,7 @@
  *
  *	@return	whether the map is empty
  */
-- (BOOL)isEmpty;
+- (BOOL)pb_isEmpty;
 
 @end
 
@@ -57,28 +57,28 @@
  *
  *	@return	whether the string is empty
  */
-- (BOOL)isEmpty;
+- (BOOL)pb_isEmpty;
 
 /**
  *	@brief	Judging method
  *
  *	@return	whether only contain numbers
  */
-- (BOOL)isOnlyNumbers;
+- (BOOL)pb_isOnlyNumbers;
 
 /**
  *	@brief	Judging method
  *
  *	@return	wheter only contain letters
  */
-- (BOOL)isOnlyLetters;
+- (BOOL)pb_isOnlyLetters;
 
 /**
  *	@brief	Judging method
  *
  *	@return	whether only contain number or letter
  */
-- (BOOL)isNumberOrLetter;
+- (BOOL)pb_isNumberOrLetter;
 
 /**
  *	@brief	caculate string's size
@@ -88,7 +88,7 @@
  *
  *	@return	the adjust size of string
  */
-- (CGSize)sizeThatFitsaWithFont:(UIFont *)font width:(CGFloat)width;
+- (CGSize)pb_sizeThatFitsaWithFont:(UIFont *)font width:(CGFloat)width;
 
 @end
 
@@ -101,7 +101,7 @@
  *
  *	@return	whether only the two image is equal
  */
-- (BOOL)isEqualTo:(UIImage *)image;
+- (BOOL)pb_isEqualTo:(UIImage *)image;
 
 
 /**
@@ -111,7 +111,7 @@
  *
  *	@return	the image from color
  */
-+ (UIImage *)imageWithColor:(UIColor *)color;
++ (UIImage *)pb_imageWithColor:(UIColor *)color;
 
 /**
  *	@brief	generate small image
@@ -120,7 +120,7 @@
  *
  *	@return	the cropped image
  */
-- (UIImage *)croppedImage:(CGRect)bounds;
+- (UIImage *)pb_croppedImage:(CGRect)bounds;
 
 /**
  *	@brief	scale image
@@ -129,7 +129,7 @@
  *
  *	@return	the scaled image
  */
-- (UIImage*)scaleImageToSize:(CGSize)dstSize;
+- (UIImage*)pb_scaleImageToSize:(CGSize)dstSize;
 
 /**
  *	@brief	create round corner image
@@ -140,7 +140,7 @@
  *
  *	@return	the round image
  */
-- (UIImage *)createRoundedRectImage:(UIImage *)image withSize:(CGSize)size withRadius:(NSInteger)radius;
+- (UIImage *)pb_createRoundedRectImage:(UIImage *)image withSize:(CGSize)size withRadius:(NSInteger)radius;
 
 /**
  *	@brief	generate dark image
@@ -150,7 +150,7 @@
  *
  *	@return	the dark image
  */
-- (UIImage *)darkColor:(UIColor *)color lightLevel:(CGFloat)level;
+- (UIImage *)pb_darkColor:(UIColor *)color lightLevel:(CGFloat)level;
 
 
 @end
@@ -162,7 +162,7 @@
  *
  *	@return	random color instance
  */
-+ (UIColor *)randomColor;
++ (UIColor *)pb_randomColor;
 
 /**
  *	@brief	generate color
@@ -172,10 +172,6 @@
  *	@return	color's instance
  */
 
-+ (UIColor *)colorWithHexString:(NSString *)hexString;
-
-@end
-
-@interface UIView (PBHelper)
++ (UIColor *)pb_colorWithHexString:(NSString *)hexString;
 
 @end
