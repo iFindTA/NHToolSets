@@ -1,5 +1,5 @@
-# NHToolSets
-### 开发过程中经常用到的Utils for iOS
+# PBToolKits
+### 开发过程中经常用到的Utils for LaXiong's iOS Developers
 #### 如果后续文件过大再考虑分文件处理
 
 ##### Usage:
@@ -13,42 +13,28 @@ NSString:
  *
  *	@return	whether the string is empty
  */
-- (BOOL)isEmpty;
+- (BOOL)pb_isEmpty;
 
 /**
  *	@brief	Judging method
  *
  *	@return	whether only contain numbers
  */
-- (BOOL)isOnlyNumbers;
+- (BOOL)pb_isOnlyNumbers;
 
 /**
  *	@brief	Judging method
  *
  *	@return	wheter only contain letters
  */
-- (BOOL)isOnlyLetters;
+- (BOOL)pb_isOnlyLetters;
 
 /**
  *	@brief	Judging method
  *
  *	@return	whether only contain number or letter
  */
-- (BOOL)isNumberOrLetter;
-
-/**
- *	@brief	Hash
- *
- *	@return	md5 hash value
- */
-- (NSString *)MD5Hash;
-
-/**
- *	@brief	Hash
- *
- *	@return	sha1 hash value
- */
-- (NSString *)SHA1Hash;
+- (BOOL)pb_isNumberOrLetter;
 
 /**
  *	@brief	caculate string's size
@@ -58,7 +44,7 @@ NSString:
  *
  *	@return	the adjust size of string
  */
-- (CGSize)sizeThatFitsaWithFont:(UIFont *)font width:(CGFloat)width;
+- (CGSize)pb_sizeThatFitsaWithFont:(UIFont *)font width:(CGFloat)width;
 
 ```
 
@@ -73,7 +59,7 @@ UIImage:
  *
  *	@return	whether only the two image is equal
  */
-- (BOOL)isEqualTo:(UIImage *)image;
+- (BOOL)pb_isEqualTo:(UIImage *)image;
 
 
 /**
@@ -83,7 +69,16 @@ UIImage:
  *
  *	@return	the image from color
  */
-+ (UIImage *)imageWithColor:(UIColor *)color;
++ (UIImage *)pb_imageWithColor:(UIColor *)color;
+
+/**
+ *	@brief	blur image
+ *
+ *	@param 	blurAmount 	blur level, default is 0.5
+ *
+ *	@return	the blured image
+ */
+- (UIImage *)pb_blurredImage:(CGFloat)level;
 
 /**
  *	@brief	generate small image
@@ -92,7 +87,7 @@ UIImage:
  *
  *	@return	the cropped image
  */
-- (UIImage *)croppedImage:(CGRect)bounds;
+- (UIImage *)pb_croppedImage:(CGRect)bounds;
 
 /**
  *	@brief	scale image
@@ -101,7 +96,7 @@ UIImage:
  *
  *	@return	the scaled image
  */
-- (UIImage*)scaleImageToSize:(CGSize)dstSize;
+- (UIImage*)pb_scaleImageToSize:(CGSize)dstSize;
 
 /**
  *	@brief	create round corner image
@@ -112,7 +107,7 @@ UIImage:
  *
  *	@return	the round image
  */
-- (UIImage *)createRoundedRectImage:(UIImage *)image withSize:(CGSize)size withRadius:(NSInteger)radius;
+- (UIImage *)pb_createRoundedRectImage:(UIImage *)image withSize:(CGSize)size withRadius:(NSInteger)radius;
 
 /**
  *	@brief	generate dark image
@@ -122,5 +117,5 @@ UIImage:
  *
  *	@return	the dark image
  */
-- (UIImage *)darkColor:(UIColor *)color lightLevel:(CGFloat)level;
+- (UIImage *)pb_darkColor:(UIColor *)color lightLevel:(CGFloat)level;
 ```
