@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "PBToolKits"
-  s.version      = "0.2.2"
+  s.version      = "0.2.3"
   s.summary      = "PBToolKits is an Objc Wrapper Kit for LaXiong's iOS Developers."
   s.homepage     = "https://github.com/iFindTA"
   s.description  = "iOS Developer's Common Kit Sets, the commands between Foundation and UIKit frameworks."

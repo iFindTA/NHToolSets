@@ -183,46 +183,6 @@
 
 @implementation UIImage (PBHelper)
 
-- (UIImage *)pb_createRoundedRectImage:(UIImage *)image withSize:(CGSize)size withRadius:(NSInteger)radius {
-    int w = size.width;
-    int h = size.height;
-    
-    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-    CGContextRef contextRef = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
-    CGRect rect = CGRectMake(0, 0, w, h);
-    
-    CGContextBeginPath(contextRef);
-    /// addround rect for path
-    float fw, fh;
-    float widthOfRadius = radius; float heightOfRadius = radius;
-    CGContextSaveGState(contextRef);
-    CGContextTranslateCTM(contextRef, CGRectGetMinX(rect), CGRectGetMinY(rect));
-    CGContextScaleCTM(contextRef, widthOfRadius, heightOfRadius);
-    fw = CGRectGetWidth(rect) / widthOfRadius;
-    fh = CGRectGetHeight(rect) / heightOfRadius;
-    
-    CGContextMoveToPoint(contextRef, fw, fh/2);  // Start at lower right corner
-    CGContextAddArcToPoint(contextRef, fw, fh, fw/2, fh, 1);  // Top right corner
-    CGContextAddArcToPoint(contextRef, 0, fh, 0, fh/2, 1); // Top left corner
-    CGContextAddArcToPoint(contextRef, 0, 0, fw/2, 0, 1); // Lower left corner
-    CGContextAddArcToPoint(contextRef, fw, 0, fw, fh/2, 1); // Back to lower right
-    
-    CGContextClosePath(contextRef);
-    CGContextRestoreGState(contextRef);
-    /// round rect path end
-    
-    CGContextClosePath(contextRef);
-    CGContextClip(contextRef);
-    CGContextDrawImage(contextRef, CGRectMake(0, 0, w, h), image.CGImage);
-    CGImageRef imageMasked = CGBitmapContextCreateImage(contextRef);
-    UIImage *img = [UIImage imageWithCGImage:imageMasked];
-    
-    CGContextRelease(contextRef);
-    CGColorSpaceRelease(colorSpaceRef);
-    CGImageRelease(imageMasked);
-    return img;
-}
-
 - (BOOL)pb_isEqualTo:(UIImage *)image {
     BOOL result = NO;
     if (image && CGSizeEqualToSize(self.size, image.size)) {
@@ -322,7 +282,7 @@
     return returnImage;
 }
 
-- (UIImage *)pb_croppedImage:(CGRect)bounds {
+- (UIImage *)pb_croppedBounds:(CGRect)bounds {
     
     CGFloat scale = MAX(self.scale, 1.0f);
     
@@ -338,7 +298,7 @@
     
 }
 
-- (UIImage*)pb_scaleImageToSize:(CGSize)dstSize {
+- (UIImage*)pb_scaleToSize:(CGSize)dstSize {
     CGImageRef imgRef = self.CGImage;
     // the below values are regardless of orientation : for UIImages from Camera, width>height (landscape)
     CGSize  srcSize = CGSizeMake(CGImageGetWidth(imgRef), CGImageGetHeight(imgRef)); // not equivalent to self.size (which is dependant on the imageOrientation)!
@@ -428,6 +388,46 @@
     UIGraphicsEndImageContext();
     
     return resizedImage;
+}
+
+- (UIImage *)pb_roundCornerWithSize:(CGSize)size withRadius:(NSInteger)radius {
+    int w = size.width;
+    int h = size.height;
+    
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGContextRef contextRef = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
+    CGRect rect = CGRectMake(0, 0, w, h);
+    
+    CGContextBeginPath(contextRef);
+    /// addround rect for path
+    float fw, fh;
+    float widthOfRadius = radius; float heightOfRadius = radius;
+    CGContextSaveGState(contextRef);
+    CGContextTranslateCTM(contextRef, CGRectGetMinX(rect), CGRectGetMinY(rect));
+    CGContextScaleCTM(contextRef, widthOfRadius, heightOfRadius);
+    fw = CGRectGetWidth(rect) / widthOfRadius;
+    fh = CGRectGetHeight(rect) / heightOfRadius;
+    
+    CGContextMoveToPoint(contextRef, fw, fh/2);  // Start at lower right corner
+    CGContextAddArcToPoint(contextRef, fw, fh, fw/2, fh, 1);  // Top right corner
+    CGContextAddArcToPoint(contextRef, 0, fh, 0, fh/2, 1); // Top left corner
+    CGContextAddArcToPoint(contextRef, 0, 0, fw/2, 0, 1); // Lower left corner
+    CGContextAddArcToPoint(contextRef, fw, 0, fw, fh/2, 1); // Back to lower right
+    
+    CGContextClosePath(contextRef);
+    CGContextRestoreGState(contextRef);
+    /// round rect path end
+    
+    CGContextClosePath(contextRef);
+    CGContextClip(contextRef);
+    CGContextDrawImage(contextRef, CGRectMake(0, 0, w, h), self.CGImage);
+    CGImageRef imageMasked = CGBitmapContextCreateImage(contextRef);
+    UIImage *img = [UIImage imageWithCGImage:imageMasked];
+    
+    CGContextRelease(contextRef);
+    CGColorSpaceRelease(colorSpaceRef);
+    CGImageRelease(imageMasked);
+    return img;
 }
 
 - (UIImage *)pb_darkColor:(UIColor *)color lightLevel:(CGFloat)level {

@@ -149,7 +149,7 @@ dispatch_async(dispatch_get_main_queue(),block);\
  *
  *	@return	the cropped image
  */
-- (UIImage *)pb_croppedImage:(CGRect)bounds;
+- (UIImage *)pb_croppedBounds:(CGRect)bounds;
 
 /**
  *	@brief	scale image
@@ -158,18 +158,17 @@ dispatch_async(dispatch_get_main_queue(),block);\
  *
  *	@return	the scaled image
  */
-- (UIImage*)pb_scaleImageToSize:(CGSize)dstSize;
+- (UIImage*)pb_scaleToSize:(CGSize)dstSize;
 
 /**
  *	@brief	create round corner image
  *
- *	@param 	image 	the origin image
  *	@param 	size 	destnation size
  *	@param 	radius 	destnation radius
  *
  *	@return	the round image
  */
-- (UIImage *)pb_createRoundedRectImage:(UIImage *)image withSize:(CGSize)size withRadius:(NSInteger)radius;
+- (UIImage *)pb_roundCornerWithSize:(CGSize)size withRadius:(NSInteger)radius;
 
 /**
  *	@brief	generate dark image

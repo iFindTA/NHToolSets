@@ -33,7 +33,6 @@
     imgView.image = dark;
     [self.view addSubview:imgView];
     
-    
     PBMAIN(^{
         NSLog(@"some thing");
     });
