@@ -428,11 +428,7 @@
     CGContextAddArc(contextRef, CGRectGetMidX(rect), CGRectGetMidY(rect), radius, 0, 2*M_PI, false);
     CGContextClosePath(contextRef);
     CGContextClip(contextRef);
-    CGContextSetFillColorWithColor(contextRef, [UIColor greenColor].CGColor);
-    CGContextFillPath(contextRef);
-    CGRect infoRect = CGRectMake(0, 0, w, h);
-    infoRect = CGRectInset(infoRect, 3, 3);
-    CGContextDrawImage(contextRef, infoRect, self.CGImage);
+    CGContextDrawImage(contextRef, rect, self.CGImage);
     CGImageRef imageMasked = CGBitmapContextCreateImage(contextRef);
     UIImage *img = [UIImage imageWithCGImage:imageMasked];
     
