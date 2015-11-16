@@ -12,9 +12,26 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
 
-#ifndef WEAKSELFPB
-#define WEAKSELFPB       __weak typeof(&*self) weakSelfPB = self;
+/// weak self reference
+#ifndef PBWEAKSELF
+#define PBWEAKSELF       __weak typeof(&*self) pbWeakSelf = self;
 #endif
+/// screen size
+#ifndef PBSCREEN_WIDTH
+#define PBSCREEN_WIDTH   ([[UIScreen mainScreen]bounds].size.width)
+#endif
+#ifndef PBSCREEN_HEIGHT
+#define PBSCREEN_HEIGHT  ([[UIScreen mainScreen]bounds].size.height)
+#endif
+/// system version
+#ifndef PBIOS8_ABOVE
+#define PBIOS8_ABOVE   ([[UIDevice currentDevice].systemVersion compare:@"8.0"] != NSOrderedDescending)
+#endif
+/// animation custom duration
+#ifndef PBANIMATE_DURATION
+#define PBANIMATE_DURATION                        0.25f
+#endif
+/// main / background thead
 #define PBMAIN(block)  if ([NSThread isMainThread]) {\
 block();\
 }else{\

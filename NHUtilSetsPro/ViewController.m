@@ -40,6 +40,8 @@
     PBMAINDelay(2.5, ^{
         NSLog(@"some thing delay");
     });
+    
+    ([[UIDevice currentDevice].systemVersion compare:@"8.0"] != NSOrderedDescending);
 }
 
 - (void)didReceiveMemoryWarning {
