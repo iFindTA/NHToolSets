@@ -225,7 +225,7 @@
     return range.location == NSNotFound;
 }
 
-- (CGSize)pb_sizeThatFitsaWithFont:(UIFont *)font width:(CGFloat)width {
+- (CGSize)pb_sizeThatFitsWithFont:(UIFont *)font width:(CGFloat)width {
     
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:self];
     NSDictionary *attSetting = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil];
@@ -235,7 +235,7 @@
     
     CGSize constraints = CGSizeMake(width, CGFLOAT_MAX);
     CGSize coreTextSize = CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, CFRangeMake(0, 0), nil, constraints, nil);
-    return CGSizeMake(width, coreTextSize.height);
+    return CGSizeMake(ceilf(width), ceilf(coreTextSize.height));
 }
 
 //NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {

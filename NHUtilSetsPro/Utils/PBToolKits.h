@@ -127,7 +127,7 @@ dispatch_async(dispatch_get_main_queue(),block);\
  *
  *	@return	the adjust size of string
  */
-- (CGSize)pb_sizeThatFitsaWithFont:(UIFont *)font width:(CGFloat)width;
+- (CGSize)pb_sizeThatFitsWithFont:(UIFont *)font width:(CGFloat)width;
 
 @end
 
