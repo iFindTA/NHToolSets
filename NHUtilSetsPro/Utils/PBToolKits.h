@@ -64,6 +64,29 @@ dispatch_async(dispatch_get_main_queue(),block);\
  */
 - (BOOL)pb_isEmpty;
 
+///////////////// NSDictionary Safe Accessors ///////////////
+/// home page: https://github.com/allenhsu/NSDictionary-Accessors
+
+- (BOOL)isArrayForKey:(NSString *)key;
+- (BOOL)isDictionaryForKey:(NSString *)key;
+- (BOOL)isStringForKey:(NSString *)key;
+- (BOOL)isNumberForKey:(NSString *)key;
+
+- (NSArray *)pb_arrayForKey:(NSString *)key;
+- (NSDictionary *)pb_dictionaryForKey:(NSString *)key;
+- (NSString *)pb_stringForKey:(NSString *)key;
+- (NSNumber *)pb_numberForKey:(NSString *)key;
+- (double)pb_doubleForKey:(NSString *)key;
+- (float)pb_floatForKey:(NSString *)key;
+- (int)pb_intForKey:(NSString *)key;
+- (unsigned int)pb_unsignedIntForKey:(NSString *)key;
+- (NSInteger)pb_integerForKey:(NSString *)key;
+- (NSUInteger)pb_unsignedIntegerForKey:(NSString *)key;
+- (long long)pb_longLongForKey:(NSString *)key;
+- (unsigned long long)pb_unsignedLongLongForKey:(NSString *)key;
+- (BOOL)pb_boolForKey:(NSString *)key;
+////////////////// NSDictionary Safe Accessors ///////////////
+
 @end
 
 @interface NSString (PBHelper)
