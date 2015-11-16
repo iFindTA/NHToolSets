@@ -178,6 +178,16 @@ dispatch_async(dispatch_get_main_queue(),block);\
 - (UIImage *)pb_roundImage;
 
 /**
+ *	@brief	generate round image
+ *
+ *	@param 	bWidth 	the round image's border width
+ *	@param 	color 	the round image's border color
+ *
+ *	@return	the round image
+ */
+- (UIImage *)pb_roundImageWithBorderWidth:(int)bWidth withColor:(UIColor *)color;
+
+/**
  *	@brief	generate round corner image
  *
  *	@param 	radius 	the round corner radius

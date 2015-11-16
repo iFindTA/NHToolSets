@@ -444,6 +444,45 @@
     return img;
 }
 
+- (UIImage *)pb_roundImageWithBorderWidth:(int)bWidth withColor:(UIColor *)color {
+    int w = self.size.width;
+    int h = self.size.height;
+    int dst_wh = w;
+    UIImage *tmpImg = self;
+    if (w != h) {
+        dst_wh = MIN(w, h);
+        tmpImg = [self pb_scaleToSize:CGSizeMake(dst_wh, dst_wh) keepAspect:false];
+    }
+    int radius = dst_wh*0.5;
+    if (bWidth >= radius || bWidth <= 0) {
+        return [self pb_roundImage];
+    }
+    color = ((color !=nil?color:[UIColor whiteColor]));
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGContextRef contextRef = CGBitmapContextCreate(NULL, dst_wh, dst_wh, 8, 4 * w, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
+    CGRect rect = CGRectMake(0, 0, dst_wh, dst_wh);
+    
+    CGContextBeginPath(contextRef);
+    CGContextAddArc(contextRef, CGRectGetMidX(rect), CGRectGetMidY(rect), radius, 0, 2*M_PI, false);
+    CGContextClosePath(contextRef);
+    CGContextClip(contextRef);
+    /// draw layer
+    CGContextSetFillColorWithColor(contextRef, color.CGColor);
+    CGContextFillRect(contextRef, rect);
+    rect = CGRectInset(rect, bWidth, bWidth);
+    CGContextAddArc(contextRef, CGRectGetMidX(rect), CGRectGetMidY(rect), radius-bWidth, 0, 2*M_PI, false);
+    CGContextClosePath(contextRef);
+    CGContextClip(contextRef);
+    CGContextDrawImage(contextRef, rect, tmpImg.CGImage);
+    CGImageRef imageMasked = CGBitmapContextCreateImage(contextRef);
+    UIImage *img = [UIImage imageWithCGImage:imageMasked];
+    
+    CGContextRelease(contextRef);
+    CGColorSpaceRelease(colorSpaceRef);
+    CGImageRelease(imageMasked);
+    return img;
+}
+
 - (UIImage *)pb_roundCornerWithRadius:(int)radius {
     int w = self.size.width;
     int h = self.size.height;
@@ -493,6 +532,7 @@
     CGContextClosePath(contextRef);
     CGContextClip(contextRef);
     /// draw layer
+    bColor = ((bColor != nil)?bColor:[UIColor whiteColor]);
     CGContextSetFillColorWithColor(contextRef, bColor.CGColor);
     CGContextFillRect(contextRef, rect);
     /// draw image
