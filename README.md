@@ -96,18 +96,44 @@ UIImage:
  *
  *	@return	the scaled image
  */
-- (UIImage*)pb_scaleToSize:(CGSize)dstSize;
+- (UIImage*)pb_scaleToSize:(CGSize)dstSize DEPRECATED_MSG_ATTRIBUTE("use pb_scaleToSize: keepAspect: method instead");
 
 /**
- *	@brief	create round corner image
+ *	@brief	scale image
  *
- *	@param 	image 	the origin image
- *	@param 	size 	destnation size
- *	@param 	radius 	destnation radius
+ *	@param 	dstSize 	the destnation size
+ *	@param 	keep 	whether keep image's width/height scale info
+ *
+ *	@return	the scaled image
+ */
+- (UIImage*)pb_scaleToSize:(CGSize)dstSize keepAspect:(BOOL)keep;
+
+/**
+ *	@brief	generate round image
  *
  *	@return	the round image
  */
-- (UIImage *)pb_createRoundWithSize:(CGSize)size withRadius:(NSInteger)radius;
+- (UIImage *)pb_roundImage;
+
+/**
+ *	@brief	generate round corner image
+ *
+ *	@param 	radius 	the round corner radius
+ *
+ *	@return	the round corner image
+ */
+- (UIImage *)pb_roundCornerWithRadius:(int)radius;
+
+/**
+ *	@brief	generate round corner image
+ *
+ *	@param 	radius 	the round corner redius
+ *	@param 	bWidth 	the border width
+ *	@param 	bColor 	the border color default is white
+ *
+ *	@return	the round corner image
+ */
+- (UIImage *)pb_roundCornerWithRadius:(int)radius withBorderWidth:(int)bWidth withBorderColor:(UIColor *)bColor;
 
 /**
  *	@brief	generate dark image

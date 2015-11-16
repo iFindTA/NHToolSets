@@ -416,16 +416,50 @@
     return scaledImage;
 }
 
-- (UIImage *)pb_roundCornerWithSize:(CGSize)size withRadius:(NSInteger)radius {
-    int w = size.width;
-    int h = size.height;
-    
+- (UIImage *)pb_roundImage {
+    int w = self.size.width;
+    int h = self.size.height;
+    int dst_wh = w;
+    UIImage *tmpImg = self;
+    if (w != h) {
+        dst_wh = MIN(w, h);
+        tmpImg = [self pb_scaleToSize:CGSizeMake(dst_wh, dst_wh) keepAspect:false];
+    }
+    int radius = dst_wh*0.5;
     CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
-    CGContextRef contextRef = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
-    CGRect rect = CGRectMake(0, 0, w, h);
+    CGContextRef contextRef = CGBitmapContextCreate(NULL, dst_wh, dst_wh, 8, 4 * w, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
+    CGRect rect = CGRectMake(0, 0, dst_wh, dst_wh);
     
     CGContextBeginPath(contextRef);
     CGContextAddArc(contextRef, CGRectGetMidX(rect), CGRectGetMidY(rect), radius, 0, 2*M_PI, false);
+    CGContextClosePath(contextRef);
+    CGContextClip(contextRef);
+    CGContextDrawImage(contextRef, rect, tmpImg.CGImage);
+    CGImageRef imageMasked = CGBitmapContextCreateImage(contextRef);
+    UIImage *img = [UIImage imageWithCGImage:imageMasked];
+    
+    CGContextRelease(contextRef);
+    CGColorSpaceRelease(colorSpaceRef);
+    CGImageRelease(imageMasked);
+    return img;
+}
+
+- (UIImage *)pb_roundCornerWithRadius:(int)radius {
+    int w = self.size.width;
+    int h = self.size.height;
+    int dst_wh = w;
+    if (w != h) {
+        dst_wh = MIN(w, h);
+    }
+    if (radius > dst_wh || radius <= 0) {
+        return self;
+    }
+    CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
+    CGContextRef contextRef = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
+    CGRect rect = CGRectMake(0, 0, w, h);
+    UIBezierPath *dstPath = [self pb_pathForSize:rect radius:radius];
+    CGContextBeginPath(contextRef);
+    CGContextAddPath(contextRef, dstPath.CGPath);
     CGContextClosePath(contextRef);
     CGContextClip(contextRef);
     CGContextDrawImage(contextRef, rect, self.CGImage);
@@ -438,23 +472,33 @@
     return img;
 }
 
-- (UIImage *)pb_roundCornerWithSize:(CGSize)size withRadius:(NSInteger)radius withLayerColor:(UIColor *)color withLayerWidth:(int)width {
-    int w = size.width;
-    int h = size.height;
+- (UIImage *)pb_roundCornerWithRadius:(int)radius withBorderWidth:(int)bWidth withBorderColor:(UIColor *)bColor {
+    int w = self.size.width;
+    int h = self.size.height;
+    int dst_wh = w;
+    if (w != h) {
+        dst_wh = MIN(w, h);
+    }
+    if (radius + bWidth > dst_wh || radius <= 0 || bWidth <= 0) {
+        return self;
+    }
     
     CGColorSpaceRef colorSpaceRef = CGColorSpaceCreateDeviceRGB();
     CGContextRef contextRef = CGBitmapContextCreate(NULL, w, h, 8, 4 * w, colorSpaceRef, (CGBitmapInfo)kCGImageAlphaPremultipliedFirst);
     CGRect rect = CGRectMake(0, 0, w, h);
+    UIBezierPath *dstPath = [self pb_pathForSize:rect radius:radius];
     /// begin graphics
     CGContextBeginPath(contextRef);
-    CGContextAddArc(contextRef, CGRectGetMidX(rect), CGRectGetMidY(rect), radius, 0, 2*M_PI, false);
+    CGContextAddPath(contextRef, dstPath.CGPath);
     CGContextClosePath(contextRef);
     CGContextClip(contextRef);
     /// draw layer
-    CGContextSetFillColorWithColor(contextRef, color.CGColor);
+    CGContextSetFillColorWithColor(contextRef, bColor.CGColor);
     CGContextFillRect(contextRef, rect);
     /// draw image
-    CGContextAddArc(contextRef, CGRectGetMidX(rect), CGRectGetMidY(rect), radius-width, 0, 2*M_PI, false);
+    rect = CGRectInset(rect, bWidth, bWidth);
+    dstPath = [self pb_pathForSize:rect radius:radius];
+    CGContextAddPath(contextRef, dstPath.CGPath);
     CGContextClosePath(contextRef);
     CGContextClip(contextRef);
     CGContextDrawImage(contextRef, rect, self.CGImage);
@@ -466,6 +510,43 @@
     CGColorSpaceRelease(colorSpaceRef);
     CGImageRelease(imageMasked);
     return img;
+}
+
+- (UIBezierPath *)pb_pathForSize:(CGRect)rect radius:(int)radius {
+    
+    CGPoint origin = rect.origin;
+    CGSize size = rect.size;
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    /// left top points
+    CGPoint lt_c = CGPointMake(origin.x, origin.y);
+    CGPoint lt_r = CGPointMake(origin.x+radius, origin.y);
+    CGPoint lt_l = CGPointMake(origin.x, origin.y+radius);
+    /// right top points
+    CGPoint rt_c = CGPointMake(origin.x+size.width, origin.y);
+    CGPoint rt_r = CGPointMake(origin.x+size.width, origin.y+radius);
+    CGPoint rt_l = CGPointMake(origin.x+size.width-radius, origin.y);
+    /// left bottom points
+    CGPoint lb_c = CGPointMake(origin.x, origin.y+size.height);
+    CGPoint lb_r = CGPointMake(origin.x+radius, origin.y+size.height);
+    CGPoint lb_l = CGPointMake(origin.x, origin.y+size.height-radius);
+    /// right bottom points
+    CGPoint rb_c = CGPointMake(origin.x+size.width, origin.y+size.height);
+    CGPoint rb_r = CGPointMake(origin.x+size.width, origin.y+size.height-radius);
+    CGPoint rb_l = CGPointMake(origin.x+size.width-radius, origin.y+size.height);
+    
+    /// add points lines to path
+    [path moveToPoint:lt_r];
+    [path addLineToPoint:rt_l];
+    [path addQuadCurveToPoint:rt_r controlPoint:rt_c];
+    [path addLineToPoint:rb_r];
+    [path addQuadCurveToPoint:rb_l controlPoint:rb_c];
+    [path addLineToPoint:lb_r];
+    [path addQuadCurveToPoint:lb_l controlPoint:lb_c];
+    [path addLineToPoint:lt_l];
+    [path addQuadCurveToPoint:lt_r controlPoint:lt_c];
+    [path closePath];
+    
+    return path;
 }
 
 - (UIImage *)pb_darkColor:(UIColor *)color lightLevel:(CGFloat)level {

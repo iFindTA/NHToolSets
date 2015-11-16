@@ -171,26 +171,31 @@ dispatch_async(dispatch_get_main_queue(),block);\
 - (UIImage*)pb_scaleToSize:(CGSize)dstSize keepAspect:(BOOL)keep;
 
 /**
- *	@brief	create round corner image
+ *	@brief	generate round image
  *
- *	@param 	size 	destnation size
- *	@param 	radius 	destnation radius
- *
- *	@return	the round corner image
+ *	@return	the round image
  */
-- (UIImage *)pb_roundCornerWithSize:(CGSize)size withRadius:(NSInteger)radius;
+- (UIImage *)pb_roundImage;
 
 /**
- *	@brief	create round corner image with layer
+ *	@brief	generate round corner image
  *
- *	@param 	size 	destnation size
- *	@param 	radius 	destnation radius
- *	@param 	color 	the layer's color
- *	@param 	width 	the layer's width
+ *	@param 	radius 	the round corner radius
  *
  *	@return	the round corner image
  */
-- (UIImage *)pb_roundCornerWithSize:(CGSize)size withRadius:(NSInteger)radius withLayerColor:(UIColor *)color withLayerWidth:(int)width;
+- (UIImage *)pb_roundCornerWithRadius:(int)radius;
+
+/**
+ *	@brief	generate round corner image
+ *
+ *	@param 	radius 	the round corner redius
+ *	@param 	bWidth 	the border width
+ *	@param 	bColor 	the border color default is white
+ *
+ *	@return	the round corner image
+ */
+- (UIImage *)pb_roundCornerWithRadius:(int)radius withBorderWidth:(int)bWidth withBorderColor:(UIColor *)bColor;
 
 /**
  *	@brief	generate dark image
