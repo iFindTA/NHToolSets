@@ -101,6 +101,13 @@ dispatch_async(dispatch_get_main_queue(),block);\
 /**
  *	@brief	Judging method
  *
+ *	@return	return self if self is not empty otherwise is @""
+ */
+- (NSString *)pb_available;
+
+/**
+ *	@brief	Judging method
+ *
  *	@return	whether only contain numbers
  */
 - (BOOL)pb_isOnlyNumbers;

@@ -204,6 +204,10 @@
     return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
+- (NSString *)pb_available {
+    return [self pb_isNull] ? @"":self;
+}
+
 - (BOOL)pb_isOnlyNumbers {
     NSCharacterSet *regular = [NSCharacterSet decimalDigitCharacterSet];
     regular = [regular invertedSet];
