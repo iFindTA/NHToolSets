@@ -257,5 +257,19 @@ dispatch_async(dispatch_get_main_queue(),block);\
  */
 - (UIImage *)pb_darkColor:(UIColor *)color lightLevel:(CGFloat)level;
 
+/**
+ *	@brief	generate image for iconfont
+ *
+ * To use this function you must add custom icon font into your plist file
+ * for the key 'Fonts provided by application : iconfont.ttf'
+ *
+ *	@param 	fontName 	iconfont name default is named of 'iconfont'
+ *	@param 	name        icon name
+ *	@param 	size        the image's size
+ *	@param 	color       the image's color default is white color
+ *
+ *	@return	the icon image
+ */
++ (UIImage *)pb_iconFont:(NSString *)fontName withName:(NSString *)name withSize:(NSInteger)size withColor:(UIColor *)color;
 
 @end

@@ -33,6 +33,11 @@
     imgView.image = dark;
     [self.view addSubview:imgView];
     
+    info.origin.y += 150;
+    imgView = [[UIImageView alloc] initWithFrame:info];
+    imgView.image = [UIImage pb_iconFont:nil withName:@"\U0000E616" withSize:100 withColor:[UIColor blueColor]];
+    [self.view addSubview:imgView];
+    
     PBMAIN(^{
         NSLog(@"some thing");
     });
@@ -41,7 +46,6 @@
         NSLog(@"some thing delay");
     });
     
-    ([[UIDevice currentDevice].systemVersion compare:@"8.0"] != NSOrderedDescending);
 }
 
 - (void)didReceiveMemoryWarning {

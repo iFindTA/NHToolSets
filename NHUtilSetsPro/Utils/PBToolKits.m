@@ -759,4 +759,40 @@
     return darkImage;
 }
 
++ (UIImage *)pb_iconFont:(NSString *)fontName withName:(NSString *)name withSize:(NSInteger)size withColor:(UIColor *)color {
+    if (size <= 0 || [name pb_isEmpty]) {
+        return nil;
+    }
+    fontName = (fontName != nil ? fontName:@"iconfont");
+    UIFont *font = [UIFont fontWithName:fontName size:size];
+    if (font == nil) {
+        return nil;
+    }
+    color = (color == nil ? [UIColor whiteColor]:color);
+    
+    CGFloat scale = [UIScreen mainScreen].scale;
+    CGFloat realSize = size * scale;
+    UIGraphicsBeginImageContext(CGSizeMake(realSize, realSize));
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    if ([name respondsToSelector:@selector(drawAtPoint:withAttributes:)]) {
+        /**
+         * 如果这里抛出异常，请打开断点列表，右击All Exceptions -> Edit Breakpoint -> All修改为Objective-C
+         * See: http://stackoverflow.com/questions/1163981/how-to-add-a-breakpoint-to-objc-exception-throw/14767076#14767076
+         */
+        [name drawAtPoint:CGPointZero withAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName: color}];
+    } else {
+    
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        CGContextSetFillColorWithColor(context, color.CGColor);
+        [name drawAtPoint:CGPointMake(0, 0) withFont:font];
+#pragma clang pop
+    }
+    
+    UIImage *image = [UIImage imageWithCGImage:UIGraphicsGetImageFromCurrentImageContext().CGImage scale:scale orientation:UIImageOrientationUp];
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 @end

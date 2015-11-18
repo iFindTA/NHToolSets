@@ -50,5 +50,9 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>iconfont.ttf</string>
+	</array>
 </dict>
 </plist>
