@@ -767,22 +767,19 @@
     if (size <= 0 || [name pb_isEmpty]) {
         return nil;
     }
+    CGFloat scale = [UIScreen mainScreen].scale;
     fontName = (fontName != nil ? fontName:@"iconfont");
-    UIFont *font = [UIFont fontWithName:fontName size:size];
+    UIFont *font = [UIFont fontWithName:fontName size:size*scale];
     if (font == nil) {
         return nil;
     }
     color = (color == nil ? [UIColor whiteColor]:color);
     
-    CGFloat scale = [UIScreen mainScreen].scale;
     CGFloat realSize = size * scale;
-    UIGraphicsBeginImageContext(CGSizeMake(realSize, realSize));
+//    UIGraphicsBeginImageContext(CGSizeMake(realSize, realSize));
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(realSize, realSize), false, scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     if ([name respondsToSelector:@selector(drawAtPoint:withAttributes:)]) {
-        /**
-         * 如果这里抛出异常，请打开断点列表，右击All Exceptions -> Edit Breakpoint -> All修改为Objective-C
-         * See: http://stackoverflow.com/questions/1163981/how-to-add-a-breakpoint-to-objc-exception-throw/14767076#14767076
-         */
         [name drawAtPoint:CGPointZero withAttributes:@{NSFontAttributeName:font, NSForegroundColorAttributeName: color}];
     } else {
     
