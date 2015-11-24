@@ -138,6 +138,53 @@ dispatch_async(dispatch_get_main_queue(),block);\
 
 @end
 
+@interface NSBundle (PBHelper)
+
+/**
+ *	@brief	get build version
+ *
+ *	@return	return the build version
+ */
++ (NSString *)pb_buildVersion;
+
+/**
+ *	@brief	get the release version
+ *
+ *	@return	return the release version
+ */
++ (NSString *)pb_releaseVersion;
+
+/**
+ *	@brief	get app's display name
+ *
+ *	@return	return app's display name
+ */
++ (NSString *)pb_displayName;
+
+@end
+
+@interface UIDevice (PBHelper)
+
+@end
+
+@interface UIFont (PBHelper)
+
+/**
+ *	@brief	system's title font
+ *
+ *	@return	return the title's font
+ */
++ (UIFont *)pb_deviceFontForTitle;
+
+/**
+ *	@brief	navigation title
+ *
+ *	@return	the title default font
+ */
++ (UIFont *)pb_navigationTitle;
+
+@end
+
 @interface UIColor (PBHelper)
 
 /**
