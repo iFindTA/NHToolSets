@@ -96,7 +96,7 @@ dispatch_async(dispatch_get_main_queue(),block);\
  *
  *  @return whether the string is null/nil value
  */
-- (BOOL)pb_isNull;
++ (BOOL)pb_isNull:(NSString *)string;
 
 /**
  *	@brief	Judging method

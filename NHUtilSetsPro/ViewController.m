@@ -46,6 +46,9 @@
         NSLog(@"some thing delay");
     });
     
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"NHINFO" ofType:@"DB"];
+    BOOL nilvalue = [NSString pb_isNull:filePath];
+    NSLog(@"path:%@=== is null value :%d",filePath,nilvalue);
 }
 
 - (void)didReceiveMemoryWarning {

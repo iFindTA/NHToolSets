@@ -192,22 +192,21 @@
 
 @implementation NSString (PBHelper)
 
-- (BOOL)pb_isNull {
-
-    if(self == nil || [self isKindOfClass:[NSNull class]] || [self pb_isEmpty] || [self isEqual:[NSNull null]]) {
-        return true;
-    }
++ (BOOL)pb_isNull:(NSString *)string {
     
-    return false;
+    if([string length] == 0 || ![[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]) {
+        return YES;
+    }
+    return NO;
 }
 
 - (BOOL)pb_isEmpty {
-    [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    return [self isEqualToString:@""];
+    NSString *someSelf = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return ([someSelf isEqualToString:@""] || ([someSelf length] == 0));
 }
 
 - (NSString *)pb_available {
-    return [self pb_isNull] ? @"":self;
+    return [NSString pb_isNull:self] ? @"":self;
 }
 
 - (BOOL)pb_isOnlyNumbers {
