@@ -193,7 +193,7 @@
 @implementation NSString (PBHelper)
 
 - (BOOL)pb_isNull {
-    
+
     if(self == nil || [self isKindOfClass:[NSNull class]] || [self pb_isEmpty] || [self isEqual:[NSNull null]]) {
         return true;
     }
@@ -202,14 +202,8 @@
 }
 
 - (BOOL)pb_isEmpty {
-    return [self pb_isEmptyIgnoringWhitespace:true];
-}
-- (BOOL)pb_isEmptyIgnoringWhitespace:(BOOL)ignoreWhitespace {
-    NSString *toCheck = (ignoreWhitespace) ? [self pb_stringByTrimmingWhitespace] : self;
-    return [toCheck isEqualToString:@""];
-}
-- (NSString *)pb_stringByTrimmingWhitespace {
-    return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return [self isEqualToString:@""];
 }
 
 - (NSString *)pb_available {

@@ -92,9 +92,16 @@ dispatch_async(dispatch_get_main_queue(),block);\
 @interface NSString (PBHelper)
 
 /**
+ *  @brief Judging method
+ *
+ *  @return whether the string is null/nil value
+ */
+- (BOOL)pb_isNull;
+
+/**
  *	@brief	Judging method
  *
- *	@return	whether the string is empty
+ *	@return	whether the string is empty value
  */
 - (BOOL)pb_isEmpty;
 
