@@ -306,7 +306,7 @@
 }
 
 //获取平台信息
-+(NSString *)getPlatform{
++(NSString *)pb_platform{
     NSString *result = [self getSysInfoByName:"hw.machine"];
     NSString *type = @"i386";
 //    NSLog(@"固件版本：%@",result);
@@ -365,7 +365,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         if (deviceFont == nil) {
-            NSString *platform = [UIDevice getPlatform];
+            NSString *platform = [UIDevice pb_platform];
             NSInteger fontSize = 15;
             if ([platform isEqualToString:@"iPhone 6"]
                 || [platform isEqualToString:@"iPhone 6s"]) {

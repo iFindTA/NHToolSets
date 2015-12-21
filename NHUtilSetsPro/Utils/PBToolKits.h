@@ -177,7 +177,7 @@ dispatch_async(dispatch_get_main_queue(),block);\
  *
  *  @return the device's platform eg. iPhone6s
  */
-+(NSString *)getPlatform;
++(NSString *)pb_platform;
 
 @end
 
