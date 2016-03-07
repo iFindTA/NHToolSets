@@ -13,9 +13,12 @@
 #import <Foundation/Foundation.h>
 
 /// weak self reference
-#ifndef PBWEAKSELF
-#define PBWEAKSELF       __weak typeof(&*self) pbWeakSelf = self;
-#endif
+#define weakify(var) __weak typeof(var) PBWeak_##var = var;
+#define strongify(var) \
+_Pragma("clang diagnostic push") \
+_Pragma("clang diagnostic ignored \"-Wshadow\"") \
+__strong typeof(var) var = PBWeak_##var; \
+_Pragma("clang diagnostic pop")
 /// screen size
 #ifndef PBSCREEN_WIDTH
 #define PBSCREEN_WIDTH   ([[UIScreen mainScreen]bounds].size.width)

@@ -38,7 +38,10 @@
     imgView.image = [UIImage pb_iconFont:nil withName:@"\U0000E616" withSize:100 withColor:[UIColor blueColor]];
     [self.view addSubview:imgView];
     
+    weakify(self);
     PBMAIN(^{
+        strongify(self);
+        [self doSomething];
         NSLog(@"some thing");
     });
     
@@ -49,6 +52,10 @@
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"NHINFO" ofType:@"DB"];
     BOOL nilvalue = [NSString pb_isNull:filePath];
     NSLog(@"path:%@=== is null value :%d",filePath,nilvalue);
+}
+
+- (void)doSomething {
+    
 }
 
 - (void)didReceiveMemoryWarning {
