@@ -343,4 +343,14 @@ dispatch_async(dispatch_get_main_queue(),block);\
  */
 + (UIImage *)pb_iconFont:(NSString *)fontName withName:(NSString *)name withSize:(NSInteger)size withColor:(UIColor *)color;
 
+/*!
+ *  @brief generate round corner image
+ *
+ *  @param radius the corner's size
+ *  @param size   the image's new size
+ *
+ *  @return the round corner image
+ */
+- (UIImage *)pb_drawRoundCornerWithRadius:(CGFloat)radius toSize:(CGSize)size;
+
 @end

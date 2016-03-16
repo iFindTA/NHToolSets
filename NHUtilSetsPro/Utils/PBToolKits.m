@@ -914,4 +914,21 @@
     return image;
 }
 
+- (UIImage *)pb_drawRoundCornerWithRadius:(CGFloat)radius toSize:(CGSize)size {
+    CGRect bounds = CGRectZero;
+    bounds.size = size;
+    
+    UIGraphicsBeginImageContextWithOptions(bounds.size, false, [UIScreen mainScreen].scale);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:bounds byRoundingCorners:UIRectCornerAllCorners cornerRadii:CGSizeMake(radius, radius)];
+    CGContextAddPath(ctx, path.CGPath);
+    CGContextClosePath(ctx);
+    CGContextClip(ctx);
+    [self drawInRect:bounds];
+    CGContextDrawPath(ctx, kCGPathFillStroke);
+    UIImage *output = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return output;
+}
+
 @end
