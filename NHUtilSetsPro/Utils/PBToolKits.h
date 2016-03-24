@@ -354,3 +354,23 @@ dispatch_async(dispatch_get_main_queue(),block);\
 - (UIImage *)pb_drawRoundCornerWithRadius:(CGFloat)radius toSize:(CGSize)size;
 
 @end
+
+struct CGBWidthColor {
+    CGFloat width;
+    unsigned long color;
+};
+typedef struct CGBWidthColor CGBWidthColor;
+
+struct CGBCornerColor {
+    CGFloat radius;
+    unsigned long color;
+};
+typedef struct CGBCornerColor CGBCornerColor;
+
+@interface UIView (PBHelper)
+
+- (void)addRound:(CGBCornerColor)corner;
+
+- (void)addRound:(CGBCornerColor)corner withBorder:(CGBWidthColor)border;
+
+@end
