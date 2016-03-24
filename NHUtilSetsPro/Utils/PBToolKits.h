@@ -369,8 +369,8 @@ typedef struct CGBCornerColor CGBCornerColor;
 
 @interface UIView (PBHelper)
 
-- (void)addRound:(CGBCornerColor)corner;
+- (void)pb_addRound:(CGBCornerColor)corner;
 
-- (void)addRound:(CGBCornerColor)corner withBorder:(CGBWidthColor)border;
+- (void)pb_addRound:(CGBCornerColor)corner withBorder:(CGBWidthColor)border;
 
 @end

@@ -937,7 +937,7 @@
 
 @implementation UIView (PBHelper)
 
-- (void)addRound:(CGBCornerColor)corner {
+- (void)pb_addRound:(CGBCornerColor)corner {
     
     UIColor *bgColor = [UIColor colorWithRed:((float)((corner.color & 0xFF0000) >> 16))/255.0 \
                                        green:((float)((corner.color & 0x00FF00) >>  8))/255.0 \
@@ -950,7 +950,7 @@
     [self insertSubview:imgView atIndex:0];
 }
 
-- (void)addRound:(CGBCornerColor)corner withBorder:(CGBWidthColor)border {
+- (void)pb_addRound:(CGBCornerColor)corner withBorder:(CGBWidthColor)border {
     UIColor *bgColor = [UIColor colorWithRed:((float)((corner.color & 0xFF0000) >> 16))/255.0 \
                                        green:((float)((corner.color & 0x00FF00) >>  8))/255.0 \
                                         blue:((float)((corner.color & 0x0000FF) >>  0))/255.0 \
