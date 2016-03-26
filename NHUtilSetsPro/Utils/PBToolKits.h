@@ -52,6 +52,10 @@ static inline BOOL PBIsEmpty(id obj) {
     || ([obj respondsToSelector:@selector(count)] && [obj count] == 0);
 }
 
+static inline NSString *PBAvailableString (NSString *obj) {
+    return PBIsEmpty(obj)?@"":obj;
+}
+
 @interface PBToolKits : NSObject
 
 @end
@@ -102,27 +106,6 @@ static inline BOOL PBIsEmpty(id obj) {
 @end
 
 @interface NSString (PBHelper)
-
-/**
- *  @brief Judging method
- *
- *  @return whether the string is null/nil value
- */
-+ (BOOL)pb_isNull:(NSString *)string;
-
-/**
- *	@brief	Judging method
- *
- *	@return	whether the string is empty value
- */
-- (BOOL)pb_isEmpty;
-
-/**
- *	@brief	Judging method
- *
- *	@return	return self if self is not empty otherwise is @""
- */
-- (NSString *)pb_available;
 
 /**
  *	@brief	Judging method

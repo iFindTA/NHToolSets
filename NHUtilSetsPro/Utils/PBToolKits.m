@@ -192,23 +192,6 @@
 
 @implementation NSString (PBHelper)
 
-+ (BOOL)pb_isNull:(NSString *)string {
-    
-    if([string length] == 0 || ![[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]) {
-        return YES;
-    }
-    return NO;
-}
-
-- (BOOL)pb_isEmpty {
-    NSString *someSelf = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    return ([someSelf isEqualToString:@""] || ([someSelf length] == 0));
-}
-
-- (NSString *)pb_available {
-    return [NSString pb_isNull:self] ? @"":self;
-}
-
 - (BOOL)pb_isOnlyNumbers {
     NSCharacterSet *regular = [NSCharacterSet decimalDigitCharacterSet];
     regular = [regular invertedSet];
@@ -882,7 +865,7 @@
 }
 
 + (UIImage *)pb_iconFont:(NSString *)fontName withName:(NSString *)name withSize:(NSInteger)size withColor:(UIColor *)color {
-    if (size <= 0 || [name pb_isEmpty]) {
+    if (size <= 0 || PBIsEmpty(name)) {
         return nil;
     }
     CGFloat scale = [UIScreen mainScreen].scale;
