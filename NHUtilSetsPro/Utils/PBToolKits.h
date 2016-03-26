@@ -45,6 +45,11 @@ dispatch_async(dispatch_get_main_queue(),block);\
 
 #define PBFormat(format, ...) [NSString stringWithFormat:format, ##__VA_ARGS__]
 
+BOOL __attribute__((overloadable)) PBIsEmpty(NSString *s) { return s == nil || [s length] == 0u; }
+BOOL __attribute__((overloadable)) PBIsEmpty(NSArray *a) { return a == nil || [a count] == 0u; }
+BOOL __attribute__((overloadable)) PBIsEmpty(NSDictionary *d) { return d == nil || [d count] == 0u; }
+BOOL __attribute__((overloadable)) PBIsEmpty(NSSet *s) { return s == nil || [s count] == 0u; }
+
 @interface PBToolKits : NSObject
 
 @end
