@@ -56,6 +56,18 @@ static inline NSString *PBAvailableString (NSString *obj) {
     return PBIsEmpty(obj)?@"":obj;
 }
 
+static inline NSNumber *PBAvailableNumber (NSNumber *obj) {
+    return PBIsEmpty(obj)?[NSNumber numberWithInt:0]:obj;
+}
+
+static inline NSArray *PBAvailableArray (NSArray *obj) {
+    return PBIsEmpty(obj)?[NSArray array]:obj;
+}
+
+static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
+    return PBIsEmpty(obj)?[NSDictionary dictionary]:obj;
+}
+
 @interface PBToolKits : NSObject
 
 @end

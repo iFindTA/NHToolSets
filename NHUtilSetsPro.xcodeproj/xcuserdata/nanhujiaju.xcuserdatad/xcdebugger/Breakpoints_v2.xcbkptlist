@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "773"
             endingLineNumber = "773"
-            landmarkName = "-pb_roundCornerWithRadius:"
+            landmarkName = "-pb_roundCornerWithRadius:withBorderWidth:withBorderColor:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "765"
             endingLineNumber = "765"
-            landmarkName = "-pb_roundCornerWithRadius:"
+            landmarkName = "-pb_roundCornerWithRadius:withBorderWidth:withBorderColor:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -47,7 +47,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "766"
             endingLineNumber = "766"
-            landmarkName = "-pb_roundCornerWithRadius:"
+            landmarkName = "-pb_roundCornerWithRadius:withBorderWidth:withBorderColor:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
