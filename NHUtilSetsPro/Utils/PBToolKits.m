@@ -349,13 +349,13 @@
     dispatch_once(&onceToken, ^{
         if (deviceFont == nil) {
             NSString *platform = [UIDevice pb_platform];
-            NSInteger fontSize = 15;
+            NSInteger fontSize = 13;
             if ([platform isEqualToString:@"iPhone 6"]
                 || [platform isEqualToString:@"iPhone 6s"]) {
-                fontSize = 17;
+                fontSize = 15;
             }else if ([platform isEqualToString:@"iPhone 6plus"]
                       || [platform isEqualToString:@"iPhone 6splus"]){
-                fontSize = 20;
+                fontSize = 17;
             }
             deviceFont = [UIFont systemFontOfSize:fontSize];
         }
