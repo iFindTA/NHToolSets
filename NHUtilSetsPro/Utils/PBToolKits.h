@@ -45,26 +45,26 @@ dispatch_async(dispatch_get_main_queue(),block);\
 
 #define PBFormat(format, ...) [NSString stringWithFormat:format, ##__VA_ARGS__]
 
-static inline BOOL PBIsEmpty(id obj) {
+static inline BOOL PBIsEmpty(id _Nullable obj) {
     return obj == nil
     || (NSNull *)obj == [NSNull null]
     || ([obj respondsToSelector:@selector(length)] && [obj length] == 0)
     || ([obj respondsToSelector:@selector(count)] && [obj count] == 0);
 }
 
-static inline NSString *PBAvailableString (NSString *obj) {
+static inline NSString * _Nonnull PBAvailableString (NSString * _Nullable obj) {
     return PBIsEmpty(obj)?@"":obj;
 }
 
-static inline NSNumber *PBAvailableNumber (NSNumber *obj) {
+static inline NSNumber * _Nonnull PBAvailableNumber (NSNumber * _Nullable obj) {
     return PBIsEmpty(obj)?[NSNumber numberWithInt:0]:obj;
 }
 
-static inline NSArray *PBAvailableArray (NSArray *obj) {
+static inline NSArray * _Nonnull PBAvailableArray (NSArray * _Nullable obj) {
     return PBIsEmpty(obj)?[NSArray array]:obj;
 }
 
-static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
+static inline NSDictionary *_Nonnull PBAvailableDictionary (NSDictionary * _Nullable obj) {
     return PBIsEmpty(obj)?[NSDictionary dictionary]:obj;
 }
 
@@ -79,7 +79,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	whether the array is empty
  */
-- (BOOL)pb_isEmpty;
+- (BOOL)pb_isEmpty NS_DEPRECATED_IOS(2_0, 7_0, "PBIsEmpty()");
 
 @end
 
@@ -90,29 +90,29 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	whether the map is empty
  */
-- (BOOL)pb_isEmpty;
+- (BOOL)pb_isEmpty NS_DEPRECATED_IOS(2_0, 7_0, "PBIsEmpty()");
 
 ///////////////// NSDictionary Safe Accessors ///////////////
 /// home page: https://github.com/allenhsu/NSDictionary-Accessors
 
-- (BOOL)isArrayForKey:(NSString *)key;
-- (BOOL)isDictionaryForKey:(NSString *)key;
-- (BOOL)isStringForKey:(NSString *)key;
-- (BOOL)isNumberForKey:(NSString *)key;
+- (BOOL)isArrayForKey:(NSString * _Nonnull )key;
+- (BOOL)isDictionaryForKey:(NSString * _Nonnull )key;
+- (BOOL)isStringForKey:(NSString * _Nonnull )key;
+- (BOOL)isNumberForKey:(NSString * _Nonnull )key;
 
-- (NSArray *)pb_arrayForKey:(NSString *)key;
-- (NSDictionary *)pb_dictionaryForKey:(NSString *)key;
-- (NSString *)pb_stringForKey:(NSString *)key;
-- (NSNumber *)pb_numberForKey:(NSString *)key;
-- (double)pb_doubleForKey:(NSString *)key;
-- (float)pb_floatForKey:(NSString *)key;
-- (int)pb_intForKey:(NSString *)key;
-- (unsigned int)pb_unsignedIntForKey:(NSString *)key;
-- (NSInteger)pb_integerForKey:(NSString *)key;
-- (NSUInteger)pb_unsignedIntegerForKey:(NSString *)key;
-- (long long)pb_longLongForKey:(NSString *)key;
-- (unsigned long long)pb_unsignedLongLongForKey:(NSString *)key;
-- (BOOL)pb_boolForKey:(NSString *)key;
+- (NSArray * _Nullable )pb_arrayForKey:(NSString * _Nonnull )key;
+- (NSDictionary * _Nullable )pb_dictionaryForKey:(NSString * _Nonnull )key;
+- (NSString * _Nullable )pb_stringForKey:(NSString * _Nonnull )key;
+- (NSNumber * _Nullable )pb_numberForKey:(NSString * _Nonnull )key;
+- (double)pb_doubleForKey:(NSString * _Nonnull )key;
+- (float)pb_floatForKey:(NSString * _Nonnull )key;
+- (int)pb_intForKey:(NSString * _Nonnull )key;
+- (unsigned int)pb_unsignedIntForKey:(NSString * _Nonnull )key;
+- (NSInteger)pb_integerForKey:(NSString * _Nonnull )key;
+- (NSUInteger)pb_unsignedIntegerForKey:(NSString * _Nonnull )key;
+- (long long)pb_longLongForKey:(NSString * _Nonnull )key;
+- (unsigned long long)pb_unsignedLongLongForKey:(NSString * _Nonnull )key;
+- (BOOL)pb_boolForKey:(NSString * _Nonnull )key;
 ////////////////// NSDictionary Safe Accessors ///////////////
 
 @end
@@ -148,7 +148,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the adjust size of string
  */
-- (CGSize)pb_sizeThatFitsWithFont:(UIFont *)font width:(CGFloat)width;
+- (CGSize)pb_sizeThatFitsWithFont:(UIFont * _Nonnull)font width:(CGFloat)width;
 
 @end
 
@@ -159,21 +159,21 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	return the build version
  */
-+ (NSString *)pb_buildVersion;
++ (NSString * _Nonnull)pb_buildVersion;
 
 /**
  *	@brief	get the release version
  *
  *	@return	return the release version
  */
-+ (NSString *)pb_releaseVersion;
++ (NSString * _Nonnull)pb_releaseVersion;
 
 /**
  *	@brief	get app's display name
  *
  *	@return	return app's display name
  */
-+ (NSString *)pb_displayName;
++ (NSString * _Nonnull)pb_displayName;
 
 @end
 
@@ -184,7 +184,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *  @return the device's platform eg. iPhone6s
  */
-+(NSString *)pb_platform;
++(NSString * _Nonnull)pb_platform;
 
 @end
 
@@ -195,16 +195,25 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	return the title's font
  */
-+ (UIFont *)pb_deviceFontForTitle;
++ (UIFont * _Nonnull)pb_deviceFontForTitle;
 
 /**
  *	@brief	navigation title
  *
  *	@return	the title default font
  */
-+ (UIFont *)pb_navigationTitle;
++ (UIFont * _Nonnull)pb_navigationTitle;
 
 @end
+
+struct PBRGBA {
+    CGFloat r;
+    CGFloat g;
+    CGFloat b;
+    CGFloat a;
+};
+
+typedef struct PBRGBA PBRGBA;
 
 @interface UIColor (PBHelper)
 
@@ -213,7 +222,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	random color instance
  */
-+ (UIColor *)pb_randomColor;
++ (UIColor * _Nonnull)pb_randomColor;
 
 /**
  *	@brief	generate color
@@ -223,7 +232,16 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *	@return	color's instance
  */
 
-+ (UIColor *)pb_colorWithHexString:(NSString *)hexString;
++ (UIColor * _Nonnull)pb_colorWithHexString:(NSString * _Nonnull)hexString;
+
+/**
+ *  @brief get rgba value from color
+ *
+ *  @param color the source color
+ *
+ *  @return the rgba value
+ */
++ (PBRGBA)pb_rgbaFromUIColor:(UIColor * _Nonnull)color;
 
 @end
 
@@ -236,7 +254,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	whether only the two image is equal
  */
-- (BOOL)pb_isEqualTo:(UIImage *)image;
+- (BOOL)pb_isEqualTo:(UIImage * _Nonnull)image;
 
 
 /**
@@ -246,7 +264,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the image from color
  */
-+ (UIImage *)pb_imageWithColor:(UIColor *)color;
++ (UIImage * _Nonnull)pb_imageWithColor:(UIColor * _Nonnull)color;
 
 /**
  *	@brief	blur image
@@ -255,7 +273,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the blured image
  */
-- (UIImage *)pb_blurredImage:(CGFloat)level;
+- (UIImage * _Nonnull)pb_blurredImage:(CGFloat)level;
 
 /**
  *	@brief	generate small image
@@ -264,7 +282,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the cropped image
  */
-- (UIImage *)pb_croppedBounds:(CGRect)bounds;
+- (UIImage * _Nonnull)pb_croppedBounds:(CGRect)bounds;
 
 /**
  *	@brief	scale image
@@ -273,7 +291,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the scaled image
  */
-- (UIImage*)pb_scaleToSize:(CGSize)dstSize DEPRECATED_MSG_ATTRIBUTE("use pb_scaleToSize: keepAspect: method instead");
+- (UIImage * _Nonnull)pb_scaleToSize:(CGSize)dstSize DEPRECATED_MSG_ATTRIBUTE("use pb_scaleToSize: keepAspect: method instead");
 
 /**
  *	@brief	scale image
@@ -283,14 +301,14 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the scaled image
  */
-- (UIImage*)pb_scaleToSize:(CGSize)dstSize keepAspect:(BOOL)keep;
+- (UIImage * _Nonnull)pb_scaleToSize:(CGSize)dstSize keepAspect:(BOOL)keep;
 
 /**
  *	@brief	generate round image
  *
  *	@return	the round image
  */
-- (UIImage *)pb_roundImage;
+- (UIImage * _Nonnull)pb_roundImage;
 
 /**
  *	@brief	generate round image
@@ -300,7 +318,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the round image
  */
-- (UIImage *)pb_roundImageWithBorderWidth:(int)bWidth withColor:(UIColor *)color;
+- (UIImage * _Nonnull)pb_roundImageWithBorderWidth:(int)bWidth withColor:(UIColor * _Nonnull)color;
 
 /**
  *	@brief	generate round corner image
@@ -309,7 +327,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the round corner image
  */
-- (UIImage *)pb_roundCornerWithRadius:(int)radius;
+- (UIImage * _Nonnull)pb_roundCornerWithRadius:(int)radius;
 
 /**
  *	@brief	generate round corner image
@@ -320,7 +338,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the round corner image
  */
-- (UIImage *)pb_roundCornerWithRadius:(int)radius withBorderWidth:(int)bWidth withBorderColor:(UIColor *)bColor;
+- (UIImage * _Nonnull)pb_roundCornerWithRadius:(int)radius withBorderWidth:(int)bWidth withBorderColor:(UIColor * _Nonnull)bColor;
 
 /**
  *	@brief	generate dark image
@@ -330,7 +348,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the dark image
  */
-- (UIImage *)pb_darkColor:(UIColor *)color lightLevel:(CGFloat)level;
+- (UIImage * _Nonnull)pb_darkColor:(UIColor * _Nonnull)color lightLevel:(CGFloat)level;
 
 /**
  *	@brief	generate image for iconfont
@@ -345,7 +363,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *	@return	the icon image
  */
-+ (UIImage *)pb_iconFont:(NSString *)fontName withName:(NSString *)name withSize:(NSInteger)size withColor:(UIColor *)color;
++ (UIImage * _Nonnull)pb_iconFont:(NSString * _Nullable)fontName withName:(NSString * _Nonnull)name withSize:(NSInteger)size withColor:(UIColor * _Nonnull)color;
 
 /*!
  *  @brief generate round corner image
@@ -355,7 +373,7 @@ static inline NSDictionary *PBAvailableDictionary (NSDictionary *obj) {
  *
  *  @return the round corner image
  */
-- (UIImage *)pb_drawRoundCornerWithRadius:(CGFloat)radius toSize:(CGSize)size;
+- (UIImage * _Nonnull)pb_drawRoundCornerWithRadius:(CGFloat)radius toSize:(CGSize)size;
 
 @end
 

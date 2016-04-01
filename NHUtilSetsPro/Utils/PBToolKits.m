@@ -429,6 +429,47 @@
     return [UIColor colorWithRed: red green: green blue: blue alpha: alpha];
 }
 
++ (PBRGBA)pb_rgbaFromUIColor:(UIColor * _Nonnull)color {
+    
+    PBRGBA rgba;CGColorRef colorRef = color.CGColor;
+    
+    CGColorSpaceRef color_space = CGColorGetColorSpace(colorRef);
+    CGColorSpaceModel color_space_model = CGColorSpaceGetModel(color_space);
+    const CGFloat *color_components = CGColorGetComponents(colorRef);
+    size_t color_component_count = CGColorGetNumberOfComponents(colorRef);
+    
+    switch (color_space_model){
+        case kCGColorSpaceModelMonochrome:{
+            assert(color_component_count == 2);
+            rgba = (PBRGBA){
+                .r = color_components[0],
+                .g = color_components[0],
+                .b = color_components[0],
+                .a = color_components[1]
+            };
+            break;
+        }
+            
+        case kCGColorSpaceModelRGB:{
+            assert(color_component_count == 4);
+            rgba = (PBRGBA){
+                .r = color_components[0],
+                .g = color_components[1],
+                .b = color_components[2],
+                .a = color_components[3]
+            };
+            break;
+        }
+            
+        default:{
+            rgba = (PBRGBA) { 0, 0, 0, 0 };
+            break;
+        }
+    }
+    
+    return rgba;
+}
+
 @end
 
 #pragma mark == UIImage ==
@@ -945,7 +986,8 @@
     UIImage *bgImg = [UIImage pb_imageWithColor:bgColor];
     CGSize size = self.bounds.size;
     UIImage *dstImg = [bgImg pb_drawRoundCornerWithRadius:corner.radius toSize:size];
-    dstImg = [dstImg pb_roundImageWithBorderWidth:border.width withColor:borderColor];
+    //dstImg = [dstImg pb_roundImageWithBorderWidth:border.width withColor:borderColor];
+    dstImg = [dstImg pb_roundCornerWithRadius:corner.radius withBorderWidth:border.width withBorderColor:borderColor];
     UIImageView *imgView = [[UIImageView alloc] initWithImage:dstImg];
     [self insertSubview:imgView atIndex:0];
 }

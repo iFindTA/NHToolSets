@@ -38,6 +38,13 @@
     imgView.image = [UIImage pb_iconFont:nil withName:@"\U0000E616" withSize:100 withColor:[UIColor blueColor]];
     [self.view addSubview:imgView];
     
+    info.origin.y += 150;
+    UIView *bgView = [[UIView alloc] initWithFrame:(CGRect){.origin=info.origin,.size=CGSizeMake(70, 30)}];
+    CGBCornerColor corner = {8,0xF5F5F5};
+    CGBWidthColor border = {1,0xC8C8C8};
+    [bgView pb_addRound:corner withBorder:border];
+    [self.view addSubview:bgView];
+    
     weakify(self);
     PBMAIN(^{
         strongify(self);
@@ -50,7 +57,7 @@
     });
     
     NSString *filePath = [[NSBundle mainBundle] pathForResource:@"NHINFO" ofType:@"DB"];
-    BOOL nilvalue = [NSString pb_isNull:filePath];
+    BOOL nilvalue = PBIsEmpty(filePath);
     NSLog(@"path:%@=== is null value :%d",filePath,nilvalue);
     
 }
