@@ -60,6 +60,10 @@
     BOOL nilvalue = PBIsEmpty(filePath);
     NSLog(@"path:%@=== is null value :%d",filePath,nilvalue);
     
+    NSString *appname = [NSBundle pb_displayName];
+    NSLog(@"app name :%@",appname);
+    NSString *ver = [NSBundle pb_releaseVersion];
+    NSLog(@"release ver:%@",ver);
 }
 
 - (void)doSomething {
