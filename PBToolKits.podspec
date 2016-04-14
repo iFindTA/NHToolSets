@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.author             = { "hujiaju" => "nanhujiaju@gmail.com" }
   s.platform     = :ios, '7.0'
   s.source       = { :git => "https://github.com/iFindTA/NHToolSets.git", :tag => s.version.to_s }
-  s.source_files  = "NHUtilSetsPro/Utils/**/*.{h,m}"
+  s.source_files  = "NHUtilSetsPro/Utils/*.{h,m}"
   s.public_header_files = "NHUtilSetsPro/Utils/*.h"
 
   s.framework  = "UIKit","Foundation","Accelerate","QuartzCore","CoreText"
