@@ -9,7 +9,7 @@
 #ifndef PBKits_h
 #define PBKits_h
 
-#import "UIFont/UIFont+PBHelper.h"
+#import <UIFont/UIFont+PBHelper.h>
 #import "UIView/UIView+PBHelper.h"
 #import "UIColor/UIColor+PBHelper.h"
 #import "UIImage/UIImage+PBHelper.h"
