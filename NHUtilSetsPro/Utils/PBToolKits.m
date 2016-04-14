@@ -480,11 +480,11 @@
 
 @implementation UIImage (PBHelper)
 
-+ (UIImage *)imagePathed:(NSString *)name {
-    return [UIImage imagePathed:name extention:nil];
++ (UIImage *)pb_imagePathed:(NSString *)name {
+    return [UIImage pb_imagePathed:name extention:nil];
 }
 
-+ (UIImage *)imagePathed:(NSString *)name extention:(NSString *)ext {
++ (UIImage *)pb_imagePathed:(NSString *)name extention:(NSString *)ext {
 
     UIImage *img = nil;
     if (PBIsEmpty(name)) {

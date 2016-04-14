@@ -254,7 +254,7 @@ typedef struct PBRGBA PBRGBA;
  *
  *  @return the image
  */
-+ (UIImage * _Nullable)imagePathed:(NSString * _Nonnull)name;
++ (UIImage * _Nullable)pb_imagePathed:(NSString * _Nonnull)name;
 
 /**
  *  @brief load image from content path that not cached in memory
@@ -264,7 +264,7 @@ typedef struct PBRGBA PBRGBA;
  *
  *  @return the image
  */
-+ (UIImage * _Nullable)imagePathed:(NSString * _Nonnull)name extention:(NSString * _Nullable)ext;
++ (UIImage * _Nullable)pb_imagePathed:(NSString * _Nonnull)name extention:(NSString * _Nullable)ext;
 
 /**
  *	@brief	Judging Method
