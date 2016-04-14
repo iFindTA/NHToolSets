@@ -7,7 +7,7 @@
 //
 
 #import "UIImage+PBHelper.h"
-#import "PBConstaints.h"
+#import "PBKits.h"
 
 @implementation UIImage (PBHelper)
 

@@ -7,7 +7,7 @@
 //
 
 #import "NSArray+PBHelper.h"
-#import "PBConstaints.h"
+#import "PBKits.h"
 
 @implementation NSArray (PBHelper)
 

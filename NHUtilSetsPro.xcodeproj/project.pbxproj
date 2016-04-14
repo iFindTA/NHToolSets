@@ -74,7 +74,6 @@
 		608C2D971CBF50F300F44699 /* PBKits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBKits.h; sourceTree = "<group>"; };
 		608C2DA11CBF52E000F44699 /* NSArray+PBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PBHelper.h"; sourceTree = "<group>"; };
 		608C2DA21CBF52E000F44699 /* NSArray+PBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PBHelper.m"; sourceTree = "<group>"; };
-		608C2DA51CBF532A00F44699 /* PBConstaints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBConstaints.h; sourceTree = "<group>"; };
 		608C2DA71CBF537500F44699 /* PBDependency.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBDependency.h; sourceTree = "<group>"; };
 		608C2DA81CBF544000F44699 /* NSBundle+PBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+PBHelper.h"; sourceTree = "<group>"; };
 		608C2DA91CBF544000F44699 /* NSBundle+PBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+PBHelper.m"; sourceTree = "<group>"; };
@@ -196,7 +195,6 @@
 			children = (
 				608C2D971CBF50F300F44699 /* PBKits.h */,
 				608C2DA61CBF535E00F44699 /* Frameworks */,
-				608C2DA41CBF531600F44699 /* PBConstaints */,
 				608C2D981CBF52C600F44699 /* NSArray */,
 				608C2D991CBF52C600F44699 /* NSBundle */,
 				608C2D9A1CBF52C600F44699 /* NSDictionary */,
@@ -289,14 +287,6 @@
 				608C2DBE1CBF54A700F44699 /* UIView+PBHelper.m */,
 			);
 			path = UIView;
-			sourceTree = "<group>";
-		};
-		608C2DA41CBF531600F44699 /* PBConstaints */ = {
-			isa = PBXGroup;
-			children = (
-				608C2DA51CBF532A00F44699 /* PBConstaints.h */,
-			);
-			path = PBConstaints;
 			sourceTree = "<group>";
 		};
 		608C2DA61CBF535E00F44699 /* Frameworks */ = {
@@ -593,9 +583,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${SRCROOT}/NHUtilSetsPro/NHUtilSetsPro.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NHUtilSetsPro/Utils\"";
 				INFOPLIST_FILE = NHUtilSetsPro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHUtilSetsPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -607,9 +599,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${SRCROOT}/NHUtilSetsPro/NHUtilSetsPro.pch";
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/NHUtilSetsPro/Utils\"";
 				INFOPLIST_FILE = NHUtilSetsPro/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = PullBear.NHUtilSetsPro;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

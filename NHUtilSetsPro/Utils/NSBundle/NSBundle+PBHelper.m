@@ -7,7 +7,7 @@
 //
 
 #import "NSBundle+PBHelper.h"
-#import "PBConstaints.h"
+#import "PBKits.h"
 #import "NSDictionary+PBHelper.h"
 
 @implementation NSBundle (PBHelper)
