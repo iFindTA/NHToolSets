@@ -248,6 +248,25 @@ typedef struct PBRGBA PBRGBA;
 @interface UIImage (PBHelper)
 
 /**
+ *  @brief load image from content path that not cached in memory
+ *
+ *  @param name the image's name
+ *
+ *  @return the image
+ */
++ (UIImage * _Nullable)imagePathed:(NSString * _Nonnull)name;
+
+/**
+ *  @brief load image from content path that not cached in memory
+ *
+ *  @param name the image's name
+ *  @param ext  jpg or png, default is png
+ *
+ *  @return the image
+ */
++ (UIImage * _Nullable)imagePathed:(NSString * _Nonnull)name extention:(NSString * _Nullable)ext;
+
+/**
  *	@brief	Judging Method
  *
  *	@param 	image 	other image

@@ -22,7 +22,8 @@
     self.title = @"PBToolKits";
     
     CGRect info = CGRectMake(100, 100, 100, 100);
-    UIImage *image = [UIImage imageNamed:@"sina150"];
+//    UIImage *image = [UIImage imageNamed:@"sina150"];
+    UIImage *image = [UIImage imagePathed:@"sina150"];
     UIImage *dark = [image pb_darkColor:[UIColor blackColor] lightLevel:0.5];
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:info];
     imgView.image = image;
@@ -64,6 +65,9 @@
     NSLog(@"app name :%@",appname);
     NSString *ver = [NSBundle pb_releaseVersion];
     NSLog(@"release ver:%@",ver);
+    
+    CGFloat m_scale = [UIScreen mainScreen].scale;
+    NSLog(@"screen scale:%f",m_scale);
 }
 
 - (void)doSomething {

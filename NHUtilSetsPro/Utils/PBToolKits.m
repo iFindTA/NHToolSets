@@ -269,7 +269,11 @@
 
 + (NSString *)pb_displayName {
     NSDictionary *bundleInfo = [[NSBundle mainBundle] infoDictionary];
-    return [bundleInfo pb_stringForKey:(NSString *)kCFBundleNameKey];
+    NSString *m_name = [bundleInfo pb_stringForKey:@"CFBundleDisplayName"];
+    if (PBIsEmpty(m_name)) {
+        m_name = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleNameKey];
+    }
+    return m_name;
 }
 
 @end
@@ -475,6 +479,41 @@
 #pragma mark == UIImage ==
 
 @implementation UIImage (PBHelper)
+
++ (UIImage *)imagePathed:(NSString *)name {
+    return [UIImage imagePathed:name extention:nil];
+}
+
++ (UIImage *)imagePathed:(NSString *)name extention:(NSString *)ext {
+
+    UIImage *img = nil;
+    if (PBIsEmpty(name)) {
+        return img;
+    }
+    if (PBIsEmpty(ext)) {
+        ext = @"png";
+    }
+    NSString *m_realName = [name copy];
+    NSUInteger location = [name rangeOfString:@"@"].location;
+    if (location != NSNotFound && [name length]>1 && location > 0) {
+        m_realName = [name substringToIndex:location-1];
+    }
+    NSBundle *bundle = [NSBundle mainBundle];
+    int m_scale = (int)[UIScreen mainScreen].scale;
+    if (m_scale == 1) {
+        img = [UIImage imageWithContentsOfFile:[bundle pathForResource:m_realName ofType:ext]];
+    }else {
+        NSString *__tmp_name = PBFormat(@"%@@%dx",m_realName,m_scale);
+        img = [UIImage imageWithContentsOfFile:[bundle pathForResource:__tmp_name ofType:ext]];
+        if (img == nil) {
+            int __tmp_scale = m_scale==2?3:2;
+            m_realName = PBFormat(@"%@@%dx",m_realName,__tmp_scale);
+            img = [UIImage imageWithContentsOfFile:[bundle pathForResource:m_realName ofType:ext]];
+        }
+    }
+    
+    return img;
+}
 
 - (BOOL)pb_isEqualTo:(UIImage *)image {
     BOOL result = NO;

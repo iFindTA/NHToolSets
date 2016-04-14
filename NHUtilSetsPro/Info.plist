@@ -54,5 +54,7 @@
 	<array>
 		<string>iconfont.ttf</string>
 	</array>
+	<key>CFBundleDisplayName</key>
+	<string>工具集合</string>
 </dict>
 </plist>
