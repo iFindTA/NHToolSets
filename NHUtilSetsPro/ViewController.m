@@ -7,7 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "PBToolKits.h"
+#import "PBKits.h"
 
 @interface ViewController ()
 
@@ -23,7 +23,7 @@
     
     CGRect info = CGRectMake(100, 100, 100, 100);
 //    UIImage *image = [UIImage imageNamed:@"sina150"];
-    UIImage *image = [UIImage imagePathed:@"sina150"];
+    UIImage *image = [UIImage pb_imagePathed:@"sina150"];
     UIImage *dark = [image pb_darkColor:[UIColor blackColor] lightLevel:0.5];
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:info];
     imgView.image = image;

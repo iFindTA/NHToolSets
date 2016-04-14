@@ -26,6 +26,9 @@ _Pragma("clang diagnostic pop")
 #ifndef PBSCREEN_HEIGHT
 #define PBSCREEN_HEIGHT  ([[UIScreen mainScreen]bounds].size.height)
 #endif
+#ifndef PBSCREEN_SCALE
+#define PBSCREEN_SCALE  ([UIScreen mainScreen].scale)
+#endif
 /// system version
 #ifndef PBIOS8_ABOVE
 #define PBIOS8_ABOVE   ([[UIDevice currentDevice].systemVersion compare:@"8.0"] != NSOrderedDescending)
@@ -254,7 +257,7 @@ typedef struct PBRGBA PBRGBA;
  *
  *  @return the image
  */
-+ (UIImage * _Nullable)pb_imagePathed:(NSString * _Nonnull)name;
++ (nullable UIImage *)pb_imagePathed:(nonnull NSString *)name;
 
 /**
  *  @brief load image from content path that not cached in memory
@@ -264,7 +267,7 @@ typedef struct PBRGBA PBRGBA;
  *
  *  @return the image
  */
-+ (UIImage * _Nullable)pb_imagePathed:(NSString * _Nonnull)name extention:(NSString * _Nullable)ext;
++ (nullable UIImage *)pb_imagePathed:(nonnull NSString *)name extention:(nullable NSString *)ext;
 
 /**
  *	@brief	Judging Method
