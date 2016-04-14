@@ -9,18 +9,18 @@
 #ifndef PBKits_h
 #define PBKits_h
 
-#import "UIFont+PBHelper.h"
-#import "UIView+PBHelper.h"
-#import "UIColor+PBHelper.h"
-#import "UIImage+PBHelper.h"
-#import "UIDevice+PBHelper.h"
+#import "UIFont/UIFont+PBHelper.h"
+#import "UIView/UIView+PBHelper.h"
+#import "UIColor/UIColor+PBHelper.h"
+#import "UIImage/UIImage+PBHelper.h"
+#import "UIDevice/UIDevice+PBHelper.h"
 
-#import "NSArray+PBHelper.h"
-#import "NSString+PBHelper.h"
-#import "NSBundle+PBHelper.h"
-#import "NSDictionary+PBHelper.h"
+#import "NSArray/NSArray+PBHelper.h"
+#import "NSString/NSString+PBHelper.h"
+#import "NSBundle/NSBundle+PBHelper.h"
+#import "NSDictionary/NSDictionary+PBHelper.h"
 
-#import "PBDependency.h"
+#import "Frameworks/PBDependency.h"
 
 /// weak self reference
 #define weakify(var) __weak typeof(var) PBWeak_##var = var;
