@@ -58,7 +58,13 @@ dispatch_async(dispatch_get_main_queue(),block);\
 #define PBMAINDelay(x, block) dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(x * NSEC_PER_SEC)), dispatch_get_main_queue(), block)
 #define PBBACK(block)  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
 
+#ifndef PBFormat
 #define PBFormat(format, ...) [NSString stringWithFormat:format, ##__VA_ARGS__]
+#endif
+
+#ifndef PBSysHighThan
+#define PBSysHighThan(a)   ([[UIDevice currentDevice].systemVersion compare:a] != NSOrderedAscending)
+#endif
 
 static inline BOOL PBIsEmpty(id _Nullable obj) {
     return obj == nil

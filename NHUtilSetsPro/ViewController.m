@@ -66,8 +66,8 @@
     NSString *ver = [NSBundle pb_releaseVersion];
     NSLog(@"release ver:%@",ver);
     
-    CGFloat m_scale = [UIScreen mainScreen].scale;
-    NSLog(@"screen scale:%f",m_scale);
+    BOOL higher = PBSysHighThan(@"8.0");
+    NSLog(@"screen scale:%d",higher);
 }
 
 - (void)doSomething {
