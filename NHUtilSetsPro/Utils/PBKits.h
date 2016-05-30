@@ -98,3 +98,18 @@ static inline NSArray * _Nonnull PBAvailableArray (NSArray * _Nullable obj) {
 static inline NSDictionary *_Nonnull PBAvailableDictionary (NSDictionary * _Nullable obj) {
     return PBIsEmpty(obj)?[NSDictionary dictionary]:obj;
 }
+
+//make the last line cell's seperate line for each section display to head
+static void setCellSeperatorLineToHead(UITableViewCell * _Nonnull cell){
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+    if([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]){
+        [cell setPreservesSuperviewLayoutMargins:NO];
+    }
+}
