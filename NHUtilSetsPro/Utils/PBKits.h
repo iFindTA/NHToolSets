@@ -41,14 +41,11 @@ _Pragma("clang diagnostic pop")
 #ifndef PBSCREEN_SCALE
 #define PBSCREEN_SCALE  ([UIScreen mainScreen].scale)
 #endif
-/// system version
-#ifndef PBIOS8_ABOVE
-#define PBIOS8_ABOVE   ([[UIDevice currentDevice].systemVersion compare:@"8.0"] != NSOrderedDescending)
-#endif
+
 /// animation custom duration
-#ifndef PBANIMATE_DURATION
-#define PBANIMATE_DURATION                        0.25f
-#endif
+
+static const CGFloat PBANIMATE_DURATION                    =    0.25f;
+
 /// main / background thead
 #define PBMAIN(block)  if ([NSThread isMainThread]) {\
 block();\
@@ -62,8 +59,21 @@ dispatch_async(dispatch_get_main_queue(),block);\
 #define PBFormat(format, ...) [NSString stringWithFormat:format, ##__VA_ARGS__]
 #endif
 
+#ifndef PBLocalized
+#define PBLocalized(a)        NSLocalizedString(a, nil)
+#endif
+
 #ifndef PBSysHighThan
 #define PBSysHighThan(a)   ([[UIDevice currentDevice].systemVersion compare:a] != NSOrderedAscending)
+#endif
+#ifndef PBSysFont
+#define PBSysFont(a)        [UIFont systemFontOfSize:a]
+#endif
+#ifndef PBSysBoldFont
+#define PBSysBoldFont(a)    [UIFont boldSystemFontOfSize:a]
+#endif
+#ifndef PBFont
+#define PBFont(n,s)         [UIFont fontWithName:n size:s]
 #endif
 
 static inline BOOL PBIsEmpty(id _Nullable obj) {
