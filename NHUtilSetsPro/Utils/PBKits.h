@@ -100,7 +100,7 @@ static inline NSDictionary *_Nonnull PBAvailableDictionary (NSDictionary * _Null
 }
 
 //make the last line cell's seperate line for each section display to head
-static void pb_makeCellSeperatorLineTopGrid(UITableViewCell * _Nonnull cell){
+static inline void pb_makeCellSeperatorLineTopGrid(UITableViewCell * _Nonnull cell){
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
