@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSDictionary (PBHelper)
 
 /**
@@ -20,24 +22,26 @@
 ///////////////// NSDictionary Safe Accessors ///////////////
 /// home page: https://github.com/allenhsu/NSDictionary-Accessors
 
-- (BOOL)isArrayForKey:(NSString * _Nonnull )key;
-- (BOOL)isDictionaryForKey:(NSString * _Nonnull )key;
-- (BOOL)isStringForKey:(NSString * _Nonnull )key;
-- (BOOL)isNumberForKey:(NSString * _Nonnull )key;
+- (BOOL)isArrayForKey:(NSString *)key;
+- (BOOL)isDictionaryForKey:(NSString *)key;
+- (BOOL)isStringForKey:(NSString *)key;
+- (BOOL)isNumberForKey:(NSString *)key;
 
-- (NSArray * _Nullable )pb_arrayForKey:(NSString * _Nonnull )key;
-- (NSDictionary * _Nullable )pb_dictionaryForKey:(NSString * _Nonnull )key;
-- (NSString * _Nullable )pb_stringForKey:(NSString * _Nonnull )key;
-- (NSNumber * _Nullable )pb_numberForKey:(NSString * _Nonnull )key;
-- (double)pb_doubleForKey:(NSString * _Nonnull )key;
-- (float)pb_floatForKey:(NSString * _Nonnull )key;
-- (int)pb_intForKey:(NSString * _Nonnull )key;
-- (unsigned int)pb_unsignedIntForKey:(NSString * _Nonnull )key;
-- (NSInteger)pb_integerForKey:(NSString * _Nonnull )key;
-- (NSUInteger)pb_unsignedIntegerForKey:(NSString * _Nonnull )key;
-- (long long)pb_longLongForKey:(NSString * _Nonnull )key;
-- (unsigned long long)pb_unsignedLongLongForKey:(NSString * _Nonnull )key;
-- (BOOL)pb_boolForKey:(NSString * _Nonnull )key;
+- (NSArray * _Nullable )pb_arrayForKey:(NSString *)key;
+- (NSDictionary * _Nullable )pb_dictionaryForKey:(NSString *)key;
+- (NSString * _Nullable )pb_stringForKey:(NSString *)key;
+- (NSNumber * _Nullable )pb_numberForKey:(NSString *)key;
+- (double)pb_doubleForKey:(NSString *)key;
+- (float)pb_floatForKey:(NSString *)key;
+- (int)pb_intForKey:(NSString *)key;
+- (unsigned int)pb_unsignedIntForKey:(NSString *)key;
+- (NSInteger)pb_integerForKey:(NSString *)key;
+- (NSUInteger)pb_unsignedIntegerForKey:(NSString *)key;
+- (long long)pb_longLongForKey:(NSString *)key;
+- (unsigned long long)pb_unsignedLongLongForKey:(NSString *)key;
+- (BOOL)pb_boolForKey:(NSString *)key;
 ////////////////// NSDictionary Safe Accessors ///////////////
+
+NS_ASSUME_NONNULL_END
 
 @end

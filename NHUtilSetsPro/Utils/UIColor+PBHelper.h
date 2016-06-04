@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 struct PBRGBA {
     CGFloat r;
     CGFloat g;
@@ -24,7 +26,7 @@ typedef struct PBRGBA PBRGBA;
  *
  *	@return	random color instance
  */
-+ (UIColor * _Nonnull)pb_randomColor;
++ (UIColor *)pb_randomColor;
 
 /**
  *	@brief	generate color
@@ -34,7 +36,7 @@ typedef struct PBRGBA PBRGBA;
  *	@return	color's instance
  */
 
-+ (UIColor * _Nonnull)pb_colorWithHexString:(NSString * _Nonnull)hexString;
++ (UIColor *)pb_colorWithHexString:(NSString *)hexString;
 
 /**
  *  @brief get rgba value from color
@@ -43,6 +45,8 @@ typedef struct PBRGBA PBRGBA;
  *
  *  @return the rgba value
  */
-+ (PBRGBA)pb_rgbaFromUIColor:(UIColor * _Nonnull)color;
++ (PBRGBA)pb_rgbaFromUIColor:(UIColor *)color;
+
+NS_ASSUME_NONNULL_END
 
 @end

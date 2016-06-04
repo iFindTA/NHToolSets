@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @import UIKit;
 @interface NSString (PBHelper)
 
@@ -40,6 +42,8 @@
  *
  *	@return	the adjust size of string
  */
-- (CGSize)pb_sizeThatFitsWithFont:(UIFont * _Nonnull)font width:(CGFloat)width;
+- (CGSize)pb_sizeThatFitsWithFont:(UIFont *)font width:(CGFloat)width;
+
+NS_ASSUME_NONNULL_END
 
 @end

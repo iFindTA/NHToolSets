@@ -76,6 +76,8 @@ dispatch_async(dispatch_get_main_queue(),block);\
 #define PBFont(n,s)         [UIFont fontWithName:n size:s]
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 static inline BOOL PBIsEmpty(id _Nullable obj) {
     return obj == nil
     || (NSNull *)obj == [NSNull null]
@@ -83,24 +85,24 @@ static inline BOOL PBIsEmpty(id _Nullable obj) {
     || ([obj respondsToSelector:@selector(count)] && [obj count] == 0);
 }
 
-static inline NSString * _Nonnull PBAvailableString (NSString * _Nullable obj) {
+static inline NSString * PBAvailableString (NSString * _Nullable obj) {
     return PBIsEmpty(obj)?@"":obj;
 }
 
-static inline NSNumber * _Nonnull PBAvailableNumber (NSNumber * _Nullable obj) {
+static inline NSNumber * PBAvailableNumber (NSNumber * _Nullable obj) {
     return PBIsEmpty(obj)?[NSNumber numberWithInt:0]:obj;
 }
 
-static inline NSArray * _Nonnull PBAvailableArray (NSArray * _Nullable obj) {
+static inline NSArray * PBAvailableArray (NSArray * _Nullable obj) {
     return PBIsEmpty(obj)?[NSArray array]:obj;
 }
 
-static inline NSDictionary *_Nonnull PBAvailableDictionary (NSDictionary * _Nullable obj) {
+static inline NSDictionary * PBAvailableDictionary (NSDictionary * _Nullable obj) {
     return PBIsEmpty(obj)?[NSDictionary dictionary]:obj;
 }
 
 //make the last line cell's seperate line for each section display to head
-static inline void pb_makeCellSeperatorLineTopGrid(UITableViewCell * _Nonnull cell){
+static inline void pb_makeCellSeperatorLineTopGrid(UITableViewCell * cell){
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];
     }
@@ -110,6 +112,8 @@ static inline void pb_makeCellSeperatorLineTopGrid(UITableViewCell * _Nonnull ce
     }
     
     if([cell respondsToSelector:@selector(setPreservesSuperviewLayoutMargins:)]){
-        [cell setPreservesSuperviewLayoutMargins:NO];
+        [cell setPreservesSuperviewLayoutMargins:true];
     }
 }
+
+NS_ASSUME_NONNULL_END

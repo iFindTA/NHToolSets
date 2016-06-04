@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSBundle (PBHelper)
 
 /**
@@ -15,20 +17,22 @@
  *
  *	@return	return the build version
  */
-+ (NSString * _Nonnull)pb_buildVersion;
++ (NSString *)pb_buildVersion;
 
 /**
  *	@brief	get the release version
  *
  *	@return	return the release version
  */
-+ (NSString * _Nonnull)pb_releaseVersion;
++ (NSString *)pb_releaseVersion;
 
 /**
  *	@brief	get app's display name
  *
  *	@return	return app's display name
  */
-+ (NSString * _Nonnull)pb_displayName;
++ (NSString *)pb_displayName;
+
+NS_ASSUME_NONNULL_END
 
 @end

@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSArray (PBHelper)
 
 /**
@@ -16,5 +18,7 @@
  *	@return	whether the array is empty
  */
 - (BOOL)pb_isEmpty NS_DEPRECATED_IOS(2_0, 7_0, "PBIsEmpty()");
+
+NS_ASSUME_NONNULL_END
 
 @end

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 struct CGBWidthColor {
     CGFloat width;
     unsigned long color;
@@ -36,5 +38,7 @@ typedef struct CGBCornerColor CGBCornerColor;
  *  @param border descript
  */
 - (void)pb_addRound:(CGBCornerColor)corner withBorder:(CGBWidthColor)border;
+
+NS_ASSUME_NONNULL_END
 
 @end

@@ -69,7 +69,6 @@
     BOOL higher = PBSysHighThan(@"8.0");
     NSLog(@"screen scale:%d",higher);
     
-    
 }
 
 - (void)doSomething {

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIImage (PBHelper)
 
 /**
@@ -19,7 +21,7 @@
  *
  *  @return the image
  */
-+ (nullable UIImage *)pb_imagePathed:(nonnull NSString *)name;
++ (nullable UIImage *)pb_imagePathed:(NSString *)name;
 
 /**
  *  @brief load image from content path that not cached in memory
@@ -31,7 +33,7 @@
  *
  *  @return the image
  */
-+ (nullable UIImage *)pb_imagePathed:(nonnull NSString *)name extention:(nullable NSString *)ext;
++ (nullable UIImage *)pb_imagePathed:(NSString *)name extention:(nullable NSString *)ext;
 
 /**
  *	@brief	Judging Method
@@ -40,7 +42,7 @@
  *
  *	@return	whether only the two image is equal
  */
-- (BOOL)pb_isEqualTo:(UIImage * _Nonnull)image;
+- (BOOL)pb_isEqualTo:(UIImage *)image;
 
 
 /**
@@ -50,7 +52,7 @@
  *
  *	@return	the image from color
  */
-+ (UIImage * _Nonnull)pb_imageWithColor:(UIColor * _Nonnull)color;
++ (UIImage *)pb_imageWithColor:(UIColor *)color;
 
 /**
  *	@brief	blur image
@@ -59,7 +61,7 @@
  *
  *	@return	the blured image
  */
-- (UIImage * _Nonnull)pb_blurredImage:(CGFloat)level;
+- (UIImage *)pb_blurredImage:(CGFloat)level;
 
 /**
  *	@brief	generate small image
@@ -68,7 +70,7 @@
  *
  *	@return	the cropped image
  */
-- (UIImage * _Nonnull)pb_croppedBounds:(CGRect)bounds;
+- (UIImage *)pb_croppedBounds:(CGRect)bounds;
 
 /**
  *	@brief	scale image
@@ -77,7 +79,7 @@
  *
  *	@return	the scaled image
  */
-- (UIImage * _Nonnull)pb_scaleToSize:(CGSize)dstSize DEPRECATED_MSG_ATTRIBUTE("use pb_scaleToSize: keepAspect: method instead");
+- (UIImage *)pb_scaleToSize:(CGSize)dstSize DEPRECATED_MSG_ATTRIBUTE("use pb_scaleToSize: keepAspect: method instead");
 
 /**
  *	@brief	scale image
@@ -87,14 +89,14 @@
  *
  *	@return	the scaled image
  */
-- (UIImage * _Nonnull)pb_scaleToSize:(CGSize)dstSize keepAspect:(BOOL)keep;
+- (UIImage *)pb_scaleToSize:(CGSize)dstSize keepAspect:(BOOL)keep;
 
 /**
  *	@brief	generate round image
  *
  *	@return	the round image
  */
-- (UIImage * _Nonnull)pb_roundImage;
+- (UIImage *)pb_roundImage;
 
 /**
  *	@brief	generate round image
@@ -104,7 +106,7 @@
  *
  *	@return	the round image
  */
-- (UIImage * _Nonnull)pb_roundImageWithBorderWidth:(int)bWidth withColor:(UIColor * _Nonnull)color;
+- (UIImage *)pb_roundImageWithBorderWidth:(int)bWidth withColor:(UIColor *)color;
 
 /**
  *	@brief	generate round corner image
@@ -113,7 +115,7 @@
  *
  *	@return	the round corner image
  */
-- (UIImage * _Nonnull)pb_roundCornerWithRadius:(int)radius;
+- (UIImage *)pb_roundCornerWithRadius:(int)radius;
 
 /**
  *	@brief	generate round corner image
@@ -124,7 +126,7 @@
  *
  *	@return	the round corner image
  */
-- (UIImage * _Nonnull)pb_roundCornerWithRadius:(int)radius withBorderWidth:(int)bWidth withBorderColor:(UIColor * _Nonnull)bColor;
+- (UIImage *)pb_roundCornerWithRadius:(int)radius withBorderWidth:(int)bWidth withBorderColor:(UIColor *)bColor;
 
 /**
  *	@brief	generate dark image
@@ -134,7 +136,7 @@
  *
  *	@return	the dark image
  */
-- (UIImage * _Nonnull)pb_darkColor:(UIColor * _Nonnull)color lightLevel:(CGFloat)level;
+- (UIImage *)pb_darkColor:(UIColor *)color lightLevel:(CGFloat)level;
 
 /**
  *	@brief	generate image for iconfont
@@ -149,7 +151,7 @@
  *
  *	@return	the icon image
  */
-+ (UIImage * _Nonnull)pb_iconFont:(NSString * _Nullable)fontName withName:(NSString * _Nonnull)name withSize:(NSInteger)size withColor:(UIColor * _Nonnull)color;
++ (UIImage *)pb_iconFont:(NSString * _Nullable)fontName withName:(NSString *)name withSize:(NSInteger)size withColor:(UIColor *)color;
 
 /*!
  *  @brief generate round corner image
@@ -159,6 +161,8 @@
  *
  *  @return the round corner image
  */
-- (UIImage * _Nonnull)pb_drawRoundCornerWithRadius:(CGFloat)radius toSize:(CGSize)size;
+- (UIImage *)pb_drawRoundCornerWithRadius:(CGFloat)radius toSize:(CGSize)size;
+
+NS_ASSUME_NONNULL_END
 
 @end

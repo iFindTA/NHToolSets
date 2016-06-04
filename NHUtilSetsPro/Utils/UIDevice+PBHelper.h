@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIDevice (PBHelper)
 
 /**
@@ -15,6 +17,8 @@
  *
  *  @return the device's platform eg. iPhone6s
  */
-+(NSString * _Nonnull)pb_platform;
++(NSString *)pb_platform;
+
+NS_ASSUME_NONNULL_END
 
 @end

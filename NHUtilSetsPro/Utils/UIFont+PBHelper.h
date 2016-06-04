@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface UIFont (PBHelper)
 
 /**
@@ -15,13 +17,15 @@
  *
  *	@return	return the title's font
  */
-+ (UIFont * _Nonnull)pb_deviceFontForTitle;
++ (UIFont *)pb_deviceFontForTitle;
 
 /**
  *	@brief	navigation title
  *
  *	@return	the title default font
  */
-+ (UIFont * _Nonnull)pb_navigationTitle;
++ (UIFont *)pb_navigationTitle;
+
+NS_ASSUME_NONNULL_END
 
 @end
