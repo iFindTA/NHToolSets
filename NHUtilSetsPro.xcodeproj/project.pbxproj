@@ -20,6 +20,7 @@
 		6068190E1BE7984800D30933 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6068190D1BE7984800D30933 /* QuartzCore.framework */; };
 		6069BA601BFC10EE00DC129D /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6069BA5F1BFC10EE00DC129D /* iconfont.ttf */; };
 		607242131BE840570055881F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 607242121BE840570055881F /* Security.framework */; };
+		60A039B41D23B2BF0043241E /* NSDate+PBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60A039B31D23B2BF0043241E /* NSDate+PBHelper.m */; };
 		60AED0A21CBF9E89006F6E7F /* NSArray+PBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AED0901CBF9E89006F6E7F /* NSArray+PBHelper.m */; };
 		60AED0A31CBF9E89006F6E7F /* NSBundle+PBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AED0921CBF9E89006F6E7F /* NSBundle+PBHelper.m */; };
 		60AED0A41CBF9E89006F6E7F /* NSDictionary+PBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AED0941CBF9E89006F6E7F /* NSDictionary+PBHelper.m */; };
@@ -72,6 +73,8 @@
 		6069BA5F1BFC10EE00DC129D /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = iconfont.ttf; sourceTree = "<group>"; };
 		607242121BE840570055881F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		608C2D971CBF50F300F44699 /* PBKits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PBKits.h; sourceTree = "<group>"; };
+		60A039B21D23B2BF0043241E /* NSDate+PBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+PBHelper.h"; sourceTree = "<group>"; };
+		60A039B31D23B2BF0043241E /* NSDate+PBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+PBHelper.m"; sourceTree = "<group>"; };
 		60AED08F1CBF9E89006F6E7F /* NSArray+PBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PBHelper.h"; sourceTree = "<group>"; };
 		60AED0901CBF9E89006F6E7F /* NSArray+PBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PBHelper.m"; sourceTree = "<group>"; };
 		60AED0911CBF9E89006F6E7F /* NSBundle+PBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSBundle+PBHelper.h"; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 				60AED09F1CBF9E89006F6E7F /* UIImage+PBHelper.m */,
 				60AED0A01CBF9E89006F6E7F /* UIView+PBHelper.h */,
 				60AED0A11CBF9E89006F6E7F /* UIView+PBHelper.m */,
+				60A039B21D23B2BF0043241E /* NSDate+PBHelper.h */,
+				60A039B31D23B2BF0043241E /* NSDate+PBHelper.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -353,6 +358,7 @@
 				60AED0A41CBF9E89006F6E7F /* NSDictionary+PBHelper.m in Sources */,
 				60AED0A51CBF9E89006F6E7F /* NSString+PBHelper.m in Sources */,
 				606818D01BE6F4DF00D30933 /* ViewController.m in Sources */,
+				60A039B41D23B2BF0043241E /* NSDate+PBHelper.m in Sources */,
 				606818CD1BE6F4DF00D30933 /* AppDelegate.m in Sources */,
 				60AED0A91CBF9E89006F6E7F /* UIImage+PBHelper.m in Sources */,
 				60AED0AA1CBF9E89006F6E7F /* UIView+PBHelper.m in Sources */,
