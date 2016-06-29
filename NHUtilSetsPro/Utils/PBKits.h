@@ -15,6 +15,7 @@
 #import "UIImage+PBHelper.h"
 #import "UIDevice+PBHelper.h"
 
+#import "NSDate+PBHelper.h"
 #import "NSArray+PBHelper.h"
 #import "NSString+PBHelper.h"
 #import "NSBundle+PBHelper.h"
