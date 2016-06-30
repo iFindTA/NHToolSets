@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface NSDate (PBHelper)
 
 /**
@@ -26,5 +28,7 @@
  *  @return the dest ago time
  */
 - (NSString *)pb_timeAgoWithLimit:(NSTimeInterval)limit dateFormatterString:(NSString *)formatter;
+
+NS_ASSUME_NONNULL_END
 
 @end

@@ -116,5 +116,14 @@ static inline void pb_makeCellSeperatorLineTopGrid(UITableViewCell * cell){
         [cell setPreservesSuperviewLayoutMargins:true];
     }
 }
+//auto simple resize to adjust device screen size
+static inline CGFloat pb_autoResize(CGFloat size, NSString *baseMode) {
+    NSDictionary *tmp = @{@"5":@"320",@"6":@"375",@"6+":@"414"};
+    NSString *sizeString = [tmp objectForKey:baseMode];
+    if (PBIsEmpty(sizeString)) {
+        return size;
+    }
+    return (size*PBSCREEN_WIDTH)/sizeString.floatValue;
+}
 
 NS_ASSUME_NONNULL_END
