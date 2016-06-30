@@ -69,10 +69,30 @@
     BOOL higher = PBSysHighThan(@"8.0");
     NSLog(@"screen scale:%d",higher);
     
+    info.origin.y += 100;
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    btn.frame = info;
+    [btn setTitle:@"time ago" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(timeAgoEvent) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:btn];
 }
 
 - (void)doSomething {
     
+}
+
+- (void)timeAgoEvent {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    NSTimeInterval interval = arc4random()%100000000;
+    NSDate *justNow = [NSDate dateWithTimeIntervalSinceNow:30];
+    NSLog(@"just now:%@",[justNow pb_timeAgo]);
+    NSDate *now = [NSDate dateWithTimeIntervalSinceNow:-interval];
+    
+    NSString *time = [formatter stringFromDate:now];
+    NSLog(@"time is :%@",time);
+    NSLog(@"time ago is:%@",[now pb_timeAgo]);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -90,8 +90,4 @@
     return [dateFormatter stringFromDate:self];
 }
 
-- (NSString *) stringFromFormat:(NSString *)format withValue:(NSInteger)value {
-    return [NSString stringWithFormat:format, value];
-}
-
 @end
