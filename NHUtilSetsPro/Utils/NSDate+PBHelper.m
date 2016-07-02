@@ -35,7 +35,7 @@
      }
      else if (deltaMinutes < 120)
      {
-         return @"一小时前";
+         return @"1小时前";
      }
      else if (deltaMinutes < (24 * 60))
      {
