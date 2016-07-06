@@ -85,7 +85,7 @@
 - (void)timeAgoEvent {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    NSString *someString = @"2016-05-31 16:25:33";
+    NSString *someString = @"2016-07-6 16:25:33";
     NSTimeInterval interval = arc4random()%100000000;
     NSDate *justNow = [NSDate dateWithTimeIntervalSinceNow:30];
     NSLog(@"just now:%@",[justNow pb_timeAgo]);
