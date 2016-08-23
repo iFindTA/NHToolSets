@@ -45,6 +45,35 @@
     return CGSizeMake(ceilf(width), ceilf(coreTextSize.height));
 }
 
+- (NSString *)pb_zhHansTransform2Ascii {
+    NSString *zhHans = [self copy];
+    if (!zhHans || zhHans.length == 0) {
+        return @"#";
+    }
+    NSMutableString *source = [zhHans mutableCopy];
+    if(source && source.length>0){
+        //只转换首字母
+        CFRange range = CFRangeMake(0, 1);
+        //转换成拼音
+        CFStringTransform((__bridge CFMutableStringRef)source, &range, kCFStringTransformMandarinLatin, NO);
+        //去掉声母
+        CFStringTransform((__bridge CFMutableStringRef)source, &range, kCFStringTransformStripDiacritics, NO);
+        
+        NSString *tmpChar = source;
+        tmpChar = [tmpChar substringToIndex:1];
+        tmpChar = [tmpChar uppercaseString];
+        int temp = [tmpChar characterAtIndex:0];
+        
+        if (temp < 65 || temp > 122 || (temp > 90 && temp < 97)) {
+            //不合法的title
+            tmpChar = @"#";
+        }
+        return tmpChar;
+        
+    }
+    return @"#";
+}
+
 //NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
 //    NSMutableString *output = [NSMutableString string];
 //

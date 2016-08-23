@@ -76,6 +76,18 @@
     [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btn addTarget:self action:@selector(timeAgoEvent) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
+    
+    self.definesPresentationContext = true;
+    
+    NSString *name = @"胡家驹";
+    NSString *ascii = [name pb_zhHansTransform2Ascii];
+    NSLog(@"asccis:%@",ascii);
+    name = @"y保护伞";
+    ascii = [name pb_zhHansTransform2Ascii];
+    NSLog(@"asccis:%@",ascii);
+    name = @"_y保护伞";
+    ascii = [name pb_zhHansTransform2Ascii];
+    NSLog(@"asccis:%@",ascii);
 }
 
 - (void)doSomething {

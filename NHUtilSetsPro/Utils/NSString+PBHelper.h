@@ -44,6 +44,15 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (CGSize)pb_sizeThatFitsWithFont:(UIFont *)font width:(CGFloat)width;
 
+/**
+ *  @brief transform zhHans to ascii charaters
+ *
+ *  @param zhHans origin hans
+ *
+ *  @return asicc char
+ */
+- (NSString *)pb_zhHansTransform2Ascii;
+
 NS_ASSUME_NONNULL_END
 
 @end
