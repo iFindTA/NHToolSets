@@ -6,11 +6,11 @@
 //  Copyright © 2016年 hu jiaju. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@import UIKit;
 @interface NSString (PBHelper)
 
 /**
