@@ -90,4 +90,91 @@
     return [dateFormatter stringFromDate:self];
 }
 
++ (NSDate *)pb_dateFromString:(NSString *)time {
+    static NSDateFormatter *dateFormatter = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        dateFormatter = [[NSDateFormatter alloc] init];
+        dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    });
+    return [dateFormatter dateFromString:time];
+}
+
++ (NSString *)pb_chatTimeStamp:(long long)stamp {
+    
+    //    NSLog(@"%f", different);
+    NSDate *mNow = [NSDate date];
+    NSTimeInterval interval = [mNow timeIntervalSince1970];
+    if (interval < stamp) {
+        return @"哈哈 穿越了";
+    } else {
+        
+        // 当前时间
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        NSDateComponents *currentComps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:mNow];
+        NSInteger currentYear = [currentComps year];
+        NSInteger currentMonth = [currentComps month];
+        NSInteger currentDay = [currentComps day];
+        
+        // 传入时间
+        NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate:mNow];
+        NSInteger year = [comps year];
+        NSInteger month = [comps month];
+        NSInteger day = [comps day];
+        NSInteger weekday = [comps weekday];
+        //        NSLog(@"year:%ld month: %ld, day: %ld", year, month, day);
+        
+        // 传入时间的时分
+        comps =[calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute)
+                           fromDate:mNow];
+        NSInteger hour = [comps hour];
+        NSInteger minute = [comps minute];
+        //        NSLog(@"hour:%ld minute: %ld", hour, minute);
+        
+        NSString *todayStr = [NSString stringWithFormat:@"%ld-%ld-%ld 23:59:59", currentYear, currentMonth, currentDay];
+        float different = - [mNow timeIntervalSinceDate:[NSDate pb_dateFromString:todayStr]];
+        float dayDifferent = floor(different / 86400);
+        
+        if (dayDifferent < 1) {
+            return [NSString stringWithFormat:@"%.2ld:%.2ld", hour, minute];
+        } else if (dayDifferent < 2) {
+            return [NSString stringWithFormat:@"昨天 %.2ld:%.2ld", hour, minute];
+        } else if (dayDifferent < 7) {
+            NSString *weekdayStr = [NSString string];
+            switch (weekday) {
+                case 1:
+                    weekdayStr = @"星期日";
+                    break;
+                case 2:
+                    weekdayStr = @"星期一";
+                    break;
+                case 3:
+                    weekdayStr = @"星期二";
+                    break;
+                case 4:
+                    weekdayStr = @"星期三";
+                    break;
+                case 5:
+                    weekdayStr = @"星期四";
+                    break;
+                case 6:
+                    weekdayStr = @"星期五";
+                    break;
+                case 7:
+                    weekdayStr = @"星期六";
+                    break;
+                default:
+                    break;
+            }
+            return [NSString stringWithFormat:@"%@ %.2ld:%.2ld", weekdayStr, hour, minute];
+        } else if (year == currentYear) {
+            return [NSString stringWithFormat:@"%ld-%ld %.2ld:%.2ld", month, day, hour, minute];
+        } else {
+            return [NSString stringWithFormat:@"%ld-%ld-%ld %.2ld:%.2ld", year, month, day, hour, minute];
+        }
+    }
+    
+    return nil;
+}
+
 @end

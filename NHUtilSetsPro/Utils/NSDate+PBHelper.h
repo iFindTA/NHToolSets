@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)pb_timeAgo;
 
 /**
- *  @brief <#Description#>
+ *  @brief simple date time ago from now or with max interval
  *
  *  @param limit     second timeinterval
  *  @param formatter such as 'yyyy-MM-dd HH:mm:ss'
@@ -28,6 +28,15 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return the dest ago time
  */
 - (NSString *)pb_timeAgoWithLimit:(NSTimeInterval)limit dateFormatterString:(NSString *)formatter;
+
+/**
+ *  @brief chat style time stamp 2 string
+ *
+ *  @param stamp time interval since now
+ *
+ *  @return readable time formatter
+ */
++ (NSString *)pb_chatTimeStamp:(long long)stamp;
 
 NS_ASSUME_NONNULL_END
 
