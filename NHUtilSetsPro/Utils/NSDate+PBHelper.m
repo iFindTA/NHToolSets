@@ -110,6 +110,7 @@
     } else {
         
         // 当前时间
+        mNow = [NSDate dateWithTimeIntervalSince1970:stamp];
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDateComponents *currentComps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:mNow];
         NSInteger currentYear = [currentComps year];
@@ -127,18 +128,17 @@
         // 传入时间的时分
         comps =[calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute)
                            fromDate:mNow];
-        NSInteger hour = [comps hour];
-        NSInteger minute = [comps minute];
-        //        NSLog(@"hour:%ld minute: %ld", hour, minute);
+        NSUInteger hour = [comps hour];
+        NSUInteger minute = [comps minute];
         
-        NSString *todayStr = [NSString stringWithFormat:@"%ld-%ld-%ld 23:59:59", currentYear, currentMonth, currentDay];
+        NSString *todayStr = [NSString stringWithFormat:@"%zd-%zd-%zd 23:59:59", currentYear, currentMonth, currentDay];
         float different = - [mNow timeIntervalSinceDate:[NSDate pb_dateFromString:todayStr]];
         float dayDifferent = floor(different / 86400);
         
         if (dayDifferent < 1) {
-            return [NSString stringWithFormat:@"%.2ld:%.2ld", hour, minute];
+            return [NSString stringWithFormat:@"%.2zd:%.2zd", hour, minute];
         } else if (dayDifferent < 2) {
-            return [NSString stringWithFormat:@"昨天 %.2ld:%.2ld", hour, minute];
+            return [NSString stringWithFormat:@"昨天 %.2zd:%.2zd", hour, minute];
         } else if (dayDifferent < 7) {
             NSString *weekdayStr = [NSString string];
             switch (weekday) {
@@ -166,11 +166,11 @@
                 default:
                     break;
             }
-            return [NSString stringWithFormat:@"%@ %.2ld:%.2ld", weekdayStr, hour, minute];
+            return [NSString stringWithFormat:@"%@ %.2zd:%.2zd", weekdayStr, hour, minute];
         } else if (year == currentYear) {
-            return [NSString stringWithFormat:@"%ld-%ld %.2ld:%.2ld", month, day, hour, minute];
+            return [NSString stringWithFormat:@"%zd-%zd %.2zd:%.2zd", month, day, hour, minute];
         } else {
-            return [NSString stringWithFormat:@"%ld-%ld-%ld %.2ld:%.2ld", year, month, day, hour, minute];
+            return [NSString stringWithFormat:@"%zd-%zd-%zd %.2zd:%.2zd", year, month, day, hour, minute];
         }
     }
     
