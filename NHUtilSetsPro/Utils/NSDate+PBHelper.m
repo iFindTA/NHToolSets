@@ -110,7 +110,6 @@
     } else {
         
         // 当前时间
-        mNow = [NSDate dateWithTimeIntervalSince1970:stamp];
         NSCalendar *calendar = [NSCalendar currentCalendar];
         NSDateComponents *currentComps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:mNow];
         NSInteger currentYear = [currentComps year];
@@ -118,7 +117,8 @@
         NSInteger currentDay = [currentComps day];
         
         // 传入时间
-        NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate:mNow];
+        NSDate *disDate = [NSDate dateWithTimeIntervalSince1970:stamp];
+        NSDateComponents *comps = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday) fromDate:disDate];
         NSInteger year = [comps year];
         NSInteger month = [comps month];
         NSInteger day = [comps day];
@@ -127,12 +127,12 @@
         
         // 传入时间的时分
         comps =[calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute)
-                           fromDate:mNow];
+                           fromDate:disDate];
         NSUInteger hour = [comps hour];
         NSUInteger minute = [comps minute];
         
         NSString *todayStr = [NSString stringWithFormat:@"%zd-%zd-%zd 23:59:59", currentYear, currentMonth, currentDay];
-        float different = - [mNow timeIntervalSinceDate:[NSDate pb_dateFromString:todayStr]];
+        float different = - [disDate timeIntervalSinceDate:[NSDate pb_dateFromString:todayStr]];
         float dayDifferent = floor(different / 86400);
         
         if (dayDifferent < 1) {
