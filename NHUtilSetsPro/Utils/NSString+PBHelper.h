@@ -53,6 +53,27 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (NSString *)pb_zhHansTransform2Ascii;
 
+/**
+ sha256 mechanism for string
+
+ @return result
+ */
+- (NSString *)pb_SHA256;
+
+/**
+ md5 hash
+
+ @return result
+ */
+- (NSString *)pb_MD5Hash;
+
+/**
+ sha1 hash
+
+ @return result
+ */
+- (NSString *)pb_SHA1Hash;
+
 NS_ASSUME_NONNULL_END
 
 @end

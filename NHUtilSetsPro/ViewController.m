@@ -88,6 +88,9 @@
     name = @"_y保护伞";
     ascii = [name pb_zhHansTransform2Ascii];
     NSLog(@"asccis:%@",ascii);
+    
+    NSString *usr = @"nanhujiaju";
+    NSLog(@"origin:%@---sha256:%@--md5:%@---sha1hash:%@",usr,usr.pb_SHA256,usr.pb_MD5Hash,usr.pb_SHA1Hash);
 }
 
 - (void)doSomething {

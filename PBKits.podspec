@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "PBKits"
-  s.version      = "0.5.12"
+  s.version      = "0.5.13"
   s.summary      = "PBKits is an Objc Wrapper Kit for iOS Developers."
   s.homepage     = "https://github.com/iFindTA"
   s.description  = "iOS Developer's Common Kit Sets, the commands between Foundation and UIKit frameworks."
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.source_files  = "NHUtilSetsPro/Utils/*.{h,m}"
   s.public_header_files = "NHUtilSetsPro/Utils/*.h"
 
-  s.framework  = "UIKit","Foundation","Accelerate","QuartzCore","CoreText"
+  s.framework  = "UIKit","Foundation","Accelerate","QuartzCore","CoreText","Security"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
   s.requires_arc = true

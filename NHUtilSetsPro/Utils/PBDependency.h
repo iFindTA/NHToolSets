@@ -15,5 +15,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <CommonCrypto/CommonDigest.h>
 
 #endif /* PBDependency_h */
