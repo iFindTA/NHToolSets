@@ -84,7 +84,7 @@ static NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
     }
     return @"#";
 }
-
+/*
 - (NSString *)pb_SHA256 {
     const char *input = [self UTF8String];
     unsigned char result[CC_SHA256_DIGEST_LENGTH];
@@ -104,6 +104,16 @@ static NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
     unsigned char result[CC_SHA1_DIGEST_LENGTH];
     CC_SHA1(input, (CC_LONG)strlen(input), result);
     return MPHexStringFromBytes(result, CC_SHA1_DIGEST_LENGTH);
+}
+ */
+
++ (NSString *)UUIDString {
+    CFUUIDRef uuid = CFUUIDCreate(NULL);
+    NSString *uString = (__bridge_transfer NSString *)CFUUIDCreateString(NULL, uuid);
+    if(uuid) {
+        CFRelease(uuid);
+    }
+    return uString;
 }
 
 @end

@@ -58,21 +58,28 @@ NS_ASSUME_NONNULL_BEGIN
 
  @return result
  */
-- (NSString *)pb_SHA256;
+- (NSString *)pb_SHA256 NS_DEPRECATED_IOS(7_0, 8_0, "pod lint with dylib error!");
 
 /**
  md5 hash
 
  @return result
  */
-- (NSString *)pb_MD5Hash;
+- (NSString *)pb_MD5Hash NS_DEPRECATED_IOS(7_0, 8_0, "pod lint with dylib error!");
 
 /**
  sha1 hash
 
  @return result
  */
-- (NSString *)pb_SHA1Hash;
+- (NSString *)pb_SHA1Hash NS_DEPRECATED_IOS(7_0, 8_0, "pod lint with dylib error!");
+
+/**
+ generate uuid string
+
+ @return result
+ */
++ (NSString *)UUIDString;
 
 NS_ASSUME_NONNULL_END
 
