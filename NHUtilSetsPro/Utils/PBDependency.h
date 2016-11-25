@@ -15,6 +15,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#import <CoreImage/CoreImage.h>
 //#import <CommonCrypto/CommonDigest.h>//cocoapods lint with dylib error
 
 #endif /* PBDependency_h */

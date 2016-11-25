@@ -163,6 +163,36 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (UIImage *)pb_drawRoundCornerWithRadius:(CGFloat)radius toSize:(CGSize)size;
 
+/**
+ *	@brief	generate qr code
+ *
+ *	@param 	code 	info string
+ *	@param 	size 	image size
+ *
+ *	@return	the info qr code image
+ */
++ (UIImage *)pb_generateQRCode:(NSString *)code size:(CGSize)size;
+
+/**
+ *	@brief	generate bar code
+ *
+ *	@param 	code 	info string
+ *	@param 	size 	image size
+ *
+ *	@return	the info bar code image
+ */
++ (UIImage *)pb_generateBarCode:(NSString *)code size:(CGSize)size;
+
+/**
+ *	@brief	merge image
+ *
+ *	@param 	icon 	the small icon image to merge in center
+ *	@param 	size 	meger size, should not more than origin image's 25%
+ *
+ *	@return	merged image
+ */
+- (UIImage *)pb_mergeImage:(UIImage *)icon size:(CGSize)size;
+
 NS_ASSUME_NONNULL_END
 
 @end
