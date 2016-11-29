@@ -193,6 +193,16 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (UIImage *)pb_mergeImage:(UIImage *)icon size:(CGSize)size;
 
+/**
+ assemble group chat avatar
+
+ @param avatars :group member's avatars
+ @param size :destnation avatar size
+ @param bgColor :avatar's bg color
+ @return group avatar
+ */
++ (UIImage *)pb_assembleGroupAvatarWithUsrAvatars:(NSArray *)avatars forAvatarSize:(CGSize)size forBgColor:(UIColor *)bgColor;
+
 NS_ASSUME_NONNULL_END
 
 @end
