@@ -30,6 +30,7 @@
 		60AED0A81CBF9E89006F6E7F /* UIFont+PBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AED09D1CBF9E89006F6E7F /* UIFont+PBHelper.m */; };
 		60AED0A91CBF9E89006F6E7F /* UIImage+PBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AED09F1CBF9E89006F6E7F /* UIImage+PBHelper.m */; };
 		60AED0AA1CBF9E89006F6E7F /* UIView+PBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 60AED0A11CBF9E89006F6E7F /* UIView+PBHelper.m */; };
+		FB31C7CA1DFF7C3E00C37090 /* NSObject+PBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FB31C7C91DFF7C3E00C37090 /* NSObject+PBHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,8 @@
 		60AED09F1CBF9E89006F6E7F /* UIImage+PBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PBHelper.m"; sourceTree = "<group>"; };
 		60AED0A01CBF9E89006F6E7F /* UIView+PBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PBHelper.h"; sourceTree = "<group>"; };
 		60AED0A11CBF9E89006F6E7F /* UIView+PBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PBHelper.m"; sourceTree = "<group>"; };
+		FB31C7C81DFF7C3E00C37090 /* NSObject+PBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+PBHelper.h"; sourceTree = "<group>"; };
+		FB31C7C91DFF7C3E00C37090 /* NSObject+PBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+PBHelper.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +221,8 @@
 				60AED0A11CBF9E89006F6E7F /* UIView+PBHelper.m */,
 				60A039B21D23B2BF0043241E /* NSDate+PBHelper.h */,
 				60A039B31D23B2BF0043241E /* NSDate+PBHelper.m */,
+				FB31C7C81DFF7C3E00C37090 /* NSObject+PBHelper.h */,
+				FB31C7C91DFF7C3E00C37090 /* NSObject+PBHelper.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -357,6 +362,7 @@
 				60AED0A81CBF9E89006F6E7F /* UIFont+PBHelper.m in Sources */,
 				60AED0A41CBF9E89006F6E7F /* NSDictionary+PBHelper.m in Sources */,
 				60AED0A51CBF9E89006F6E7F /* NSString+PBHelper.m in Sources */,
+				FB31C7CA1DFF7C3E00C37090 /* NSObject+PBHelper.m in Sources */,
 				606818D01BE6F4DF00D30933 /* ViewController.m in Sources */,
 				60A039B41D23B2BF0043241E /* NSDate+PBHelper.m in Sources */,
 				606818CD1BE6F4DF00D30933 /* AppDelegate.m in Sources */,
