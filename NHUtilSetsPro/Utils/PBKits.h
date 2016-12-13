@@ -19,6 +19,7 @@
 #import "NSArray+PBHelper.h"
 #import "NSString+PBHelper.h"
 #import "NSBundle+PBHelper.h"
+#import "NSObject+PBHelper.h"
 #import "NSDictionary+PBHelper.h"
 
 #import "PBDependency.h"
