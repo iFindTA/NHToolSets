@@ -44,7 +44,7 @@ static NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
 }
 
 - (CGSize)pb_sizeThatFitsWithFont:(UIFont *)font width:(CGFloat)width {
-    
+    /*
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:self];
     NSDictionary *attSetting = [NSDictionary dictionaryWithObjectsAndKeys:font,NSFontAttributeName, nil];
     NSRange range = NSMakeRange(0, self.length);
@@ -53,7 +53,15 @@ static NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
     
     CGSize constraints = CGSizeMake(width, CGFLOAT_MAX);
     CGSize coreTextSize = CTFramesetterSuggestFrameSizeWithConstraints(frameSetter, CFRangeMake(0, 0), nil, constraints, nil);
-    return CGSizeMake(ceilf(width), ceilf(coreTextSize.height));
+     */
+    
+    NSString *displayInfo = [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    [style setLineBreakMode:NSLineBreakByCharWrapping];
+    NSDictionary *attributes = @{NSFontAttributeName:font,NSParagraphStyleAttributeName:style};
+    //CGFloat displayWidth = ceil(pb_autoResize(ChatContentW, @"6"));
+    CGSize realSize = [displayInfo boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading attributes:attributes context:nil].size;
+    return CGSizeMake(ceilf(realSize.width), ceilf(realSize.height));
 }
 
 - (NSString *)pb_zhHansTransform2Ascii {

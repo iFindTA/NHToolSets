@@ -45,8 +45,9 @@ _Pragma("clang diagnostic pop")
 #endif
 
 /// animation custom duration
-
-static const CGFloat PBANIMATE_DURATION                    =    0.25f;
+static const CGFloat PBANIMATE_DURATION                     =    0.25f;
+/// font offset
+static const CGFloat PBFONT_OFFSET                          =   2.f;
 
 /// main / background thead
 #define PBMAIN(block)  if ([NSThread isMainThread]) {\
@@ -126,6 +127,21 @@ static inline CGFloat pb_autoResize(CGFloat size, NSString *baseMode) {
         return size;
     }
     return (size*PBSCREEN_WIDTH)/sizeString.floatValue;
+}
+
+/**
+ auto resize font size with base mode iPhone6
+
+ @param fontSize for iPhone6's font size
+ @return the adjust font size
+ */
+static inline CGFloat pb_autoFont(CGFloat fontSize) {
+    //base mode for iPhone6
+    CGFloat base_mod_width = 375;
+    if (PBSCREEN_WIDTH > base_mod_width) {
+        return fontSize + PBFONT_OFFSET;
+    }
+    return fontSize;
 }
 
 NS_ASSUME_NONNULL_END
