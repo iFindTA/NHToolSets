@@ -105,7 +105,9 @@ static inline NSDictionary * PBAvailableDictionary (NSDictionary * _Nullable obj
     return PBIsEmpty(obj)?[NSDictionary dictionary]:obj;
 }
 
-//make the last line cell's seperate line for each section display to head
+/*
+ make the last line cell's seperate line for each section display to head
+ */
 static inline void pb_makeCellSeperatorLineTopGrid(UITableViewCell * cell){
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
         [cell setSeparatorInset:UIEdgeInsetsZero];
@@ -119,7 +121,9 @@ static inline void pb_makeCellSeperatorLineTopGrid(UITableViewCell * cell){
         [cell setPreservesSuperviewLayoutMargins:true];
     }
 }
-//auto simple resize to adjust device screen size
+/*
+ auto simple resize to adjust device screen size
+ */
 static inline CGFloat pb_autoResize(CGFloat size, NSString *baseMode) {
     NSDictionary *tmp = @{@"5":@"320",@"6":@"375",@"6+":@"414"};
     NSString *sizeString = [tmp objectForKey:baseMode];
