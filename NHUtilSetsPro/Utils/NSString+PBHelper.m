@@ -124,4 +124,14 @@ static NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
     return uString;
 }
 
+- (NSString *)pb_urlEncoding{
+    if (self.length == 0) {
+        return self;
+    }
+   //NSString *URLencodeString = CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(kCFAllocatorDefault, (CFStringRef)urlString, NULL, CFSTR(":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+    NSCharacterSet *sets = [[NSCharacterSet characterSetWithCharactersInString:@":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"] invertedSet];
+    NSString *URLencodeString = [self stringByAddingPercentEncodingWithAllowedCharacters:sets];
+    return URLencodeString;
+}
+
 @end

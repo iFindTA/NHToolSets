@@ -81,6 +81,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSString *)UUIDString;
 
+/**
+ URL encode function
+
+ @return encoded url
+ */
+- (NSString *)pb_urlEncoding;
+
 NS_ASSUME_NONNULL_END
 
 @end
