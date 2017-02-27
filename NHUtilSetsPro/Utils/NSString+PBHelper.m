@@ -8,8 +8,9 @@
 
 #import "NSString+PBHelper.h"
 #import "PBDependency.h"
+#import <CommonCrypto/CommonDigest.h>
 
-static NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
+static NSString *PBHexStringFromBytes(void *bytes, NSUInteger len) {
     NSMutableString *output = [NSMutableString string];
     
     unsigned char *input = (unsigned char *)bytes;
@@ -92,28 +93,36 @@ static NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
     }
     return @"#";
 }
-/*
-- (NSString *)pb_SHA256 {
-    const char *input = [self UTF8String];
-    unsigned char result[CC_SHA256_DIGEST_LENGTH];
-    CC_SHA256(input, (CC_LONG)strlen(input), result);
-    return MPHexStringFromBytes(result, CC_SHA256_DIGEST_LENGTH);
-}
 
 - (NSString *)pb_MD5Hash {
+    if (self.length == 0) {
+        return self;
+    }
     const char *input = [self UTF8String];
     unsigned char result[CC_MD5_DIGEST_LENGTH];
     CC_MD5(input, (CC_LONG)strlen(input), result);
-    return MPHexStringFromBytes(result, CC_MD5_DIGEST_LENGTH);
+    return PBHexStringFromBytes(result, CC_MD5_DIGEST_LENGTH);
 }
 
 - (NSString *)pb_SHA1Hash {
+    if (self.length == 0) {
+        return self;
+    }
     const char *input = [self UTF8String];
     unsigned char result[CC_SHA1_DIGEST_LENGTH];
     CC_SHA1(input, (CC_LONG)strlen(input), result);
-    return MPHexStringFromBytes(result, CC_SHA1_DIGEST_LENGTH);
+    return PBHexStringFromBytes(result, CC_SHA1_DIGEST_LENGTH);
 }
- */
+
+- (NSString *)pb_SHA256 {
+    if (self.length == 0) {
+        return self;
+    }
+    const char *input = [self UTF8String];
+    unsigned char result[CC_SHA256_DIGEST_LENGTH];
+    CC_SHA256(input, (CC_LONG)strlen(input), result);
+    return PBHexStringFromBytes(result, CC_SHA256_DIGEST_LENGTH);
+}
 
 + (NSString *)UUIDString {
     CFUUIDRef uuid = CFUUIDCreate(NULL);
@@ -132,6 +141,21 @@ static NSString *MPHexStringFromBytes(void *bytes, NSUInteger len) {
     NSCharacterSet *sets = [[NSCharacterSet characterSetWithCharactersInString:@":/?#[]@!$ &'()*+,;=\"<>%{}|\\^~`"] invertedSet];
     NSString *URLencodeString = [self stringByAddingPercentEncodingWithAllowedCharacters:sets];
     return URLencodeString;
+}
+
++ (NSString *)pb_randomString4Length:(NSUInteger)length{
+    if (length<=0) {
+        return nil;
+    }
+    NSString *sourceString = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-*/_=[]|<>@!#:";
+    NSMutableString *result = [[NSMutableString alloc] init] ;
+    srand((unsigned)time(0));
+    for (int i = 0; i < length; i++){
+        unsigned index = rand() % [sourceString length];
+        NSString *s = [sourceString substringWithRange:NSMakeRange(index, 1)];
+        [result appendString:s];
+    }
+    return result;
 }
 
 @end

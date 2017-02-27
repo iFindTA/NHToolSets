@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "PBKits"
-  s.version      = "0.5.139"
+  s.version      = "0.5.140"
   s.summary      = "PBKits is an Objc Wrapper Kit for iOS Developers."
   s.homepage     = "https://github.com/iFindTA"
   s.description  = "iOS Developer's Common Kit Sets, the commands between Foundation and UIKit frameworks."
@@ -17,6 +17,10 @@ Pod::Spec.new do |s|
   # s.frameworks = "SomeFramework", "AnotherFramework"
 
   s.requires_arc = true
+
+   #s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/CommonCrypto,$(SRCROOT)/FLKNetService/Core","CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES" =>"YES","ONLY_ACTIVE_ARCH" => "NO"}
+  s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include","CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES" =>"YES","ONLY_ACTIVE_ARCH" => "NO"}
+
   # s.dependency "JSONKit", "~> 1.4"
 
 end

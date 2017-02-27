@@ -54,25 +54,25 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSString *)pb_zhHansTransform2Ascii;
 
 /**
+ md5 hash
+ 
+ @return result
+ */
+- (NSString * _Nullable)pb_MD5Hash;
+
+/**
+ sha1 hash
+ 
+ @return result
+ */
+- (NSString * _Nullable)pb_SHA1Hash;
+
+/**
  sha256 mechanism for string
 
  @return result
  */
-- (NSString *)pb_SHA256 NS_DEPRECATED_IOS(7_0, 8_0, "pod lint with dylib error!");
-
-/**
- md5 hash
-
- @return result
- */
-- (NSString *)pb_MD5Hash NS_DEPRECATED_IOS(7_0, 8_0, "pod lint with dylib error!");
-
-/**
- sha1 hash
-
- @return result
- */
-- (NSString *)pb_SHA1Hash NS_DEPRECATED_IOS(7_0, 8_0, "pod lint with dylib error!");
+- (NSString * _Nullable)pb_SHA256 /*NS_DEPRECATED_IOS(7_0, 8_0, "pod lint with dylib error!")*/;
 
 /**
  generate uuid string
@@ -87,6 +87,14 @@ NS_ASSUME_NONNULL_BEGIN
  @return encoded url
  */
 - (NSString *)pb_urlEncoding;
+
+/**
+ generate random string
+
+ @param length string's length
+ @return the random string, null for len == 0
+ */
++ (NSString * _Nullable)pb_randomString4Length:(NSUInteger)length;
 
 NS_ASSUME_NONNULL_END
 
