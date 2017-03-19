@@ -15,6 +15,7 @@
 #import "UIImage+PBHelper.h"
 #import "UIDevice+PBHelper.h"
 
+#import "NSData+PBHelper.h"
 #import "NSDate+PBHelper.h"
 #import "NSArray+PBHelper.h"
 #import "NSString+PBHelper.h"
@@ -45,9 +46,9 @@ _Pragma("clang diagnostic pop")
 #endif
 
 /// animation custom duration
-static const CGFloat PBANIMATE_DURATION                     =    0.25f;
+static const CGFloat PBANIMATE_DURATION                     =       0.25f;
 /// font offset
-static const CGFloat PBFONT_OFFSET                          =   2.f;
+static const CGFloat PBFONT_OFFSET                          =       2.f;
 
 /// main / background thead
 #define PBMAIN(block)  if ([NSThread isMainThread]) {\
@@ -68,7 +69,7 @@ dispatch_async(dispatch_get_main_queue(),block);\
 #endif
 
 #ifndef PBSysHighThan
-#define PBSysHighThan(a)   ([[UIDevice currentDevice].systemVersion compare:a] != NSOrderedAscending)
+#define PBSysHighThan(a)   ([[UIDevice currentDevice].systemVersion compare:a] != NSOrderedDescending)
 #endif
 #ifndef PBSysFont
 #define PBSysFont(a)        [UIFont systemFontOfSize:a]

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		600FB6641E7E6D0E001BD635 /* NSData+PBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 600FB6631E7E6D0E001BD635 /* NSData+PBHelper.m */; };
 		6062962F1CBF70C4009FFFD8 /* sina150@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6062962E1CBF70C4009FFFD8 /* sina150@2x.png */; };
 		606818CA1BE6F4DF00D30933 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 606818C91BE6F4DF00D30933 /* main.m */; };
 		606818CD1BE6F4DF00D30933 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 606818CC1BE6F4DF00D30933 /* AppDelegate.m */; };
@@ -51,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		600FB6621E7E6D0E001BD635 /* NSData+PBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+PBHelper.h"; sourceTree = "<group>"; };
+		600FB6631E7E6D0E001BD635 /* NSData+PBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+PBHelper.m"; sourceTree = "<group>"; };
 		6062962E1CBF70C4009FFFD8 /* sina150@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sina150@2x.png"; sourceTree = "<group>"; };
 		606818C51BE6F4DF00D30933 /* NHUtilSetsPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NHUtilSetsPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		606818C91BE6F4DF00D30933 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				608C2D971CBF50F300F44699 /* PBKits.h */,
+				600FB6621E7E6D0E001BD635 /* NSData+PBHelper.h */,
+				600FB6631E7E6D0E001BD635 /* NSData+PBHelper.m */,
 				60AED08F1CBF9E89006F6E7F /* NSArray+PBHelper.h */,
 				60AED0901CBF9E89006F6E7F /* NSArray+PBHelper.m */,
 				60AED0911CBF9E89006F6E7F /* NSBundle+PBHelper.h */,
@@ -361,6 +366,7 @@
 			files = (
 				60AED0A81CBF9E89006F6E7F /* UIFont+PBHelper.m in Sources */,
 				60AED0A41CBF9E89006F6E7F /* NSDictionary+PBHelper.m in Sources */,
+				600FB6641E7E6D0E001BD635 /* NSData+PBHelper.m in Sources */,
 				60AED0A51CBF9E89006F6E7F /* NSString+PBHelper.m in Sources */,
 				FB31C7CA1DFF7C3E00C37090 /* NSObject+PBHelper.m in Sources */,
 				606818D01BE6F4DF00D30933 /* ViewController.m in Sources */,
