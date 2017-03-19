@@ -129,7 +129,7 @@ static void pb_fixKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, NS
     [ivData setLength: [keyData length]];
 }
 
-- (NSData *)pb_encryptedAES256DataUsingKey:(id) key error:(NSError * _Nullable *) error {
+- (NSData *)pb_encryptedAES256DataUsingKey:(id) key withError:(NSError * _Nullable *) error {
     CCCryptorStatus status = kCCSuccess;
     NSData * result = [self pb_dataEncryptedUsingAlgorithm:kCCAlgorithmAES128
                                                         key:key
@@ -173,7 +173,7 @@ static void pb_fixKeyLengths( CCAlgorithm algorithm, NSMutableData * keyData, NS
     return ( [NSData dataWithBytesNoCopy: buf length: bytesTotal] );
 }
 
-- (NSData *)pb_decryptedAES256DataUsingKey:(id) key error:(NSError * _Nullable *) error {
+- (NSData *)pb_decryptedAES256DataUsingKey:(NSString *)key withError:(NSError * _Nullable *) error {
     CCCryptorStatus status = kCCSuccess;
     NSData * result = [self pb_decryptedDataUsingAlgorithm: kCCAlgorithmAES128
                                                         key: key

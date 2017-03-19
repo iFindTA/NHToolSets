@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param error for decrypt
  @return result
  */
-- (NSData *)pb_decryptedAES256DataYsingKey:(NSString *)key withError:(NSError  * _Nullable *)error;
+- (NSData *)pb_decryptedAES256DataUsingKey:(NSString *)key withError:(NSError  * _Nullable *)error;
 
 @end
 
