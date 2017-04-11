@@ -21,9 +21,11 @@
     
     self.title = @"PBToolKits";
     
+    NSString *qrInfos = @"{\"key\":\"孙凯\"}";
+    
     CGRect info = CGRectMake(100, 100, 100, 100);
-//    UIImage *image = [UIImage imageNamed:@"sina150"];
-    UIImage *image = [UIImage pb_imagePathed:@"sina150"];
+    UIImage *image = [UIImage pb_generateQRCode:qrInfos size:info.size];
+//    UIImage *image = [UIImage pb_imagePathed:@"sina150"];
     UIImage *dark = [image pb_darkColor:[UIColor blackColor] lightLevel:0.5];
     UIImageView *imgView = [[UIImageView alloc] initWithFrame:info];
     imgView.image = image;

@@ -582,7 +582,7 @@ static void pb_addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float 
     
     // 生成二维码图片
     CIImage *qrcodeImage;
-    NSData *data = [code dataUsingEncoding:NSISOLatin1StringEncoding allowLossyConversion:false];
+    NSData *data = [code dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:false];
     CIFilter *filter = [CIFilter filterWithName:@"CIQRCodeGenerator"];
     
     [filter setValue:data forKey:@"inputMessage"];
@@ -600,7 +600,7 @@ static void pb_addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float 
 + (UIImage *)pb_generateBarCode:(NSString *)code size:(CGSize)size {
     // 生成条形码图片
     CIImage *barcodeImage;
-    NSData *data = [code dataUsingEncoding:NSISOLatin1StringEncoding allowLossyConversion:false];
+    NSData *data = [code dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:false];
     CIFilter *filter = [CIFilter filterWithName:@"CICode128BarcodeGenerator"];
     
     [filter setValue:data forKey:@"inputMessage"];
