@@ -8,6 +8,13 @@
 
 #import "UIColor+PBHelper.h"
 
+/**
+ generate color for hex
+ */
+UIColor * pbColorMake(unsigned int hex) {
+    return [UIColor colorWithRed:((hex >> 16)&0xFF)/255.0 green:((hex >> 8)&0xFF)/255.0 blue:(hex&0xFF)/255.0 alpha:1.0f];
+}
+
 @implementation UIColor (PBHelper)
 
 + (UIColor *)pb_randomColor {

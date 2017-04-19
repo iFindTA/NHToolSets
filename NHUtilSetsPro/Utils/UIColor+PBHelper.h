@@ -47,6 +47,11 @@ typedef struct PBRGBA PBRGBA;
  */
 + (PBRGBA)pb_rgbaFromUIColor:(UIColor *)color;
 
-NS_ASSUME_NONNULL_END
-
 @end
+
+/**
+ generate color for hex
+ */
+FOUNDATION_EXPORT UIColor * pbColorMake(unsigned int hex);
+
+NS_ASSUME_NONNULL_END
