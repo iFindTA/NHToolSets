@@ -55,6 +55,14 @@ NS_ASSUME_NONNULL_BEGIN
 + (UIImage *)pb_imageWithColor:(UIColor *)color;
 
 /**
+ convert image to color from a CGPoint
+
+ @param pt point for destnation
+ @return color
+ */
+- (UIColor * _Nullable)pb_image2Color4Point:(CGPoint)pt;
+
+/**
  *	@brief	blur image
  *
  *	@param 	blurAmount 	blur level, default is 0.5
