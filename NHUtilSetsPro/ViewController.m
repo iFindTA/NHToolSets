@@ -81,8 +81,8 @@
     
     self.definesPresentationContext = true;
     
-    NSString *name = @"胡家驹";
-    NSString *ascii = [name pb_zhHansTransform2Ascii];
+    NSString *name = @" 曾魁";
+    NSString *ascii = [name pb_zhHans2Ascii4Type:PBZHHans2AsciiTypeLastChar];
     NSLog(@"asccis:%@",ascii);
     name = @"y保护伞";
     ascii = [name pb_zhHansTransform2Ascii];

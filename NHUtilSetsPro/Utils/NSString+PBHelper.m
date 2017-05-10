@@ -94,6 +94,104 @@ static NSString *PBHexStringFromBytes(void *bytes, NSUInteger len) {
     return @"#";
 }
 
+- (NSDictionary <NSString *, NSArray *>*)multicastFamilyMaps {
+    static NSMutableDictionary *maps = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (maps == nil) {
+            maps = [NSMutableDictionary dictionaryWithObjectsAndKeys
+             :@[@"po",@"fan"],@"繁"
+             ,@[@"ou",@"qu"],@"区"
+             ,@[@"qiu",@"chou"],@"仇"
+             ,@[@"chong",@"zhong"],@"种"
+             ,@[@"shan",@"dan"],@"单"
+             ,@[@"xie",@"jie"],@"解"
+             ,@[@"zha",@"cha"],@"查"
+             ,@[@"zeng",@"ceng"],@"曾"
+             ,@[@"bi",@"mi"],@"秘"
+             ,@[@"yue",@"le"],@"乐"
+             ,@[@"chong",@"zhong"],@"重"
+             ,@[@"piao",@"pu"],@"朴"
+             ,@[@"miao",@"mou"],@"缪"
+             ,@[@"zhai",@"di"],@"翟"
+             ,@[@"she",@"zhe"],@"折"
+             ,@[@"he",@"hei"],@"黑"
+             ,@[@"ge",@"gai"],@"盖"
+             ,@[@"shen",@"chen"],@"沈"
+             ,@[@"yu chi",@"wei chi"],@"尉迟"
+             ,@[@"mo qi",@"wan qi"],@"万俟"
+             ,nil];
+        }
+    });
+    return maps.copy;
+}
+
+- (NSString *)zhHans2Ascii {
+    NSString *zhHans = [[self stringByReplacingOccurrencesOfString:@" " withString:@""] copy];
+    NSUInteger char_len = zhHans.length;
+    if (!zhHans || char_len == 0) {
+        return @"#";
+    }
+    NSString *family_char_en0 = [zhHans substringToIndex:1];
+    NSString *family_char_en1 = nil;
+    if (zhHans.length >= 3) {
+        family_char_en1 = [zhHans substringToIndex:2];
+    }
+    NSMutableString *source = [zhHans mutableCopy];
+    if(source && source.length>0){
+        //只转换首字母
+        CFRange range = CFRangeMake(0, char_len);
+        //转换成拼音
+        CFStringTransform((__bridge CFMutableStringRef)source, &range, kCFStringTransformMandarinLatin, NO);
+        //去掉声母
+        CFStringTransform((__bridge CFMutableStringRef)source, &range, kCFStringTransformStripDiacritics, NO);
+        //处理多音字
+        NSArray <NSString *>*familyMaps = [self.multicastFamilyMaps allKeys];
+        __block NSString *dest_key = nil;
+        [familyMaps enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            NSRange charRange_en0 = [obj rangeOfString:family_char_en0];
+            if (charRange_en0.location != NSNotFound) {
+                dest_key = obj.copy;
+                *stop = true;
+            } else if (family_char_en1.length != 0 && [obj rangeOfString:family_char_en1].location!= NSNotFound) {
+                dest_key = obj.copy;
+                *stop = true;
+            }
+        }];
+        if (dest_key != nil) {
+            //找到多音字
+            NSArray *res = [self.multicastFamilyMaps objectForKey:dest_key];
+            NSString *dest_char = [res firstObject];NSString *last_char = [res lastObject];
+            NSString *dest_source = [source stringByReplacingOccurrencesOfString:last_char withString:dest_char];
+            return dest_source;
+        }
+        
+        return source.copy;
+        
+    }
+    return @"#";
+}
+
+- (NSString *)pb_zhHans2Ascii4Type:(PBZHHans2AsciiType)type {
+    NSString *source = [self zhHans2Ascii];
+    __block NSMutableString *dest = nil;
+    if (type & PBZHHans2AsciiTypeAll) {
+        dest = [source stringByReplacingOccurrencesOfString:@" " withString:@""].mutableCopy;
+    } else if (type & PBZHHans2AsciiTypeLastChar) {
+        dest = [source substringToIndex:1].mutableCopy;
+    } else if (type & PBZHHans2AsciiTypeCharSets) {
+        dest = [NSMutableString stringWithCapacity:0];
+        NSArray <NSString *>* tmps = [source componentsSeparatedByString:@" "];
+        [tmps enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [dest appendString:[obj substringToIndex:1]];
+        }];
+    }
+    if (dest.length == 0) {
+        dest = [source mutableCopy];
+    }
+    return dest.copy;
+}
+
 - (NSString *)pb_MD5Hash {
     if (self.length == 0) {
         return self;

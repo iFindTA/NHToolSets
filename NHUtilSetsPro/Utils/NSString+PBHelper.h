@@ -9,6 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSUInteger, PBZHHans2AsciiType) {
+    PBZHHans2AsciiTypeAll                               =   1   <<  0,//全拼 eg 曾魁：zengkui
+    PBZHHans2AsciiTypeLastChar                          =   1   <<  1,//姓氏 eg 曾魁：z
+    PBZHHans2AsciiTypeCharSets                          =   1   <<  2,//首字母组合 eg 曾魁：zk
+};
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface NSString (PBHelper)
@@ -51,21 +57,29 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return asicc char
  */
-- (NSString *)pb_zhHansTransform2Ascii;
+- (NSString *)pb_zhHansTransform2Ascii __attribute((deprecated(("no use anymore!, please use 'pb_zhHans2Ascii4Type' instead !"))));
+
+/**
+ transform zhHans to ascii charaters
+
+ @param type for result
+ @return asicc char
+ */
+- (NSString *)pb_zhHans2Ascii4Type:(PBZHHans2AsciiType)type;
 
 /**
  md5 hash
  
  @return result
  */
-- (NSString * _Nullable)pb_MD5Hash;
+- (NSString * _Nullable)pb_MD5Hash __attribute((deprecated(("not safe anymore!"))));
 
 /**
  sha1 hash
  
  @return result
  */
-- (NSString * _Nullable)pb_SHA1Hash;
+- (NSString * _Nullable)pb_SHA1Hash __attribute((deprecated(("not safe anymore!"))));
 
 /**
  sha256 mechanism for string
