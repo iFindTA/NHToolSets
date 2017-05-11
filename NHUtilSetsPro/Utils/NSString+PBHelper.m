@@ -108,7 +108,6 @@ static NSString *PBHexStringFromBytes(void *bytes, NSUInteger len) {
              ,@[@"xie",@"jie"],@"解"
              ,@[@"zha",@"cha"],@"查"
              ,@[@"zeng",@"ceng"],@"曾"
-             ,@[@"bi",@"mi"],@"秘"
              ,@[@"yue",@"le"],@"乐"
              ,@[@"chong",@"zhong"],@"重"
              ,@[@"piao",@"pu"],@"朴"
@@ -118,6 +117,7 @@ static NSString *PBHexStringFromBytes(void *bytes, NSUInteger len) {
              ,@[@"he",@"hei"],@"黑"
              ,@[@"ge",@"gai"],@"盖"
              ,@[@"shen",@"chen"],@"沈"
+             ,@[@"zhang sun",@"chang sun"],@"长孙"
              ,@[@"yu chi",@"wei chi"],@"尉迟"
              ,@[@"mo qi",@"wan qi"],@"万俟"
              ,nil];
@@ -127,16 +127,11 @@ static NSString *PBHexStringFromBytes(void *bytes, NSUInteger len) {
 }
 
 - (NSString *)zhHans2Ascii {
-    NSString *zhHans = [[self stringByReplacingOccurrencesOfString:@" " withString:@""] copy];
+    NSString *zhHans = [self copy];
     NSUInteger char_len = zhHans.length;
-    if (!zhHans || char_len == 0) {
-        return @"#";
-    }
-    NSString *family_char_en0 = [zhHans substringToIndex:1];
-    NSString *family_char_en1 = nil;
-    if (zhHans.length >= 3) {
-        family_char_en1 = [zhHans substringToIndex:2];
-    }
+//    if (!zhHans || char_len == 0) {
+//        return @"#";
+//    }
     NSMutableString *source = [zhHans mutableCopy];
     if(source && source.length>0){
         //只转换首字母
@@ -145,26 +140,6 @@ static NSString *PBHexStringFromBytes(void *bytes, NSUInteger len) {
         CFStringTransform((__bridge CFMutableStringRef)source, &range, kCFStringTransformMandarinLatin, NO);
         //去掉声母
         CFStringTransform((__bridge CFMutableStringRef)source, &range, kCFStringTransformStripDiacritics, NO);
-        //处理多音字
-        NSArray <NSString *>*familyMaps = [self.multicastFamilyMaps allKeys];
-        __block NSString *dest_key = nil;
-        [familyMaps enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            NSRange charRange_en0 = [obj rangeOfString:family_char_en0];
-            if (charRange_en0.location != NSNotFound) {
-                dest_key = obj.copy;
-                *stop = true;
-            } else if (family_char_en1.length != 0 && [obj rangeOfString:family_char_en1].location!= NSNotFound) {
-                dest_key = obj.copy;
-                *stop = true;
-            }
-        }];
-        if (dest_key != nil) {
-            //找到多音字
-            NSArray *res = [self.multicastFamilyMaps objectForKey:dest_key];
-            NSString *dest_char = [res firstObject];NSString *last_char = [res lastObject];
-            NSString *dest_source = [source stringByReplacingOccurrencesOfString:last_char withString:dest_char];
-            return dest_source;
-        }
         
         return source.copy;
         
@@ -172,8 +147,50 @@ static NSString *PBHexStringFromBytes(void *bytes, NSUInteger len) {
     return @"#";
 }
 
-- (NSString *)pb_zhHans2Ascii4Type:(PBZHHans2AsciiType)type {
-    NSString *source = [self zhHans2Ascii];
+- (NSString *)pb_zhHans2Ascii {
+    NSString *zhHans = [[self stringByReplacingOccurrencesOfString:@" " withString:@""] copy];
+    NSUInteger char_len = zhHans.length;
+    if (!zhHans || char_len == 0) {
+        return @"#";
+    }
+    NSString *ascii = [zhHans zhHans2Ascii];
+    return ascii;
+}
+
+- (NSString *)pb_zhHansName2Ascii4Type:(PBZHHans2AsciiType)type {
+    
+    NSString *zhHans = [[self stringByReplacingOccurrencesOfString:@" " withString:@""] copy];
+    NSUInteger char_len = zhHans.length;
+    if (!zhHans || char_len == 0) {
+        return @"#";
+    }
+    NSString *ascii = [zhHans zhHans2Ascii];
+    NSString *family_char_en0 = [zhHans substringToIndex:1];
+    NSString *family_char_en1 = nil;
+    if (zhHans.length >= 3) {
+        family_char_en1 = [zhHans substringToIndex:2];
+    }
+    //处理多音字
+    NSMutableString *source = [ascii mutableCopy];
+    NSArray <NSString *>*familyMaps = [self.multicastFamilyMaps allKeys];
+    __block NSString *dest_key = nil;
+    [familyMaps enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        NSRange charRange_en0 = [obj rangeOfString:family_char_en0];
+        if (charRange_en0.location != NSNotFound) {
+            dest_key = obj.copy;
+            *stop = true;
+        } else if (family_char_en1.length != 0 && [obj rangeOfString:family_char_en1].location!= NSNotFound) {
+            dest_key = obj.copy;
+            *stop = true;
+        }
+    }];
+    if (dest_key != nil) {
+        //找到姓名多音字
+        NSArray *res = [self.multicastFamilyMaps objectForKey:dest_key];
+        NSString *dest_char = [res firstObject];NSString *last_char = [res lastObject];
+        NSString *dest_source = [source stringByReplacingOccurrencesOfString:last_char withString:dest_char];
+        return dest_source;
+    }
     __block NSMutableString *dest = nil;
     if (type & PBZHHans2AsciiTypeAll) {
         dest = [source stringByReplacingOccurrencesOfString:@" " withString:@""].mutableCopy;

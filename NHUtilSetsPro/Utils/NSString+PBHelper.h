@@ -51,21 +51,19 @@ NS_ASSUME_NONNULL_BEGIN
 - (CGSize)pb_sizeThatFitsWithFont:(UIFont *)font width:(CGFloat)width;
 
 /**
- *  @brief transform zhHans to ascii charaters
- *
- *  @param zhHans origin hans
- *
- *  @return asicc char
+ transform zhHans to ascii charaters
+
+ @return ascii chars
  */
-- (NSString *)pb_zhHansTransform2Ascii __attribute((deprecated(("no use anymore!, please use 'pb_zhHans2Ascii4Type' instead !"))));
+- (NSString *)pb_zhHans2Ascii;
 
 /**
- transform zhHans to ascii charaters
+ transform zhHans-name to ascii charaters
 
  @param type for result
  @return asicc char
  */
-- (NSString *)pb_zhHans2Ascii4Type:(PBZHHans2AsciiType)type;
+- (NSString *)pb_zhHansName2Ascii4Type:(PBZHHans2AsciiType)type;
 
 /**
  md5 hash
