@@ -31,4 +31,19 @@
     return m_name;
 }
 
++ (id _Nullable)pb_mainBundle4Key:(NSString *)key {
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:key];
+}
+
++ (id _Nullable)pb_mainBundle4key:(NSString *)key atPlist:(NSString *)pName {
+    NSString *fileName = pName.copy;
+    NSRange sepRange = [fileName rangeOfString:@"."];
+    if (sepRange.location != NSNotFound) {
+        fileName = [fileName substringToIndex:sepRange.location];
+    }
+    NSString *fPath = [[NSBundle mainBundle] pathForResource:fileName ofType:@"plist"];
+    NSDictionary *infoMap = [NSDictionary dictionaryWithContentsOfFile:fPath];
+    return [infoMap objectForKey:key];
+}
+
 @end

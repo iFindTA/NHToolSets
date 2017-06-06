@@ -33,6 +33,23 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (NSString *)pb_displayName;
 
+/**
+ objectForKey: for infoDictinary in mainBundle
+
+ @param key for mainBundle
+ @return result
+ */
++ (id _Nullable)pb_mainBundle4Key:(NSString *)key;
+
+/**
+ objectForKey: in main bundle
+
+ @param key for main bundle
+ @param pName name of plist
+ @return result
+ */
++ (id _Nullable)pb_mainBundle4key:(NSString *)key atPlist:(NSString *)pName;
+
 NS_ASSUME_NONNULL_END
 
 @end
