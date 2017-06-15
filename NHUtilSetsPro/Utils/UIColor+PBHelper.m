@@ -15,6 +15,13 @@ UIColor * pbColorMake(unsigned int hex) {
     return [UIColor colorWithRed:((hex >> 16)&0xFF)/255.0 green:((hex >> 8)&0xFF)/255.0 blue:(hex&0xFF)/255.0 alpha:1.0f];
 }
 
+/**
+ RGB color with alpha
+ */
+UIColor * pb_colorRGBMake(unsigned int hex, int alpha) {
+    return [UIColor colorWithRed:((hex >> 16)&0xFF)/255.0 green:((hex >> 8)&0xFF)/255.0 blue:(hex&0xFF)/255.0 alpha:alpha];
+}
+
 @implementation UIColor (PBHelper)
 
 + (UIColor *)pb_randomColor {
@@ -47,11 +54,11 @@ UIColor * pbColorMake(unsigned int hex) {
             green = [self colorComponentFrom: colorString start: 1 length: 1];
             blue  = [self colorComponentFrom: colorString start: 2 length: 1];
             break;
-        case 4: // #ARGB
-            alpha = [self colorComponentFrom: colorString start: 0 length: 1];
-            red   = [self colorComponentFrom: colorString start: 1 length: 1];
-            green = [self colorComponentFrom: colorString start: 2 length: 1];
-            blue  = [self colorComponentFrom: colorString start: 3 length: 1];
+        case 4: // #RGBA
+            red = [self colorComponentFrom: colorString start: 0 length: 1];
+            green   = [self colorComponentFrom: colorString start: 1 length: 1];
+            blue = [self colorComponentFrom: colorString start: 2 length: 1];
+            alpha  = [self colorComponentFrom: colorString start: 3 length: 1];
             break;
         case 6: // #RRGGBB
             alpha = 1.0f;
@@ -59,11 +66,11 @@ UIColor * pbColorMake(unsigned int hex) {
             green = [self colorComponentFrom: colorString start: 2 length: 2];
             blue  = [self colorComponentFrom: colorString start: 4 length: 2];
             break;
-        case 8: // #AARRGGBB
-            alpha = [self colorComponentFrom: colorString start: 0 length: 2];
-            red   = [self colorComponentFrom: colorString start: 2 length: 2];
-            green = [self colorComponentFrom: colorString start: 4 length: 2];
-            blue  = [self colorComponentFrom: colorString start: 6 length: 2];
+        case 8: // #RRGGBBAA
+            red = [self colorComponentFrom: colorString start: 0 length: 2];
+            green   = [self colorComponentFrom: colorString start: 2 length: 2];
+            blue = [self colorComponentFrom: colorString start: 4 length: 2];
+            alpha  = [self colorComponentFrom: colorString start: 6 length: 2];
             break;
         default:
             red = 0 ; green = 0 ; blue = 0; alpha = 1;

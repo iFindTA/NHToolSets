@@ -10,6 +10,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+struct PBImgTextInfo {
+    unsigned int                        fontSize;
+    const char                         *fontName;
+    const char                         *textColor; //image font color
+    const char                         *bgColor; //image background color
+    unsigned int                        width; //image size width
+    unsigned int                        height;//image size height
+};
+typedef struct PBImgTextInfo PBImgTextInfo;
+
 @interface UIImage (PBHelper)
 
 /**
@@ -44,7 +54,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)pb_isEqualTo:(UIImage *)image;
 
-
 /**
  *	@brief	generate image
  *
@@ -53,6 +62,15 @@ NS_ASSUME_NONNULL_BEGIN
  *	@return	the image from color
  */
 + (UIImage *)pb_imageWithColor:(UIColor *)color;
+
+/**
+ generate image
+
+ @param text that draw on the image
+ @param info of the dest-img
+ @return image
+ */
++ (UIImage *)pb_imageWithText:(NSString *)text withInfo:(PBImgTextInfo)info;
 
 /**
  convert image to color from a CGPoint
@@ -135,6 +153,14 @@ NS_ASSUME_NONNULL_BEGIN
  *	@return	the round corner image
  */
 - (UIImage *)pb_roundCornerWithRadius:(int)radius withBorderWidth:(int)bWidth withBorderColor:(UIColor *)bColor;
+
+/**
+ adjust the alphe property of the image
+
+ @param alpha channel
+ @return image
+ */
+- (UIImage *)pb_imageWithAlpha:(CGFloat)alpha;
 
 /**
  *	@brief	generate dark image

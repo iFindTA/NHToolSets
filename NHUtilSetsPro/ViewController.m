@@ -36,9 +36,30 @@
     imgView.image = dark;
     [self.view addSubview:imgView];
     
+    unsigned int hex = 0x808080;
+    NSUInteger len = sizeof(hex);
+    NSLog(@"len:%zd",len);
+    hex = 0x80808090;
+    NSLog(@"len:%zd-----%zd",len,hex);
+    
+    PBImgTextInfo imgInfo = {
+        .fontSize = 12,
+        .fontName = "Helvetica-Light",
+        .textColor = "#808080",
+        .bgColor = "#E8E8F5C4",
+        .width = 100,
+        .height = 100,
+    };
+    UIImage *img = [UIImage pb_iconFont:nil withName:@"\U0000E616" withSize:100 withColor:[UIColor blueColor]];
     info.origin.y += 150;
     imgView = [[UIImageView alloc] initWithFrame:info];
-    imgView.image = [UIImage pb_iconFont:nil withName:@"\U0000E616" withSize:100 withColor:[UIColor blueColor]];
+    imgView.image = img;
+    //imgView.backgroundColor = [UIColor pb_randomColor];
+    [self.view addSubview:imgView];
+    img = [UIImage pb_imageWithText:@"未激活" withInfo:imgInfo];
+    imgView = [[UIImageView alloc] initWithFrame:info];
+    imgView.image = img;
+    //imgView.backgroundColor = [UIColor pb_randomColor];
     [self.view addSubview:imgView];
     
     info.origin.y += 150;
@@ -81,18 +102,18 @@
     
     self.definesPresentationContext = true;
     
-    NSString *name = @" 曾魁";
-    NSString *ascii = [name pb_zhHans2Ascii4Type:PBZHHans2AsciiTypeLastChar];
-    NSLog(@"asccis:%@",ascii);
-    name = @"y保护伞";
-    ascii = [name pb_zhHansTransform2Ascii];
-    NSLog(@"asccis:%@",ascii);
-    name = @"_y保护伞";
-    ascii = [name pb_zhHansTransform2Ascii];
-    NSLog(@"asccis:%@",ascii);
-    
-    NSString *usr = @"nanhujiaju";
-    NSLog(@"origin:%@---sha256:%@--md5:%@---sha1hash:%@",usr,usr.pb_SHA256,usr.pb_MD5Hash,usr.pb_SHA1Hash);
+//    NSString *name = @" 曾魁";
+//    NSString *ascii = [name pb_zhHans2Ascii4Type:PBZHHans2AsciiTypeLastChar];
+//    NSLog(@"asccis:%@",ascii);
+//    name = @"y保护伞";
+//    ascii = [name pb_zhHansTransform2Ascii];
+//    NSLog(@"asccis:%@",ascii);
+//    name = @"_y保护伞";
+//    ascii = [name pb_zhHansTransform2Ascii];
+//    NSLog(@"asccis:%@",ascii);
+//    
+//    NSString *usr = @"nanhujiaju";
+//    NSLog(@"origin:%@---sha256:%@--md5:%@---sha1hash:%@",usr,usr.pb_SHA256,usr.pb_MD5Hash,usr.pb_SHA1Hash);
 }
 
 - (void)doSomething {

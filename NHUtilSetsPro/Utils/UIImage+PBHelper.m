@@ -123,6 +123,48 @@ static void pb_addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float 
     return image;
 }
 
++ (UIImage *)pb_imageWithText:(NSString *)text withInfo:(PBImgTextInfo)info {
+    CGSize size = CGSizeMake(info.width, info.height);
+    NSString *fontHex = [NSString stringWithUTF8String:info.textColor];
+    NSString *defaultHex = @"#FFFFFF";
+    if (PBIsEmpty(fontHex)) {
+        fontHex = defaultHex;
+    }
+    NSString *bgHex = [NSString stringWithUTF8String:info.bgColor];
+    if (PBIsEmpty(bgHex)) {
+        bgHex = defaultHex;
+    }
+    UIColor *bgColor = [UIColor pb_colorWithHexString:bgHex];
+    UIColor *textColor = [UIColor pb_colorWithHexString:fontHex];
+    NSString *fontName = [NSString stringWithUTF8String:info.fontName];
+    UIFont *font = [UIFont systemFontOfSize:info.fontSize];
+    if (!PBIsEmpty(fontName)) {
+        font = [UIFont fontWithName:fontName size:info.fontSize];
+    }
+    CGRect rect = (CGRect){.origin = CGPointZero, .size = size};
+    //计算文本区域
+    CGSize textSize = [text pb_sizeThatFitsWithFont:font width:1000];
+    NSAssert(info.width >= textSize.width, @"image size must be greater than text info!!!");
+    CGFloat s_x = (info.width - textSize.width) * 0.5;
+    CGFloat s_y = (info.height - textSize.height) * 0.5;
+    CGRect textBounds = (CGRect){.origin = CGPointMake(s_x, s_y), .size = textSize};
+    NSDictionary *infoAttr = [NSDictionary dictionaryWithObjectsAndKeys:font, NSFontAttributeName, textColor, NSForegroundColorAttributeName, nil];
+    //绘图
+    //UIGraphicsBeginImageContext(size);
+    UIGraphicsBeginImageContextWithOptions(size, false, [UIScreen mainScreen].scale);
+    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(ctx, [bgColor CGColor]);
+    CGContextFillRect(ctx, rect);
+    
+    [text drawInRect:textBounds withAttributes:infoAttr];
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+    //return [image pb_imageWithAlpha:info.alpha];
+}
+
 - (UIColor *)pb_image2Color4Point:(CGPoint)pt {
     // Cancel if point is outside image coordinates
     if (!CGRectContainsPoint(CGRectMake(0.0f, 0.0f, self.size.width, self.size.height), pt)) {
@@ -537,6 +579,16 @@ static void pb_addRoundedRectToPath(CGContextRef contextRef, CGRect rect, float 
     [path closePath];
     
     return path;
+}
+
+- (UIImage *)pb_imageWithAlpha:(CGFloat)alpha {
+    CGSize size = self.size;
+    CGFloat scale = self.scale;
+    UIGraphicsBeginImageContextWithOptions(size, false, scale);
+    [self drawAtPoint:CGPointZero blendMode:kCGBlendModeNormal alpha:alpha];
+    UIImage *newImg = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImg;
 }
 
 - (UIImage *)pb_darkColor:(UIColor *)color lightLevel:(CGFloat)level {

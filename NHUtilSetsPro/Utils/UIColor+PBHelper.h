@@ -54,4 +54,9 @@ typedef struct PBRGBA PBRGBA;
  */
 FOUNDATION_EXPORT UIColor * pbColorMake(unsigned int hex);
 
+/**
+ RGB Color with color
+ */
+FOUNDATION_EXPORT UIColor * pb_colorMake(unsigned int hex, unsigned, int alpha);
+
 NS_ASSUME_NONNULL_END
