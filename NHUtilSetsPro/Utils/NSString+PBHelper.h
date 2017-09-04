@@ -41,6 +41,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)pb_isNumberOrLetter;
 
 /**
+ whether self match the regex
+ 
+ @param pattern usr-custom regex
+ @return result
+ */
+- (BOOL)pb_isMatchRegexPattern:(NSString *)pattern;
+
+/**
  *	@brief	caculate string's size
  *
  *	@param 	font 	string's font

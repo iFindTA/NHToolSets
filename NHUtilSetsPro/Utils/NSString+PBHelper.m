@@ -44,6 +44,15 @@ static NSString *PBHexStringFromBytes(void *bytes, NSUInteger len) {
     return range.location == NSNotFound;
 }
 
+- (BOOL)pb_isMatchRegexPattern:(NSString *)pattern {
+    BOOL ret = false;
+    if (self.length == 0 || pattern.length == 0) {
+        return ret;
+    }
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", pattern];
+    return [predicate evaluateWithObject:self];
+}
+
 - (CGSize)pb_sizeThatFitsWithFont:(UIFont *)font width:(CGFloat)width {
     /*
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:self];
