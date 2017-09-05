@@ -271,7 +271,7 @@ static NSString *PBHexStringFromBytes(void *bytes, NSUInteger len) {
     if (length<=0) {
         return nil;
     }
-    NSString *sourceString = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-*/_=[]|<>@!#:";
+    NSString *sourceString = @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+-*_[]<>@!#:";
     NSMutableString *result = [[NSMutableString alloc] init] ;
     srand((unsigned)time(0));
     for (int i = 0; i < length; i++){
