@@ -8,6 +8,7 @@
 
 #import "UIFont+PBHelper.h"
 #import "UIDevice+PBHelper.h"
+#import <CoreText/CoreText.h>
 
 @implementation UIFont (PBHelper)
 
@@ -38,6 +39,24 @@
         __tmp_font = [UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
     }
     return __tmp_font;
+}
+
++ (void)registerFontPath:(NSString *)fontPath {
+    NSData *dynamicFontData = [NSData dataWithContentsOfFile:fontPath];
+    if (!dynamicFontData) {
+        return;
+    }
+    CFErrorRef error;
+    CGDataProviderRef providerRef = CGDataProviderCreateWithCFData((__bridge CFDataRef)dynamicFontData);
+    CGFontRef font = CGFontCreateWithDataProvider(providerRef);
+    if (! CTFontManagerRegisterGraphicsFont(font, &error)) {
+        //注册失败
+        CFStringRef errorDescription = CFErrorCopyDescription(error);
+        NSLog(@"Failed to load font: %@", errorDescription);
+        CFRelease(errorDescription);
+    }
+    CFRelease(font);
+    CFRelease(providerRef);
 }
 
 @end

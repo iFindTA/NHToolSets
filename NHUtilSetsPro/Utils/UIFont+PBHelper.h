@@ -26,6 +26,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (UIFont *)pb_navigationTitle;
 
+/**
+ register user-defined font
+
+ @param fontPath the font file path
+ */
++ (void)registerFontPath:(NSString *)fontPath;
+
 NS_ASSUME_NONNULL_END
 
 @end
