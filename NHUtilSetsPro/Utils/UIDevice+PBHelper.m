@@ -53,6 +53,9 @@
     if ([result isEqualToString:@"iPhone7,1"])      type = @"iPhone 6plus";
     if ([result isEqualToString:@"iPhone8,1"])      type = @"iPhone 6s";
     if ([result isEqualToString:@"iPhone8,2"])      type = @"iPhone 6splus";
+    if ([result isEqualToString:@"iPhone8,4"])      type = @"iPhone SE";
+    if ([result isEqualToString:@"iPhone9,1"])      type = @"iPhone 7";
+    if ([result isEqualToString:@"iPhone9,2"])      type = @"iPhone 7plus";
     //iPad
     if ([result isEqualToString:@"iPad2,1"]     ||
         [result isEqualToString:@"iPad2,2"]     ||
@@ -75,6 +78,17 @@
     
     
     return type;
+}
+
++ (BOOL)pb_isiPhoneX {
+#if DEBUG
+    CGFloat mainHeight = [UIScreen mainScreen].bounds.size.height;
+    if (mainHeight >= 800) {
+        return true;
+    }
+#endif
+    NSString *model = [self getSysInfoByName:"hw.machine"];
+    return [model isEqualToString:@"iPhone10,1"];
 }
 
 @end

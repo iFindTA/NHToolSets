@@ -17,7 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return the device's platform eg. iPhone6s
  */
-+(NSString *)pb_platform;
++ (NSString *)pb_platform;
+
+/**
+ whether device for iPhone-X
+ */
++ (BOOL)pb_isiPhoneX;
 
 NS_ASSUME_NONNULL_END
 

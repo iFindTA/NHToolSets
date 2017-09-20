@@ -102,6 +102,9 @@
     
     self.definesPresentationContext = true;
     
+    NSString *model = [UIDevice pb_platform];
+    NSLog(@"model:%@ === %d", model, [UIDevice pb_isiPhoneX]);
+    
 //    NSString *name = @" 曾魁";
 //    NSString *ascii = [name pb_zhHans2Ascii4Type:PBZHHans2AsciiTypeLastChar];
 //    NSLog(@"asccis:%@",ascii);
