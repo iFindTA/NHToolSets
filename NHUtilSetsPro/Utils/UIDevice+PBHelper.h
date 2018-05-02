@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  whether device for iPhone-X
  */
-+ (BOOL)pb_isiPhoneX;
++ (BOOL)pb_isX;
 
 NS_ASSUME_NONNULL_END
 
